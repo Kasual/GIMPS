@@ -1,0 +1,159 @@
+#!/usr/bin/perl
+# $Id$
+# KKas 07/2001
+#
+# Simple script to summarize 'selftest.out' files from Glucas.
+# 
+# By default uses 'selftest.out' file in the current directory.
+# It's possible to analyze several files at once by giving the
+# file names on the commandline.
+# 
+# Averages timings from iterations 21-50, assuming roundoff checking enabled.
+# Averages timings from iterations 51-90, assuming roundoff checking disabled.
+# In addition the average deviation is calculated to detect unstable timings.
+# The last column contains the percentage gained by disabling roundoff checking.
+#
+# KKas 08/2001
+#
+# Using '-F [MHz]' it's possible to generate a 'Relative Performance Index'.
+# instead of average deviations
+# See E. W. Mayers non-x86 timings page for more details.
+# <ftp://hogranch.com/pub/mayer/gimps_timings.html>
+#
+
+use strict;
+use Getopt::Std;
+use vars qw/ $opt_F /;
+
+my $c = 0;
+my $st = 0;
+my $fft = 0;
+my $iter = 0;
+my %usertime = ();
+my $sum = 0;
+my $timeerr = 0;
+my $timeerrdev = 0;
+my $timenoerr = 0;
+my $timenoerrdev = 0;
+
+# get command line options 
+getopts('F:');
+
+# Uses 'selftest.out' in the current directory by default.
+@ARGV = ("selftest.out") unless @ARGV;
+
+print "\n";
+if (defined($opt_F)) {
+  print " FFT   sec/Iter    RPI   sec/Iter    RPI  % (RC=0)\n";
+}
+else {
+  print " FFT   sec/Iter deviat   sec/Iter deviat  % (RC=0)\n";
+}
+print "       Roundoff_check=1  Roundoff_check=0\n";
+print "--------------------------------------------------\n";
+
+while(<>){
+  # Find start of new FFT-runlength
+  if(/^Selftest (\d+) \((\d+) K FFT-runlength\)/) {
+    $st = $1;
+    $fft = $2;
+    %usertime = ();
+  }
+
+  # Matches timings from machines with getrusage and %CPU
+  if(/^Iter\. (\d+) \(\d+\.\d+%\), Err= \d+\.\d+,.*%CPU.*(\d+\.\d+) user/) {
+    $usertime{$1} = $2;
+  }
+
+  # Matches timings from machines with getrusage
+  if(/^Iter\.\s+(\d+) \(\s*\d+\.\d+%\), Err= \d+\.\d+, (\d+\.\d+) user/) {
+    $usertime{$1} = $2;
+  }
+
+  # Matches timings from machines without getrusage
+  if(/^Iter\.\s+(\d+) \(\s*\d+\.\d+%\), Err= \d+\.\d+, \d*:*\d+\:\d+ real \((\d+\.\d+) sec/) {
+    $usertime{$1} = 10*$2;
+  }
+
+  # Warn if accuracy gets increased
+  if(/^Restarting\. Accuracy increased\./) {
+    printf("%4d Accuracy increased\n", $fft);
+  }
+
+  # Warn if FFT length gets changed
+  if(/^Restarting\. Changed FFT length\./) {
+    printf("%4d FFT length changed\n", $fft);
+  }
+
+  # Just in case ...
+  if(/Selftest (\d+) failed!/){
+    printf("%4d Selftest %d failed!\n", $fft, $1);
+  }
+
+  # Done with this runlength - summarize
+  if(/^Selftest \d+ success/){
+    $sum = 0;
+    foreach $iter (30,40,50) { $sum += $usertime{$iter} }
+    $timeerr = $sum/3;
+    $sum = 0;
+    foreach $iter (30,40,50) { $sum += abs($usertime{$iter} - $timeerr) }
+    $timeerrdev = $sum/30;
+    $timeerr /= 10;
+    $sum = 0;
+    foreach $iter (60,70,80,90) { $sum += $usertime{$iter} }
+    $timenoerr = $sum/4;
+    $sum = 0;
+    foreach $iter (60,70,80,90) { $sum += abs($usertime{$iter} - $timenoerr) }
+    $timenoerrdev = $sum/40;
+    $timenoerr /= 10;
+    if (defined($opt_F)) {
+      printf("%4d %10.3f %s %10.3f %s  %8.1f\n", $fft, $timeerr, RPI400($fft,$timeerr,$opt_F), $timenoerr, RPI400($fft,$timenoerr,$opt_F), 100*(1-$timenoerr/$timeerr));
+    }
+    else {
+      printf("%4d %10.3f %6.3f %10.3f %6.3f  %8.1f\n", $fft, $timeerr, $timeerrdev, $timenoerr, $timenoerrdev, 100*(1-$timenoerr/$timeerr));
+   }
+  }
+}
+
+# Calculate RPI (Relative Performance Index) relative to
+# George Woltman's reference Pentium II 400MHz running prime95
+# Ignoring slightly longer FFT range of prime95.
+#
+# See E. W. Mayers <ftp://hogranch.com/pub/mayer/gimps_timings.html>
+
+sub RPI400 {
+  my ($fft, $sec, $mhz) = @_;
+  my $rpi = 0;
+
+# Reference timings taken from prime95 v21 (prime95/mult.asm)
+  my %p400 = (
+     131072, 0.0604,
+     163840, 0.0830,
+     196608, 0.0982,
+     229376, 0.1193,
+     262144, 0.1316,
+     327680, 0.1726,
+     393216, 0.2107,
+     458752, 0.2520,
+     524288, 0.2808,
+     655360, 0.372,
+     786432, 0.453,
+     917504, 0.536,
+    1048576, 0.600,
+    1310720, 0.776,
+    1572864, 0.934,
+    1835008, 1.113,
+    2097152, 1.226,
+    2621440, 1.636,
+    3145728, 1.990,
+    3670016, 2.380,
+    4194304, 2.604
+  );
+
+  if (exists($p400{1024*$fft})) {
+    return sprintf("%6.0f", 100*($p400{1024*$fft}*400)/($sec*$mhz));
+  }
+  else {
+    return "   N/A";
+  }
+}

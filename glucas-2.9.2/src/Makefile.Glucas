@@ -1,0 +1,302 @@
+# $Id: Makefile.Glucas,v 2.16 2002/05/28 22:36:25 gbvalor Exp $
+# Makefile skeleton to build Glucas with detailed personal preferences
+# If the usual unix style './configure ; make ' fails, you can edit this 
+# file to set the optimal compiler flags. There is some examples you can 
+# uncomment 
+
+# HOW TO CALL THE COMPILER. SELECT HERE YOUR COMPILER
+CC=
+# YOU CAN CHANGE HERE THE SUFIXES FOR OBJECT 
+O=
+# HOW TO LINK
+LINK=
+#ONLY COMPILE FLAG
+C=
+#OUTPUT FLAG
+OUT=
+
+# EXAMPLE for GNU/GCC compiler
+#CC=gcc
+#O=o
+#LINK=$(CC) 
+#C=-c
+#OUT=-o
+
+#
+# SET THE OPTIMAL COMPILER FLAGS AND GLUCAS DEFINE HERE
+#
+CFLAGS=
+
+#
+# SOME COMPILERS DON'T WORK WELL WITH CFLAGS, SO WE NEED A LESSER
+# OPTIMIZATION FLAGS
+#
+CFLAGS1=
+
+#
+# tricky.c file needs even lesser optimization flag
+#
+CFLAGS0=
+
+#
+# SET THE OPTIMAL MACROS FOR GLUCAS
+#
+DEFINE_GLUCAS=
+
+# EXAMPLE 1) For Intel C++ compiler
+#CFLAGS=-O3 -rcd -Wall -malign-double -mcpu=i586 -march=i586 -fomit-frame-pointer -mpreferred-stack-boundary=2 -fno-defer-pop 
+#CFLAGS0=-O0 -rcd
+#CFLAGS1=$(CFLAGS)
+#DEFINE_GLUCAS=-DY_AVAL=4 -DY_SECURE -DY_MINIMUM -DY_TARGET=0 -D_PTHREADS=4
+
+# EXAMPLE 2) for a linux/gnu pentium system
+CFLAGS=-O3 -Wall -malign-double -mcpu=i686 -march=i686 -fomit-frame-pointer -mpreferred-stack-boundary=2 -fno-defer-pop 
+CFLAGS0=-O0
+CFLAGS1=$(CFLAGS)
+DEFINE_GLUCAS=-DY_AVAL=4 -DY_TARGET=11 -DY_SECURE -DY_MINIMUM -DY_PREFETCH_EXPENSIVE 
+ 
+# EXAMPLE 3) For a Compaq-Digital-alpha (valid for Tru64 and GNU/linux).
+# On Linux/GNU systems the Compaq compiler should be invoqued as 'ccc' instead of 'cc' (see below) 
+#CFLAGS=-O4 -fast -non_shared -tune host -arch host -assume accuracy_sensitive -unroll 1
+#DEFINE_GLUCAS=-DY_MEM_THRESHOLD=32768 -DY_TARGET=31 -DY_AVAL=3 -DY_KILL_BRANCHES -DY_BLOCKSIZE=4096 -DY_SHIFT=9 -DY_VECTORIZE -DY_LONG_MACROS -DY_VECTORIZE2 
+#CFLAGS0=-O0
+#CFLAGS1=$(CFLAGS)
+
+# EXAMPLE 4) For a Compaq-Digital-alpha (valid for Tru64 and GNU/linux).
+# For gcc /GNU compiler 
+#CFLAGS=-O3 -Wall -mcpu=ev6 -fverbose-asm
+#DEFINE_GLUCAS=-DY_MEM_THRESHOLD=8192 -DY_AVAL=3 -DY_TARGET=32 -DY_KILL_BRANCHES -DY_BLOCKSIZE=4096 -DY_SHIFT=9 -DY_LONG_MACROS 
+
+#example 5) For a itanium
+#CFLAGS=-O3 -Wall -I/opt/intel/compiler50/ia64/include 
+#CFLAGS1=-O2 -Wall -I/opt/intel/compiler50/ia64/include
+#CFLAGS0=-O0 
+#DEFINE_GLUCAS=-DY_AVAL=3 -DY_TARGET=0 -DY_MEM_THRESHOLD=32768 -DY_BLOCKSIZE=4096 -DY_SHIFT=9 -DY_PRELOAD_TRIGS -DY_KILL_BRANCHES -DY_LONG_MACROS -DY_VECTORIZE -DY_VECTORIZE2
+
+# EXAMPLE 6) For a Sun Solaris ultrasparcv9 
+# For gcc /GNU compiler 
+#CFLAGS=-O3 -Wall -mcpu=ultrasparc
+#DEFINE_GLUCAS=-DY_MEM_THRESHOLD=8192 -DY_AVAL=3 -DY_TARGET=0 -DY_KILL_BRANCHES -DY_BLOCKSIZE=512 -DY_SHIFT=8 -DY_VECTORIZE 
+#CFLAGS0=-O0
+#CFLAGS1=$(CFLAGS)
+
+# EXAMPLE 7) For a Sun Solaris ultrasparcv9 
+# For Sun C-compiler 
+#CFLAGS=-fast -Xs -xprefetch
+#DEFINE_GLUCAS=-DY_MEM_THRESHOLD=8192 -DY_AVAL=3 -DY_TARGET=0 -DY_KILL_BRANCHES -DY_BLOCKSIZE=4096 -DY_SHIFT=9 -DY_VECTORIZE 
+#CFLAGS0=-O0
+#CFLAGS1=$(CFLAGS)
+
+# EXAMPLE 8) For an Athlon/duron
+#CFLAGS=-O3 -Wall -static -malign-double -mcpu=athlon  -march=athlon -fomit-frame-pointer -mpreferred-stack-boundary=2 -fno-defer-pop
+#DEFINE_GLUCAS=-DY_AVAL=4 -DY_SECURE -DY_KILL_BRANCHES -DY_TARGET=0 -DY_BLOCKSIZE=1024 -DY_MINIMUM -DY_LONG_MACROS -DY_VECTORIZE -DY_VECTORIZE2 
+#CFLAGS0=-O0
+#CFLAGS1=$(CFLAGS)
+
+
+
+#**************************************************************************
+# NOTHING BELOW HERE SOULD NEED TO BE MODIFIED ***************************
+#*************************************************************************
+
+GDIR=./
+YDIR=./
+
+
+THIS_FILE=Makefile.Glucas
+
+LIBS=-lm -lpthread
+
+PROGS=Glucas
+
+# Objects for Glucas
+
+YEAFFT_OBJS=$(YDIR)yeainit.$O $(YDIR)yeafft.$O $(YDIR)yeafft1.$O \
+        $(GDIR)tricky.$O $(YDIR)radix_2.$O $(YDIR)radix_4.$O \
+        $(YDIR)radix_5.$O $(YDIR)radix_6.$O $(YDIR)radix_7.$O \
+        $(YDIR)radix_8.$O $(YDIR)radix_9.$O $(YDIR)radix_10.$O \
+        $(YDIR)radix_12.$O $(YDIR)radix_14.$O $(YDIR)radix_16.$O \
+        $(YDIR)radix_32.$O $(YDIR)dyadic.$O $(YDIR)difdit_2.$O \
+        $(YDIR)difdit_4.$O $(YDIR)difdit_8.$O $(YDIR)difdit_16.$O \
+	$(YDIR)dyadic32.$O
+
+GLUCAS_OBJS=$(GDIR)glucas.$O $(GDIR)gio.$O $(GDIR)yealucas.$O \
+        $(GDIR)ynorm.$O $(GDIR)ynorm_4.$O $(GDIR)ynorm_5.$O \
+        $(GDIR)ynorm_6.$O $(GDIR)ynorm_7.$O $(GDIR)ynorm_8.$O \
+        $(GDIR)ynorm_9.$O $(GDIR)ynorm_10.$O $(GDIR)ynorm_12.$O \
+        $(GDIR)ynorm_14.$O $(GDIR)ynorm_16.$O $(GDIR)gsetup.$O \
+	$(GDIR)compat.$O $(GDIR)gstd.$O $(GDIR)selftest.$O \
+	$(GDIR)lucasini.$O $(GDIR)gthreads.$O $(GDIR)version.$O
+
+HEADERS_YEAFFT=$(GDIR)yeafft.h $(GDIR)gmp_yea.h $(GDIR)mccomp.h \
+        $(GDIR)ydebug.h $(GDIR)ygeneric.h $(GDIR)generic.h $(GDIR)prefetch.h \
+	$(GDIR)ygeneric4.h $(GDIR)ygeneric8.h
+
+HEADERS_GLUCAS=$(GDIR)glucas.h $(GDIR)gsetup.h $(GDIR)version.h
+
+all: $(PROGS)
+
+    
+#
+# For clarity proposes I wrote the following large list of rules.
+# The use of multiple dependency or/and targets does no save too much
+# lines because of multiples exceptions 
+#
+
+#rules for yeafft objects
+
+
+$(YDIR)yeafft.$O : $(YDIR)yeafft.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)yeafft.c $(OUT) $@
+
+$(YDIR)yeainit.$O : $(YDIR)yeainit.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)yeainit.c $(OUT) $@
+
+$(YDIR)yeafft1.$O : $(YDIR)yeafft1.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)yeafft1.c $(OUT) $@
+
+$(GDIR)tricky.$O : $(GDIR)tricky.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS0) $(DEFINE_GLUCAS) $(C) $(GDIR)tricky.c $(OUT) $@
+
+$(YDIR)radix_2.$O : $(YDIR)radix_2.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)radix_2.c $(OUT) $@
+
+$(YDIR)radix_4.$O : $(YDIR)radix_4.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)radix_4.c $(OUT) $@
+
+$(YDIR)radix_5.$O : $(YDIR)radix_5.c $(HEADERS_YEAFFT) $(GDIR)fft5.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)radix_5.c $(OUT) $@
+
+$(YDIR)radix_6.$O : $(YDIR)radix_6.c $(HEADERS_YEAFFT) $(GDIR)fft3.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)radix_6.c $(OUT) $@
+
+$(YDIR)radix_7.$O : $(YDIR)radix_7.c $(HEADERS_YEAFFT)  $(GDIR)fft7.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)radix_7.c $(OUT) $@
+
+$(YDIR)radix_8.$O : $(YDIR)radix_8.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)radix_8.c $(OUT) $@
+
+$(YDIR)radix_8.s : $(YDIR)radix_8.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) -S $(YDIR)radix_8.c $(OUT) $@
+
+$(YDIR)radix_9.$O : $(YDIR)radix_9.c $(HEADERS_YEAFFT)  $(GDIR)fft3.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)radix_9.c $(OUT) $@
+
+$(YDIR)radix_10.$O : $(YDIR)radix_10.c $(HEADERS_YEAFFT)  $(GDIR)fft5.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)radix_10.c $(OUT) $@
+
+$(YDIR)radix_12.$O : $(YDIR)radix_12.c $(HEADERS_YEAFFT)  $(GDIR)fft3.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)radix_12.c $(OUT) $@
+
+$(YDIR)radix_14.$O : $(YDIR)radix_14.c $(HEADERS_YEAFFT)  $(GDIR)fft7.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)radix_14.c $(OUT) $@
+
+$(YDIR)radix_16.$O : $(YDIR)radix_16.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)radix_16.c $(OUT) $@
+
+$(YDIR)radix_32.$O : $(YDIR)radix_32.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)radix_32.c $(OUT) $@
+
+$(YDIR)difdit_2.$O : $(YDIR)difdit_2.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)difdit_2.c $(OUT) $@
+
+$(YDIR)difdit_4.$O : $(YDIR)difdit_4.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)difdit_4.c $(OUT) $@
+
+$(YDIR)difdit_8.$O : $(YDIR)difdit_8.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)difdit_8.c $(OUT) $@
+
+$(YDIR)difdit_16.$O : $(YDIR)difdit_16.c $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)difdit_16.c $(OUT) $@
+
+$(YDIR)dyadic.$O : $(YDIR)dyadic.c $(HEADERS_YEAFFT) 
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)dyadic.c $(OUT) $@
+
+$(YDIR)dyadic32.$O : $(YDIR)dyadic32.c $(HEADERS_YEAFFT) 
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(YDIR)dyadic32.c $(OUT) $@
+
+# Rules for Glucas-specific objects 
+
+$(GDIR)glucas.$O : $(GDIR)glucas.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)glucas.c $(OUT) $@
+
+$(GDIR)lucasini.$O : $(GDIR)lucasini.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)lucasini.c $(OUT) $@
+
+$(GDIR)gthreads.$O : $(GDIR)gthreads.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)gthreads.c $(OUT) $@
+
+$(GDIR)gsetup.$O : $(GDIR)gsetup.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)gsetup.c $(OUT) $@
+
+$(GDIR)gstd.$O : $(GDIR)gstd.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)gstd.c $(OUT) $@
+
+$(GDIR)compat.$O : $(GDIR)compat.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)compat.c $(OUT) $@
+
+$(GDIR)selftest.$O : $(GDIR)selftest.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)selftest.c $(OUT) $@
+
+$(GDIR)gio.$O : $(GDIR)gio.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS1) $(DEFINE_GLUCAS) $(C) $(GDIR)gio.c $(OUT) $@
+
+$(GDIR)yealucas.$O : $(GDIR)yealucas.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)yealucas.c $(OUT) $@
+
+$(GDIR)ynorm.$O : $(GDIR)ynorm.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)ynorm.c $(OUT) $@
+
+$(GDIR)ynorm_4.$O : $(GDIR)ynorm_4.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)ynorm_4.c $(OUT) $@
+
+$(GDIR)ynorm_5.$O : $(GDIR)ynorm_5.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT) $(GDIR)fft5.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)ynorm_5.c $(OUT) $@
+
+$(GDIR)ynorm_6.$O : $(GDIR)ynorm_6.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT) $(GDIR)fft3.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)ynorm_6.c $(OUT) $@
+
+$(GDIR)ynorm_7.$O : $(GDIR)ynorm_7.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)  $(GDIR)fft7.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)ynorm_7.c $(OUT) $@
+
+$(GDIR)ynorm_8.$O : $(GDIR)ynorm_8.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)ynorm_8.c $(OUT) $@
+
+$(GDIR)ynorm_8.s : $(GDIR)ynorm_8.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) -S $(GDIR)ynorm_8.c $(OUT) $@
+
+$(GDIR)ynorm_9.$O : $(GDIR)ynorm_9.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)  $(GDIR)fft3.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)ynorm_9.c $(OUT) $@
+
+$(GDIR)ynorm_10.$O : $(GDIR)ynorm_10.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)  $(GDIR)fft5.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)ynorm_10.c $(OUT) $@
+
+$(GDIR)ynorm_12.$O : $(GDIR)ynorm_12.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)  $(GDIR)fft3.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)ynorm_12.c $(OUT) $@
+
+$(GDIR)ynorm_14.$O : $(GDIR)ynorm_14.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)  $(GDIR)fft7.h
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)ynorm_14.c $(OUT) $@
+
+$(GDIR)ynorm_16.$O : $(GDIR)ynorm_16.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)ynorm_16.c $(OUT) $@
+
+$(GDIR)version.$O : $(GDIR)version.c $(HEADERS_GLUCAS) $(HEADERS_YEAFFT)
+	$(CC) $(CFLAGS) $(DEFINE_GLUCAS) $(C) $(GDIR)version.c $(OUT) $@
+
+Glucas : $(GLUCAS_OBJS) $(YEAFFT_OBJS) 
+	$(LINK) $(GLUCAS_OBJS) $(YEAFFT_OBJS) $(LIBS) $(OUT) $@
+
+clean :
+	rm -f $(GDIR)*.$O $(PROGS)
+
+.PHONY : clean 
+
+
+
+
+
+
+
+
+
+

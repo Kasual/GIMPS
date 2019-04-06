@@ -1,0 +1,72 @@
+#!/bin/sh
+#
+# $Id$
+# This is a test to check Glucas I/O save files, not to
+# check speed 
+#
+# (c) Guillermo Ballester Valor, 2003
+#
+# Licensed under GPL terms
+#
+# Usage:
+#
+# glucas_io_test n
+#
+# where n is the same argument than when calling ./Glucas -s n
+
+function make_selftest
+{
+./Glucas -K 11 -s ${1} 
+./Glucas -K 11 -s ${1} 
+./Glucas -K 11 -s ${1} 
+./Glucas -K 11 -s ${1} 
+./Glucas -K 11 -s ${1} 
+./Glucas -K 11 -s ${1} 
+./Glucas -K 11 -s ${1} 
+./Glucas -K 11 -s ${1} 
+./Glucas -K 11 -s ${1} 
+}
+
+echo Glucas special selftest checking save files i/o integrity v-1.0
+
+case ${1} in
+    s* )
+	for test in 1 2 3 4 5 6 7 8 9 10 11; do
+	    make_selftest $test
+	done;
+	;;
+
+    p* )
+	for test in 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21; do
+	    make_selftest $test
+	done;
+	;;
+
+
+    b* )
+	for test in 11 12 13 14 15 16 17 18 19 20 21; do
+	    make_selftest $test
+	done;
+	;;
+
+    h* )
+	for test in 21 22 23 24 25 26; do
+	    make_selftest $test
+	done;
+	;;
+
+    e* )
+	for test in 26 27 28 29 30 31; do
+	    make_selftest $test
+	done;
+	;;
+      
+    a* )
+	for test in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18\
+	    19 20 21 22 23 24 25 26 27 28 29 30 31; do
+	    make_selftest $test
+	done;
+	;;
+    *)
+	make_selftest ${1}
+esac

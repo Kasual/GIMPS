@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- $Id$ -->
+<html>
+<head>
+  <title>Glucas - Yet Another FFT</title>
+  <meta name="GENERATOR" content="Quanta Plus">
+  <meta name="AUTHOR" content="Guillermo Ballester Valor">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+  <meta name="KEYWORDS" content="FFT, convolution, Fast Fourier Transfrom, 
+  Mersenne numbers, Lucas-Lehmer test">
+  <meta name="DESCRIPTION" content="FFT library to make convolutions as fast
+   as possible. Glucas is a Mersenne numbers primality test. Uses YEAFFT library">
+</head>
+<body lang="es-ES" text="#000000" link="#0000ef" vlink="#51188e"
+ bgcolor="#ccffff">
+
+<center>
+<img src="http://sourceforge.net/sflogo.php?group_id=24518&amp;type=5"
+ name="Imagen1" alt="SourceForgeLogo" align="bottom" width="210"
+ height="62" border="0">
+
+<a href="http://petition.eurolinux.org"><img src="../patent_banner.png"></a>
+</center>
+
+<h1><b><i><font size="7"><font face="Arial, Helvetica"><font
+ color="#993300">G</font></font></font></i>LUCAS - Yet Another FFT</b></h1>
+
+<h3><a href="./index.html.es">Spanish Introduction</a>  </h3>
+<h3><a href="#Introduction">Introduction</a> </h3>                           
+<h3><a href="http://sourceforge.net/projects/glucas">Project status (sourceforge)</a> </h3>
+<h3><a
+ href="http://sourceforge.net/project/showfiles.php?group_id=24518">Downloads (old 2.9.0 version)
+</a> </h3>
+<h3><a
+ href="../pub/glucas/snapshots">Latests tarballs (2.9.2 version)</a> </h3>
+<h3><a href="http://www.oxixares.com/viewcvs">Browse subversion repository</a></h3>
+<h4><a href="http://glucas.sourceforge.net/oldbin.html">Even old Binaries</a></h4>
+<h3><a href="./doc/index.html">Documentation 
+on line</a></h3>
+<p><a name="Introduction"></a><br>
+<b>INTRODUCTION.</b>  </p>
+ 
+<p><font face="Arial, Helvetica"><b>Glucas</b> is a free program to test
+primality of Mersenne numbers (numbers with the form 2^n - 1). Its results
+say us whether a Mersenne number is a prime number. You can learn a lot of
+Mersenne numbers <a
+ href="http://www.utm.edu/research/primes/mersenne.shtml">here</a></font> 
+. <font face="Arial, Helvetica">The special form of Mersenne Numbers gives
+us three big advantages:</font>  </p>
+ 
+<p><font face="Arial, Helvetica">1) There is a fast test (Lucas-Lehemer test.).
+If success then we are sure the analyzed number is a Prime number. If fails
+then we are sure the number is not prime.</font>  </p>
+ 
+<p><font face="Arial, Helvetica">2) The modular reduction we need can be
+made in a easy way.</font>  </p>
+ 
+<p><font face="Arial, Helvetica">3) The algorithm used to multiply the very
+big numbers we usually need (about some million bits) uses a special form
+of Fast Fourier Transform, <a href="http://www.perfsci.com/">DWT</a>. The
+speed are twice the general integer multiplication via FFT and convolution
+theorem.</font>  </p>
+ 
+<p><font face="Arial, Helvetica">These advantages make the <a
+ href="http://www.utm.edu/research/primes/largest.html">records list of big
+prime numbers</a> leaded by Mersenne Primes. You can be a discoverer of a
+record Mersenne Prime number. But don't be excited, it is very hard. There
+is a project in the Internet dedicated to the search of such scarce numbers.
+This is <a href="http://mersenne.org/prime.htm">GIMPS, the Great Internet
+Mersenne Prime Search</a></font> . <font face="Arial, Helvetica">GIMPS already
+has found the four biggest primes in the history and is one of the pioneers
+in the distributed computing in the net. The core of this project is G. Woltman,
+who wrote the client programs for x86 platforms. They are astonishing fast
+and I personally think is the fastest FFT ever written to these processors.
+They are carefully tuned in assembler.</font>  </p>
+ 
+<p><font face="Arial, Helvetica">Glucas is a c-coded program to make Lucas-Lehmer
+test. As I have old Pentiums at home and work, I also included some assembler
+macros for GNU/gcc compiler to speed it up. I've reached about 80% of Woltman's
+latest prime95 v.20. For other platforms there is only two clients available
+fast enough, Glucas and Mlucas. <a
+ href="http://novarese.net/prime/mlucas.html">Mlucas</a> is an excellent
+fortran90-coded program written by E.W. Mayer (a version of Mlucas is included
+in the test suite specf2000). The performance of Mlucas is similar to Glucas.
+Mlucas needs a good f90 compiler and Glucas a C-compiler. For some platforms
+as Mac, there is no f90 compilers available, and here is the advantage of
+Glucas.</font>  </p>
+ 
+<p><font face="Arial, Helvetica">You can read more about Glucas. The complete
+manual online is <a
+ href="http://glucas.sourceforge.net/glucas/index.html">here.</a> You also
+can get the <a
+ href="http://prdownloads.sourceforge.net/glucas/Glucas-2.9.0.docs.tar.gz?download">documentation
+package</a> which includes the html docs, and printable dvi and PDF manuals. </font>
+ </p>
+ 
+<p><font face="Arial, Helvetica"><b>YEAFFT</b> is the library used by Glucas
+to make the convolutions (big multiplications) we need. This is written by
+Guillermo Ballester Valor (me) and the skeleton is based in <a
+ href="http://www.perfsci.com/free/techpapers/confgt.pdf">this paper</a>.
+This is a C-coded library with some assembler macros for GNU/gcc compiler.
+It is written under GPL license.</font> <br>
+<br>
+<h3>UPDATE: Because of some dificulties in Sourceforge, I'm partialy migrating the project 
+to my local server. The actual version is 2.9.2. You can download the latest snapshots 
+<a href="../pub/glucas/snapshots"> here </a>.
+</h3>
+<br>
+<p>In adition to sourceforge CVS access to Glucas's reporitory, you also can get 
+anonymous access to a <a href="http://subversion.tigris.org">
+Subversion</a> type repository. To checkout the repository:</p>
+<CODE>svn co https://svn.oxixares.com/repos/glucas</CODE>
+<p>To update:</p>
+<CODE>svn update https://svn.oxixares.com/repos/glucas</CODE>
+<p>
+Active directory in repository is 'glucas/trunk/glucas'
+</p>
+
+<p>You also can <a href="https://svn.oxixares.com/viewcvs">browse the repository</a></p>
+<code>https://svn.oxixares.com/viewcvs</code>
+
+
+<h5><b>UPDATED: Mar-06-2005</b></h5>
+
+</body>
+</html>

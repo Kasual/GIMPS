@@ -1,0 +1,3126 @@
+------------------------------------------------------------------------
+r710 | gbv | 2005-03-06 19:13:56 +0100 (Sun, 06 Mar 2005) | 3 lines
+
+* Makefile.Glucas: Moved to dir src. It missed in the 'big move'
+* stam-vti: deleted as unnecessary
+
+------------------------------------------------------------------------
+r709 | gbv | 2005-03-06 19:02:41 +0100 (Sun, 06 Mar 2005) | 4 lines
+
+* doc/glucas_main.html, doc/glucas_main.html.es:
+  Added these two files in place of glucas.html. 
+* glucas.html: deleted as obsolete.
+
+------------------------------------------------------------------------
+r708 | gbv | 2005-03-06 18:51:04 +0100 (Sun, 06 Mar 2005) | 3 lines
+
+* src/Makefile.am doc/Makefile.am: Added as needed by new directories 
+  structure
+
+------------------------------------------------------------------------
+r707 | gbv | 2005-03-06 18:49:05 +0100 (Sun, 06 Mar 2005) | 4 lines
+
+* Doxyfile, Makefile.cvs: Added as result of work with
+  kdevelop
+* cmpGlucas: Moved to src directory 
+
+------------------------------------------------------------------------
+r706 | gbv | 2005-03-06 18:33:04 +0100 (Sun, 06 Mar 2005) | 9 lines
+
+* The directories has been reestructured. Two directories
+  has been created:
+   src : Includes all code but docs.
+   doc : Includes all docs.
+* Makefiles and friends has been changed and added properly.
+  (new ones will be commited in next commit)
+* The copyright years has been updated.
+
+
+------------------------------------------------------------------------
+r705 | gbv | 2005-03-06 00:47:06 +0100 (Sun, 06 Mar 2005) | 2 lines
+
+* Added 2004,2005 in copyright
+
+------------------------------------------------------------------------
+r704 | gbv | 2005-02-26 12:32:17 +0100 (Sat, 26 Feb 2005) | 6 lines
+
+* fftxsse2.h, compat.c, dyadic*.c, fftx.c gsetup.h, fftxx86.h,
+  difdit_x.c, gstd.c, lucasini.c, iteration.c, gmp_yea.h, 
+  macos-codewarrior-prefix.h, glucas.h, mccomp.h, dyadic.c, 
+  prefetch.h, difdit_x.c, difditmm_x.c mccomplx.h :
+   GNU-style auto-formated. No fuctional changes
+
+------------------------------------------------------------------------
+r703 | gbv | 2005-02-26 12:21:02 +0100 (Sat, 26 Feb 2005) | 3 lines
+
+* radix_x.c, radixmp_x, radixmm_x.c: GNU-style auto-formated.
+  No fucntional-changes
+
+------------------------------------------------------------------------
+r702 | gbv | 2005-02-26 12:15:02 +0100 (Sat, 26 Feb 2005) | 4 lines
+
+* round.h, ycx86.h, selftest.c, yeafft.c yeafft.h, yeainit.c,
+  yealucas.c, ydebug.c, yeafft1.c: GNU-style auto-formated.
+  No functional changes
+
+------------------------------------------------------------------------
+r701 | gbv | 2005-02-26 12:09:47 +0100 (Sat, 26 Feb 2005) | 4 lines
+
+* ygenvect.h, yia64.h, ygensse2.h, yminimum.h, ygeneric4.h,
+  ygeneric8.c, ygeneric.h: GNU-style auto-formated. No functional
+  changes
+
+------------------------------------------------------------------------
+r700 | gbv | 2005-02-26 11:59:45 +0100 (Sat, 26 Feb 2005) | 3 lines
+
+* ynorm_x.c ynormia64.h : GNU-style Auto-formated.
+  No fucntional changes
+
+------------------------------------------------------------------------
+r699 | gbv | 2005-02-26 11:53:28 +0100 (Sat, 26 Feb 2005) | 3 lines
+
+* ynormm_5.c, ynormm_6.c, ymormm_7.c, ynormm_8.c ynormm_9.c:
+  GNU-style auto-formated. No functional code changed.
+
+------------------------------------------------------------------------
+r698 | gbv | 2005-02-26 11:49:02 +0100 (Sat, 26 Feb 2005) | 4 lines
+
+* yx86p4.h, ynormsse2.h, yx86comm.h, yx86ath.h, ysse2.h,
+  ynormx86.h, yx86.h, ynormx86p3.h, yx86p3.h :
+    GNU-Style Auto-formated. No functional changes  
+
+------------------------------------------------------------------------
+r697 | gbv | 2005-02-26 11:14:16 +0100 (Sat, 26 Feb 2005) | 2 lines
+
+* Some comments added. kdevelop Auto-formated GNU-style
+
+------------------------------------------------------------------------
+r696 | gbv | 2005-02-26 11:08:36 +0100 (Sat, 26 Feb 2005) | 2 lines
+
+* Some comments added. Auto-formated GNU-style
+
+------------------------------------------------------------------------
+r695 | gbv | 2005-02-26 11:01:37 +0100 (Sat, 26 Feb 2005) | 2 lines
+
+* Some GNU-style format chages. Automatically made by kdevelop. 
+
+------------------------------------------------------------------------
+r694 | gbv | 2005-02-26 00:32:50 +0100 (Sat, 26 Feb 2005) | 2 lines
+
+* Fixed a typo bug in #define's
+
+------------------------------------------------------------------------
+r693 | gbv | 2005-02-26 00:31:49 +0100 (Sat, 26 Feb 2005) | 3 lines
+
+* add a digit the time/iter output as T. Reix suggested. 
+  Nowadays multiprocesors machine are getting faster :)
+
+------------------------------------------------------------------------
+r692 | gbv | 2005-02-25 23:56:48 +0100 (Fri, 25 Feb 2005) | 3 lines
+
+* gio.c: update isnewprime() with recent new prime
+  discovered M25964951
+
+------------------------------------------------------------------------
+r691 | gbv | 2004-09-18 19:56:10 +0200 (Sat, 18 Sep 2004) | 2 lines
+
+* Fixed some more compile warnings
+
+------------------------------------------------------------------------
+r690 | gbv | 2004-09-18 18:59:27 +0200 (Sat, 18 Sep 2004) | 2 lines
+
+* Fixed some warnings
+
+------------------------------------------------------------------------
+r689 | gbv | 2004-09-18 18:38:25 +0200 (Sat, 18 Sep 2004) | 2 lines
+
+* Added a test to check whether the system is a true IA64
+
+------------------------------------------------------------------------
+r688 | gbv | 2004-09-18 18:25:59 +0200 (Sat, 18 Sep 2004) | 3 lines
+
+* Temporal and save files s*, t* and g* are supressed when
+  doing 'make clean'.
+
+------------------------------------------------------------------------
+r687 | gbv | 2004-09-18 18:23:49 +0200 (Sat, 18 Sep 2004) | 4 lines
+
+* Fixed some warnings when compiled with --Wall flag
+  Mostly of them are comparisons between signed and unsigned
+  integers.
+
+------------------------------------------------------------------------
+r686 | gbv | 2004-09-18 18:20:48 +0200 (Sat, 18 Sep 2004) | 4 lines
+
+* last_normalize(): Fixed a potential bug when a long 
+ string o 'F' is in the residue. It could cause the add
+ carry loop go out the limits
+
+------------------------------------------------------------------------
+r685 | gbv | 2004-09-18 18:18:21 +0200 (Sat, 18 Sep 2004) | 2 lines
+
+* Supressed extrange characters in comments
+
+------------------------------------------------------------------------
+r684 | gbv | 2004-09-03 23:21:06 +0200 (Fri, 03 Sep 2004) | 2 lines
+
+* Revert prior patch related qith CFLAGS
+
+------------------------------------------------------------------------
+r683 | gbv | 2004-09-03 23:17:45 +0200 (Fri, 03 Sep 2004) | 2 lines
+
+* Added the posibility to add some flags with CFLAGS
+
+------------------------------------------------------------------------
+r682 | gbv | 2004-09-03 23:15:39 +0200 (Fri, 03 Sep 2004) | 4 lines
+
+* radixmp_8.c: fixed two bugs when defined Y_ITANIUM
+* gthreads.c: Fixed a potential bug when there more 
+  threads than blocks in pass 1.
+
+------------------------------------------------------------------------
+r681 | gbv | 2004-06-07 00:08:13 +0200 (Mon, 07 Jun 2004) | 5 lines
+
+* Configure.in: Added cases when x86_64/freebsd
+* lucasini.c : Simplified code calling to y_cancel_all_threads()
+* gthreads.c, gthreads.h: new y_join_and_freemem_all_threads()
+* Iteration.c: simplified code
+
+------------------------------------------------------------------------
+r680 | gbv | 2004-06-02 22:09:19 +0200 (Wed, 02 Jun 2004) | 2 lines
+
+* html doc now goes to html dir
+
+------------------------------------------------------------------------
+r679 | gbv | 2004-06-02 20:49:59 +0200 (Wed, 02 Jun 2004) | 2 lines
+
+* Some more fixes to avoid error when cacnelling threads
+
+------------------------------------------------------------------------
+r678 | gbv | 2004-05-31 21:51:34 +0200 (Mon, 31 May 2004) | 2 lines
+
+* Update version
+
+------------------------------------------------------------------------
+r677 | gbv | 2004-05-31 21:50:21 +0200 (Mon, 31 May 2004) | 2 lines
+
+* Fixed a problem when no pass1 for sunmp and openmp
+
+------------------------------------------------------------------------
+r676 | gbv | 2004-05-30 12:39:26 +0200 (Sun, 30 May 2004) | 2 lines
+
+* added #if ... #endif when defined _PTHREADS
+
+------------------------------------------------------------------------
+r675 | gbv | 2004-05-30 11:41:17 +0200 (Sun, 30 May 2004) | 1 line
+
+
+------------------------------------------------------------------------
+r674 | gbv | 2004-05-30 11:38:11 +0200 (Sun, 30 May 2004) | 2 lines
+
+* updated to new keyword
+
+------------------------------------------------------------------------
+r673 | gbv | 2004-05-30 11:36:56 +0200 (Sun, 30 May 2004) | 2 lines
+
+* Third attempt to include 'Rev' keyword
+
+------------------------------------------------------------------------
+r672 | gbv | 2004-05-30 11:33:18 +0200 (Sun, 30 May 2004) | 2 lines
+
+* Propset revision
+
+------------------------------------------------------------------------
+r671 | gbv | 2004-05-30 11:31:54 +0200 (Sun, 30 May 2004) | 2 lines
+
+* Added Rev keyword to configure.in
+
+------------------------------------------------------------------------
+r670 | gbv | 2004-05-30 11:23:21 +0200 (Sun, 30 May 2004) | 2 lines
+
+* Uptated texi files
+
+------------------------------------------------------------------------
+r669 | gbv | 2004-05-30 11:21:43 +0200 (Sun, 30 May 2004) | 3 lines
+
+* glucas.texi: updated the known Mersenne Primes list
+* version.c: updated
+
+------------------------------------------------------------------------
+r668 | gbv | 2004-05-30 11:18:45 +0200 (Sun, 30 May 2004) | 5 lines
+
+* New iteration.c file with lucas_square() function
+* gthreads.c: new y_cancel_all_threads() function
+* glucas.c: use y_cancel_all_threads() when termitating,
+  restarting or killing
+
+------------------------------------------------------------------------
+r667 | gbv | 2004-05-30 00:15:50 +0200 (Sun, 30 May 2004) | 2 lines
+
+* M24036583 is already considered as Known Mersenne Prime
+
+------------------------------------------------------------------------
+r666 | gbv | 2004-05-29 22:20:35 +0200 (Sat, 29 May 2004) | 3 lines
+
+* Commited T.Reix code for trace threads and some more code.
+  Fixed warnings when cancelled and joined threads.
+
+------------------------------------------------------------------------
+r665 | gbv | 2004-05-29 14:31:53 +0200 (Sat, 29 May 2004) | 2 lines
+
+* Added keywords to *.texi files
+
+------------------------------------------------------------------------
+r664 | gbv | 2004-05-29 13:53:26 +0200 (Sat, 29 May 2004) | 2 lines
+
+* Modified multithreaded code for pass1. 
+
+------------------------------------------------------------------------
+r663 | gbv | 2004-05-28 20:18:49 +0200 (Fri, 28 May 2004) | 4 lines
+
+* Added yealucmp.c
+* Fixed problems with new mp code for pass1 when there are more than a
+  single FFT step
+
+------------------------------------------------------------------------
+r662 | gbv | 2004-05-27 18:19:00 +0200 (Thu, 27 May 2004) | 3 lines
+
+* Added new radixmp_* code
+* Fixed mp code for sse2
+
+------------------------------------------------------------------------
+r661 | gbv | 2004-05-26 19:35:47 +0200 (Wed, 26 May 2004) | 2 lines
+
+* Big patch to better work distribution for multithread work in pass1
+
+------------------------------------------------------------------------
+r660 | gbv | 2004-05-24 23:11:55 +0200 (Mon, 24 May 2004) | 2 lines
+
+* Modified docs about the use of non power_of_two threads
+
+------------------------------------------------------------------------
+r659 | gbv | 2004-05-24 23:08:10 +0200 (Mon, 24 May 2004) | 2 lines
+
+* Updated version
+
+------------------------------------------------------------------------
+r658 | gbv | 2004-05-24 23:07:48 +0200 (Mon, 24 May 2004) | 2 lines
+
+* Finally we can use non power_of_two # threads
+
+------------------------------------------------------------------------
+r657 | gbv | 2004-05-20 21:56:09 +0200 (Thu, 20 May 2004) | 2 lines
+
+* Fixed a problem with SUNMP
+
+------------------------------------------------------------------------
+r656 | gbv | 2004-05-20 20:30:01 +0200 (Thu, 20 May 2004) | 3 lines
+
+* After fixed the important bug when threads > 4 the version is now
+  2.9.2
+
+------------------------------------------------------------------------
+r655 | gbv | 2004-05-20 20:14:27 +0200 (Thu, 20 May 2004) | 5 lines
+
+* Fixed a bug for Openmp and Sunmp when threads > 4
+* Some fixes for intel icc >=8.0
+* Forced Y_PLAN[0] >= 9 when nthreads > 4. It should scale better for
+  many threads 
+
+------------------------------------------------------------------------
+r654 | gbv | 2004-05-20 00:21:19 +0200 (Thu, 20 May 2004) | 2 lines
+
+* Update version
+
+------------------------------------------------------------------------
+r653 | gbv | 2004-05-20 00:19:27 +0200 (Thu, 20 May 2004) | 2 lines
+
+* Some adaptations to intel icc 8.0 compiler
+
+------------------------------------------------------------------------
+r652 | gbv | 2004-05-18 19:40:58 +0200 (Tue, 18 May 2004) | 3 lines
+
+* Fixed a bug in ynormm_x.c files related with px pointer
+* glucas.texi: Added doc about -z option
+
+------------------------------------------------------------------------
+r651 | gbv | 2004-05-17 23:22:17 +0200 (Mon, 17 May 2004) | 2 lines
+
+* Add the -z option to force the next FFT runlength
+
+------------------------------------------------------------------------
+r650 | gbv | 2004-05-16 09:31:26 +0200 (Sun, 16 May 2004) | 2 lines
+
+* Changed name of pointer of main array data to PX from px
+
+------------------------------------------------------------------------
+r649 | gbv | 2004-05-10 23:04:20 +0200 (Mon, 10 May 2004) | 3 lines
+
+* Fixed a bug which crashes glucas when new reading save files in some
+  rare conditions
+
+------------------------------------------------------------------------
+r648 | gbv | 2004-04-17 19:53:21 +0200 (Sat, 17 Apr 2004) | 3 lines
+
+*Mofied how tricky.c found the round constant for x86 processors due
+ to new gcc-ssa compiler 
+
+------------------------------------------------------------------------
+r647 | gbv | 2004-04-09 21:08:28 +0200 (Fri, 09 Apr 2004) | 4 lines
+
+*gio.c: read_queue(): Added test to check the task
+*version.c: updated
+*version.texi:updated by latest glucas.texi modifications
+
+------------------------------------------------------------------------
+r646 | gbv | 2004-04-09 20:39:04 +0200 (Fri, 09 Apr 2004) | 2 lines
+
+*Deleted the binary glucas.dvi in the repository
+
+------------------------------------------------------------------------
+r645 | gbv | 2004-04-09 20:38:09 +0200 (Fri, 09 Apr 2004) | 7 lines
+
+*gio.c: read_queue(): added tests to detect bad formats, bad exponents
+and bad shift bits in queue files
+*Glucas_test: Added 'primenet' and 'medium' subsituted by 'big' as the
+builtin selftest
+*glucas.texi: Added information about 'primenet' option in selftest
+
+
+------------------------------------------------------------------------
+r644 | gbv | 2004-04-08 23:48:03 +0200 (Thu, 08 Apr 2004) | 5 lines
+
+*Makefile.am: Supressed some innecesary files in dist_files
+*glucas.c, glucas.h: Include controls to see whether a residue is 0 or
+two.
+*version.c: updated
+
+------------------------------------------------------------------------
+r643 | gbv | 2004-04-08 20:10:14 +0200 (Thu, 08 Apr 2004) | 1 line
+
+=Set ID keyword property
+------------------------------------------------------------------------
+r642 | gbv | 2004-04-08 20:02:00 +0200 (Thu, 08 Apr 2004) | 3 lines
+
+*configure.in: Added some test sugested by autoscan
+*config.h.in: New tests generated by added test in configure.in
+
+------------------------------------------------------------------------
+r641 | gbv | 2004-04-08 19:49:43 +0200 (Thu, 08 Apr 2004) | 3 lines
+
+*deleted some scripts not being part of glucas or autogenerated by other
+tools.
+
+------------------------------------------------------------------------
+r640 | unknown | 2004-03-29 20:30:07 +0200 (Mon, 29 Mar 2004) | 1 line
+
+This commit was manufactured by cvs2svn to create tag 'release-2_8a'.
+------------------------------------------------------------------------
+r639 | unknown | 2004-03-29 20:30:05 +0200 (Mon, 29 Mar 2004) | 1 line
+
+This commit was manufactured by cvs2svn to create tag 'release-2_8b'.
+------------------------------------------------------------------------
+r638 | unknown | 2004-03-29 20:30:04 +0200 (Mon, 29 Mar 2004) | 1 line
+
+This commit was manufactured by cvs2svn to create tag 'release-2_8c'.
+------------------------------------------------------------------------
+r637 | unknown | 2004-03-29 20:30:02 +0200 (Mon, 29 Mar 2004) | 2 lines
+
+This commit was manufactured by cvs2svn to create tag
+'first_sourceforge_rev'.
+------------------------------------------------------------------------
+r636 | unknown | 2004-03-29 20:30:01 +0200 (Mon, 29 Mar 2004) | 1 line
+
+This commit was manufactured by cvs2svn to create tag 'start'.
+------------------------------------------------------------------------
+r635 | unknown | 2004-03-29 20:30:00 +0200 (Mon, 29 Mar 2004) | 2 lines
+
+This commit was manufactured by cvs2svn to create tag
+'release-2_9_0'.
+------------------------------------------------------------------------
+r634 | unknown | 2004-03-29 20:29:58 +0200 (Mon, 29 Mar 2004) | 1 line
+
+This commit was manufactured by cvs2svn to create branch 'updates-2_8c'.
+------------------------------------------------------------------------
+r633 | gbvalor | 2004-02-09 22:12:36 +0100 (Mon, 09 Feb 2004) | 4 lines
+
+* gio.c: Function read_check_point() returms -2 if there is no memory to
+         allocated the required arrays.
+* version.c: Update
+
+------------------------------------------------------------------------
+r632 | gbvalor | 2004-02-05 19:45:15 +0100 (Thu, 05 Feb 2004) | 4 lines
+
+* gio.c: cleaned some loop index;
+* yeainit.c: Aditional memory control for allocated arrays;
+* version.c: Updated
+
+------------------------------------------------------------------------
+r631 | gbvalor | 2004-01-27 19:33:32 +0100 (Tue, 27 Jan 2004) | 3 lines
+
+*configure.in: New configure case for ibm-aix.
+*version.c : update
+
+------------------------------------------------------------------------
+r630 | gbvalor | 2004-01-25 18:03:00 +0100 (Sun, 25 Jan 2004) | 6 lines
+
+*configfsf.guess, config.guess, configfsf.sub, config.sub: Updated from
+  latest GMP snapshot and patched with few powerpc models.
+*Glucas_test: Supressed () in a make_selftest bash function causing
+  problems in AIX.
+*version.c: updated.
+
+------------------------------------------------------------------------
+r629 | gbvalor | 2004-01-18 22:37:30 +0100 (Sun, 18 Jan 2004) | 2 lines
+
+*version.c : Updated version.
+
+------------------------------------------------------------------------
+r628 | kiste | 2004-01-18 18:45:48 +0100 (Sun, 18 Jan 2004) | 2 lines
+
+Fix opening of glucas.ini/glucas.out without close in read_inifile()
+
+------------------------------------------------------------------------
+r627 | gbvalor | 2003-12-09 21:47:51 +0100 (Tue, 09 Dec 2003) | 3 lines
+
+ygensse2.h: Some sse2 macro improvements for AMD64
+version.texi, version.c, configure.in: Updates
+
+------------------------------------------------------------------------
+r626 | gbvalor | 2003-12-02 23:12:54 +0100 (Tue, 02 Dec 2003) | 3 lines
+
+*gio.c glucas.texi: Added M20996011 in the Known Mersenne Primes list.
+*version.c : update
+
+------------------------------------------------------------------------
+r625 | gbvalor | 2003-11-29 12:10:55 +0100 (Sat, 29 Nov 2003) | 2 lines
+
+*ChangeLog, version.c : updated
+
+------------------------------------------------------------------------
+2003-11-25 21:49  gbvalor
+
+	* glucas/: glucas.c, glucas.h, version.c: *glucas.c, glucas.h:
+	  Patch to read inifile every time a save file is wrote.    So we
+	  can change, as example, the output like without killing Glucas.
+	  *version.c : updated
+
+2003-11-23 19:13  gbvalor
+
+	* glucas/: glucas.texi, version.texi: *glucas.texi: modified some
+	  information about Glucas_test. Added the posibility to set
+	  GLUCAS_FLAGS when configuring
+
+2003-11-23 13:16  gbvalor
+
+	* glucas/: configure.in, radix_8.c, version.c, yeafft.h, ynorm_5.c,
+	  ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c: * ynorm_5.c,
+	  ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c, yeafft.h:   fixed a
+	  bug in computing addr() causing a coredump on itaniums *
+	  version.c: updated * configure.in: added DY_ITANIUM to ia64_hpux.
+	  Fixed a small bug * ... minor changes on code style
+
+2003-11-22 22:42  gbvalor
+
+	* glucas/Makefile.am: *Added script Glucas_test to package
+
+2003-11-22 22:38  gbvalor
+
+	* glucas/: Glucas_test, configure.in, glucas.c, glucas.h,
+	  glucas.texi, radix_16.c, radixmm_16.c, radixmm_8.c, selftest.c,
+	  tricky.c, version.c, version.texi, ydebug.h, yeafft.h, yeainit.c,
+	  ygensse2.h, ynormsse2.h: *configure.in: New options for ia64-HPUX
+	  and Intel C++ compiler *glucas.c, glucas.h, glucas.texi,
+	  selftest.c: New -K option.  *Glucas_test: Added this script to
+	  check i/o save files *version.c, version.texi, ... : updates and
+	  style changes
+
+2003-09-08 01:22  gbvalor
+
+	* glucas/: configure.in, gio.c, glucas.c, glucas.h, glucas.info,
+	  glucas.info-1, glucas.texi, radixmm_16.c, version.c,
+	  version.texi, yeafft.h, ygensse2.h: glucas.h: Modified prototypes
+	  of some functions. Supressed mask and shift	  arguments on i/o
+	  functions.  glucas.c, gio.c: Supressed mask and shift parameters
+	  in some functions. Now	they use addr() macro.	yeafft.h:
+	  Introduced Y_PADDING_LEVEL parameter and new set of add() macros
+	  glucas.texi, glucas-info* : Information about Y_PADDING_LEVEL
+	  version.c, version.texi: update configure.in: Introduced
+	  Y_PADDING_LEVEL configuration for Opteron and Athlon ygensse2.h:
+	  Modified some macros.
+
+2003-09-07 13:13  gbvalor
+
+	* glucas/: cmpGlucas, sumGlucas: *cmpGlucas: Fixed a typo-bug in
+	  displaying.  Added CVS revision Id *sumGlucas: added CVS revision
+	  Id
+
+2003-09-06 18:23  gbvalor
+
+	* glucas/: Makefile.am, cmpGlucas, sumGlucas, version.c, yeafft.h,
+	  yeainit.c: *Makefile: added sumGlucas and cmpGlucas to EXTRA_DIST
+	  *sumGlucas, cmpGlucas: Added.  *version.c: updated
+
+2003-08-12 11:43  gbvalor
+
+	* glucas/ChangeLog: *ChangeLog: Updated ChangeLog with cvs2pl.pl
+	  utility
+
+2003-08-03 21:15  gbvalor
+
+	* glucas/: version.c, version.h: *version.h: updated version.h. not
+	  commited in last commit and causing	      compilation error.
+
+2003-08-02 10:26  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, aclocal.m4, config.h.in,
+	  configure, configure.in, gio.c, glucas.h, glucas.info,
+	  glucas.info-1, radix_16.c, radixmm_16.c, radixmm_8.c, round.h,
+	  tricky.c, version.c, yeafft.h, ynormm_8.c, ynormsse2.h:
+	  *configure.in: Added tests to x86_64* targets. Supressed malloc
+	  test	    causing problems in some platforms (TruUnix-64, X86_64
+	  ...) *glucas.h: Moved asm macros with rouning code to round.h
+	  *Makefile.am: added round.h file *round.h: New file. It collects
+	  all asm macros and other stuff related     with round to integer.
+	  *tricky.c: fixed a trial sse2-asm macro.  *version.c: Updated
+	  and fixed for opterons.  *yeafft.h: Moved round trick code to
+	  round.h *ynormsse2.h: Modified some macros for opterons
+	  *ynormm_8.c: Commented a line to debug proposes
+
+2003-07-21 23:59  gbvalor
+
+	* glucas/: glucas.h, prefetch.h, radixmm_8.c, version.c, ynorm.h,
+	  ynormm_8.c, ynormsse2.h: *glucas.h: fixed Assembler macros for
+	  Intel compiler *prefetch.h, radixmm_8.c: new Y_INC_AHEAD and
+	  Y_PREFETCH_AHEAD macros *ynormsse2.h: modified some SSE2 macros.
+	  *version.c: updated.
+
+2003-07-20 13:02  gbvalor
+
+	* glucas/: configure.in, fft3x86.h, glucas.c, glucas.h, radix_16.c,
+	  radix_8.c, version.c, ydebug.h, yeafft.h, ygensse2.h, ynorm.h,
+	  ynorm_8.c: *configure.in: Modified some default parameters for
+	  pentium4 *glucas.c, ydebug.h: modified x86-debug code
+	  *radix_16.c, radix_8.c, ynorm_8.c: modified some blanks lines
+	  *yeafft.h: a new scheme for addr() macros.  *glucas.h: fixed and
+	  improved asm-macros for rounding SSE2.  *ygensse2.h: improved
+	  some generic SSE2 macros *version.c: updated
+
+2003-07-16 23:40  gbvalor
+
+	* glucas/: configure.in, version.c, yeainit.c: *configure.in:
+	  Modified Y_BLOCKSIZE and Y_SHIFT default for pentium4
+
+2003-07-16 00:17  gbvalor
+
+	* glucas/ynormm_5.c: Supressed some debug lines
+
+2003-07-16 00:11  gbvalor
+
+	* glucas/: difditmm_4.c, difditmm_8.c, fft5.h, fft5sse2.h, fft7.h,
+	  fft7sse2.h, glucas.h, prefetch.h, radix_8.c, radixmm_16.c,
+	  radixmm_4.c, radixmm_5.c, radixmm_6.c, radixmm_7.c, radixmm_8.c,
+	  radixmm_9.c, version.c, ydebug.h, yeafft.c, yeafft.h, ynorm_7.c,
+	  ynorm_8.c, ynormm_5.c, ynormm_6.c, ynormm_7.c, ynormm_8.c,
+	  ynormm_9.c: *fft5.h fft5sse2.h fft7.h fft7sse2.h: some minor
+	  changes *prefetch.h: fixed a bug for ppc.  *glucas.h yeafft.h:
+	  included prototypes for functions when Y_USE_SSE2 is not
+	  defined.  *ynormm_X.c radixmm_X.c difditmm_x.c: included
+	  functions when Y_USE_SSE2 is	 not defined.
+
+2003-07-14 19:33  gbvalor
+
+	* glucas/: difdit_16.c, difdit_4.c, difdit_8.c, difditmm_4.c,
+	  difditmm_8.c, gio.c, gthreads.h, prefetch.h, radix_8.c,
+	  radixmm_16.c, radixmm_4.c, radixmm_5.c, radixmm_6.c, radixmm_7.c,
+	  radixmm_8.c, radixmm_9.c, version.c, ynorm.h, ynormm_5.c,
+	  ynormm_6.c, ynormm_7.c, ynormm_8.c, ynormm_9.c, ysse2.h:
+	  *prefetch.h: New macro definitions   prefetch_data_trig_nta()
+	  prefetch_p_tirg_nta()   to prefetch data with no temporary.
+	  *radixmm_4.c, radixmm_5.c, radixmm_6.c, radixmm_7.c, radixmm_8.c,
+	  radixmm_9.c, radixmm_16.c: Used new prefetch macros. Added some
+	  code	 when Y_USE_SSE2 is not defined.  *ynormm_5.c, ynormm_6.c,
+	  ynormm_7.c ynormm_8.c ynormm_9.c,   difditmm_4.c, difditmm_8.c:
+	  Added code when Y_USE_SSE2 is not   defined. This should fix a
+	  bug in some  compilers.  *ysse2.h : minor changes in macros.
+	  *version.c: update version *gio.c: supressed unused var in
+	  print_date3() function
+
+2003-07-07 23:39  gbvalor
+
+	* glucas/version.c: New version
+
+2003-07-07 23:38  gbvalor
+
+	* glucas/: radixmm_6.c, selftest.c: *selftest.c : Changed the
+	  exponent to test on selftest 7 to 5301301. It     avoids to
+	  restart increasing the accuracy.  *radixmm_6.c : supressed unused
+	  local vars.
+
+2003-07-04 19:08  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h, glucas.texi, version.c:
+	  *gio.c: -Added copy_last_save_file() function. It will copy
+	  last s-file to a sNNNN_last file when a new prime is
+	  discovered. This file could be used to discard false	  primes.
+		-Modified default iteration info rate from 10000 to 20000.
+	  -Modified write_glucasout() to permit short timestamp   and
+	  use them in new outputs (reverting some yesterday   changes).
+	  *glucas.c:-When a roundoff error is detected, Glucas now restart
+	  from last save file and check whether is a reproducible
+	  (lack of precision) error or a non-reproducible (hardware)
+	  error. In case of better precision needed, it increase  the
+	  accuracy as in older versions, otherwise a Warning is
+	  prompted.  *glucas.h:-New prototypes.  *glucas.texi: Commented
+	  last changes.
+
+2003-07-03 18:09  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h, selftest.c, tricky.c,
+	  version.c, yeafft.h, yeafft1.c, yealucas.c, ynormm_5.c,
+	  ynormm_6.c, ynormm_7.c, ynormm_8.c, ynormm_9.c, ynormsse2.h,
+	  ysse2.h: * gio.c, glucas.c: Added short date/time information on
+	  output (no selftest)	Now default iter info rate is 5000 instead
+	  off 4096. No doubled info when  save file and QA save file are in
+	  the same iter.  * Some cleaning work on SSE2 code.
+
+2003-07-02 22:19  gbvalor
+
+	* glucas/: fft7sse2.h, radixmm_6.c, radixmm_7.c, ynormm_6.c,
+	  ynormm_7.c: Added files for SSE2 code
+
+2003-07-02 22:14  gbvalor
+
+	* glucas/: Makefile.am, glucas.h, gthreads.c, gthreads.h,
+	  radixmm_9.c, version.c, yeafft.h, yeainit.c, yealucas.c,
+	  ynormm_9.c, ysse2.h: Added files and completed SSE2 code for
+	  6*2^n and 7*2^n FFT RL.
+
+2003-07-01 19:42  gbvalor
+
+	* glucas/: gthreads.c, gthreads.h, yeafft.h: *yeafft.h: Deactived
+	  at the momet the sum_check *gthreads.c, gthreads.h: fixed pthread
+	  SSE2 code for 9*2^n and 5*2^n FFT RL
+
+2003-07-01 19:01  gbvalor
+
+	* glucas/: Makefile.am, fft5.h, fft5sse2.h, glucas.c, glucas.h,
+	  radixmm_5.c, radixmm_9.c, selftest.c, version.c, yeafft.h,
+	  yeafft1.c, yeainit.c, yealucas.c, ygensse2.h, ynorm.c, ynorm_5.c,
+	  ynormm_5.c: Added SSE2 code for 5*2^n FFT runlength. Mostly in
+	  new files  fft5sse2.h radixmm_5.c ynormm_5.c
+
+2003-06-30 00:42  gbvalor
+
+	* glucas/: lucasini.c, version.c, ynormm_8.c, ynormm_9.c, ysse2.h:
+	  Fixed a bug with threaded SSE2 code for 9*2^n and 2^n FFT
+	  runlengths.  Completed sum check code for those FFT's
+	  (deactivated but working OK when enabled).
+
+2003-06-24 00:56  gbvalor
+
+	* glucas/: fft7.h, glucas.c, glucas.h, gthreads.c, gthreads.h,
+	  lucasini.c, version.c, yeafft.h, ygeneric.h, ynorm.h, ynorm_10.c,
+	  ynorm_12.c, ynorm_14.c, ynorm_16.c, ynorm_5.c, ynorm_6.c,
+	  ynorm_7.c, ynorm_8.c, ynorm_9.c: First draft of SUmcheck test.
+	  Still deactivated. To activate define SUM_CHECK in yeafft.h. At
+	  the moment, it cause problems with SSE2 code.  Fixed a bug when
+	  restarting with posix threads.
+
+2003-06-22 14:23  kiste
+
+	* glucas/ynorm_8.c: Added missing #ifdef for undefined "SUM_CHECK".
+
+2003-06-21 13:13  gbvalor
+
+	* glucas/: ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c,
+	  ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c: Modified
+	  macros to load discrete weighted factors. About a 1% of gain in
+	  Athlons.
+
+2003-06-20 16:16  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, fft3sse2.h, radixmm_9.c,
+	  version.c, yeafft.h, yeafft1.c, yealucas.c, ygensse2.h,
+	  ynormm_8.c, ynormm_9.c, ynormsse2.h: First working SSE2
+	  last-dif-carry-first-dit version for 9*2^n FFT runlengths
+
+2003-06-13 18:36  gbvalor
+
+	* glucas/: configure, gio.c, glucas.c, glucas.h, glucas.info,
+	  glucas.info-1, glucas.info-2, gthreads.c, gthreads.h, lucasini.c,
+	  selftest.c, version.c, yeafft.h, yeainit.c, ynorm_8.c,
+	  ynormm_8.c, ynormsse2.h, ysse2.h: * New fixes to SSE2 code on
+	  power_of_two FFT length runs. Now it also   runs on OpenMP and
+	  Posix-threads. Other runlengths with SSE2 will give	Glucas's
+	  panic. Some code-style rewriting.
+
+2003-06-08 12:38  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h, glucas.texi, gsetup.c,
+	  version.c: *Added the option -N to adjust nice priority.
+
+2003-06-06 00:06  gbvalor
+
+	* glucas/: glucas.c, version.c: *glucas.c : When a g* file is not
+	  present in working directory, then the   roundoff_check error is
+	  activated during next 2^17 iterations to be sure   threre no
+	  problems with accuracy. This problem has been detected verifying
+	  Mersenne prime #40 *version.c : update.
+
+2003-06-02 22:47  gbvalor
+
+	* glucas/: Makefile.am, configure, configure.in, difditmm_8.c,
+	  fft3sse2.h, gio.c, glucas.c, glucas.h, glucas.texi, radixmm_16.c,
+	  selftest.c, version.c, version.texi, yeafft.h, yeafft1.c,
+	  yeainit.c, yealucas.c, ynorm.h, ynormm_8.c, ynormm_9.c,
+	  ynormsse2.h: *fft3sse2.h, ynormm_9.c: Added first draft to CVS.
+	  This are SSE2 code files    to carry and norm phase with radix-9.
+	  Still no operative *Makefile.am: Added fft3sse2.h and ynormm_9.c
+	  files to glucas sources *glucas.c, glucas.h, selftest.c, gio.c,
+	  glucas.texi:	  New -S option, is the same than -s, but now the
+	  selftest does 1000	iterations.  *configure, configure.in,
+	  difditmm_8.c, radixmm_16.c, yeafft1.c yeainit.c    yealucas.c,
+	  ynorm.h, ynormm_8.c ynormsse2.h: Some minor changes, most    of
+	  them to adapt the code to GNU coding standar.
+
+2003-05-26 23:16  gbvalor
+
+	* glucas/: glucas.c, glucas.h, lucasini.c, radixmm_8.c, tricky.c,
+	  version.c, yeafft1.c, yealucas.c, ynormm_8.c, ynormsse2.h,
+	  ysse2.h: More SSE2 code, still deactivated but partially working
+	  in some test :)
+
+2003-05-25 23:30  gbvalor
+
+	* glucas/: glucas.c, glucas.h, lucasini.c, tricky.c, version.c,
+	  yeafft.h, yeainit.c, yealucas.c, ynorm.c, ynormm_8.c,
+	  ynormsse2.h, ysse2.h: * Implemented some SSE2 code in last DIT,
+	  norm, carry and first DIF. Still   no linked and no working.
+
+2003-05-16 19:17  gbvalor
+
+	* glucas/: glucas.c, glucas.h, tricky.c, version.c, yeafft.h,
+	  yeainit.c, ynormm_8.c, ynormsse2.h, ysse2.h: * glucas.c: Some
+	  comments about round SSE2 vector constant * glucas.h: Definitions
+	  of SSE2 round macros.  * tricky.c: Autodetection and set the SSE2
+	  vector constant * version.c: Update version.	* yeafft.h:
+	  Introduced auxiliar SSE2 constants to ABS and    CHS * yeainit.c:
+	  Set ABS and CHS SSE2 constants * ynormsse2.h: first drafts.
+	  Nothing of interest * ysse2.h : ABS and CHS SSE2 macros
+
+2003-05-08 23:51  gbvalor
+
+	* glucas/: configure.in, version.c: * configure.in : Added a test
+	  for -xopenmp flag used in new Sun C/C++ compilers * version.c :
+	  Updated
+
+2003-04-27 13:44  gbvalor
+
+	* glucas/: radix_16.c, radix_4.c, radix_8.c, radixmm_16.c,
+	  radixmm_4.c, radixmm_8.c, version.c, ynorm_5.c, ynorm_6.c,
+	  ynorm_7.c, ynorm_8.c, ynorm_9.c, ynormm_8.c: Added prefetch hints
+	  at the beginning of routines to prefetch first data
+
+2003-04-26 00:17  gbvalor
+
+	* glucas/: Makefile.am, configure, configure.in, version.c,
+	  ysse2.h: *configure.in : Included test and some modifications for
+	  GCC 3.3 and 3.4 *ysse2.h : Prepared for GCC 3.3 and 3.4. GCC 3.3
+	  compiler for SSE2 simply	   doesn't work. I summited a bug
+	  report to GCC but there few chances	   they fixed the bug.
+	  FORTUNATELY GCC 3.4 (exxperimental) does the	      work well and
+	  fast.  *version.c : updated *Makefile.am, configure: derived from
+	  configure.in
+
+2003-04-24 19:40  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, difditmm_4.c, difditmm_8.c,
+	  glucas.c, glucas.h, radixmm_16.c, radixmm_4.c, radixmm_8.c,
+	  version.c, yeafft.h, yeainit.c, ynormm_8.c, ynormsse2.h, ysse2.h:
+	  *Makefile.am : Included first draft of files 'ynormsse2.h' and
+	  'ynormm_8.c'	    as Glucas sources.	*Makefile.in: Derived from
+	  Makefile.am *configure: Derived from new Makefile.am And
+	  Makefile.in *difditmm_4.c , difditmm_8.c, glucas.c, glucas.h,
+	  radixmm_4.c, radixmm_8.c  yeafft.h, yeainit.c: New SSE2 FFT
+	  constants now declared as globals. On 	FFT routines they
+	  are called after prefetch them instead of define	them as
+	  locals and set every call.  *version: Updated *ynormm_8.c,
+	  ynormsse2.h: First drafts on CVS. At the moment, it only contains
+	  the scalar code to be converted to SSE2.
+
+2003-04-22 23:02  gbvalor
+
+	* glucas/: Makefile.am, difditmm_4.c, difditmm_8.c, yeafft.h,
+	  yeafft1.c, ygensse2.h: *difditmm_4.c : NEW. First version running
+	  OK. It includes the SSE2 code   for last_dif_square_first_dit for
+	  radix 4.  *Makefile.am : Added difditmm_4.c in Glucas sources.
+	  *difditmm_8.c : Some macros passed to ygensse2.h. file. Some
+	  other minor	   changes *yeafft.h : Added definition for
+	  radixmm_4_dif_square_dit() function.	*ygensse2.h : Added some
+	  macros from difditmm_8.c file. Those macros are	  also used
+	  in difditmm_4.c code.  *yeafft1.c : added calls to difditmm_4.c
+	  routines *version.c : updated version.  *condigure : Updated to
+	  new Makefile.am
+
+2003-04-22 00:37  gbvalor
+
+	* glucas/: difditmm_8.c, version.c, yeafft.h, yeafft1.c,
+	  ygensse2.h, ysse2.h: *difditmm_8.c: Lots of new code. Already
+	  working OK.  *version.c: updated version *yeafft.h: new function
+	  definitions.	*yeafft1.c: calls to radixmm_8_dif_square_dit()
+	  *ygensse2.h: modified some comments and blanks *ysse2.h: fixed a
+	  bug in Y_MM_UNPACKLO_PD in emulation mode.	Some coments and
+	  blanks
+
+2003-04-20 23:36  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, config.h.in, configure,
+	  radixmm_16.c: *Makefile.am: Included source file difditmm_8.c
+	  *radixmm_16.c: Fixed a small bug *Makefile.in, *configure:
+	  Updated
+
+2003-04-20 23:22  gbvalor
+
+	* glucas/: difditmm_8.c, version.c: *difditmm_8.c: First version in
+	  CVS. It contains code for dif_square_dit    phase using SSE2 code
+	  and macros. It still doesn't run OK. It is	    deactivated
+	  undefining Y_USE_SSE2_PASS2 * version.c: Updated version.
+
+2003-04-20 23:03  gbvalor
+
+	* glucas/: glucas.h, gmp_yea.h, yeafft.h, yeafft1.c, ygensse2.h,
+	  ysse2.h: *glucas.h: Only modified comments and blanks.
+	  *gmp_yea.n: Only modified comments and blanks.  *yeafft.h: Added
+	  definition for some SSE2 routines *yeafft1.c: First step in
+	  preparing for dif_square_dit	 SSE2 routines *ysse2.h: Added some
+	  basic SSE2 macros.  *ygensse2.h: Included some big macros for
+	  SSE2 routines   in dif_square_dit pass.
+
+2003-04-17 20:35  gbvalor
+
+	* glucas/ysse2.h: Added some macros.
+
+2003-04-17 19:26  gbvalor
+
+	* glucas/yeafft.h: Revised some format lines. No significant
+	  changes.
+
+2003-04-17 19:18  gbvalor
+
+	* glucas/configure.in: Enabled gprof profiler to Intel C++ compiler
+	  when --enable-profiler is set
+
+2003-01-04 13:24  kiste
+
+	* glucas/gio.c: Fixed some typos in format strings.
+
+2003-01-04 09:14  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h: Added control code to the
+	  amount of exponents in queue file. Fixes a bug when there where
+	  more than 128 exponents. Now is defined Y_MAX_QD as 128.
+
+2003-01-01 18:46  kiste
+
+	* glucas/: configure.in, mccomp.h, prefetch.h, version.c: Optimized
+	  configuration and prefetch for PA-RISC 2.0 on Linux.
+
+2002-10-21 19:38  kiste
+
+	* glucas/: prefetch.h, version.c, yeafft.h: Make sure first
+	  argument of dcbt instuction is not r0=0.
+
+2002-10-20 19:48  gbvalor
+
+	* glucas/: version.c, version.texi: version.c: Updated
+	  version.texi: dit
+
+2002-10-20 19:45  gbvalor
+
+	* glucas/: glucas.dvi, glucas.info, glucas.info-1, glucas.info-2,
+	  glucas.texi: glucas.texi: Added information about command line
+	  flags -h, -c, -r, -v.
+
+2002-10-20 19:42  gbvalor
+
+	* glucas/gio.c: gio.c: The default when enter an exponent in
+	  command line is now 'append'	     instead of 'insert'.
+
+2002-10-03 19:24  gbvalor
+
+	* glucas/: Makefile.am, prefetch.h, radixmm_4.c, version.c,
+	  yeafft.h, yeafft1.c, yealucas.c, ygensse2.h: *Makefile.am: Added
+	  'radixmm_4.c' file *prefetch.h: Modified some prefetch hints
+	  *version.c: updated *yeafft.h: Included routines definitions in
+	  'radixmm_4.c' *yealucas.c: Inserted code to call radixmm_4.c
+	  rouitnes *yeafft1.c: Idem.  *ygensse2.h: Some macros recoded.
+	  *radixmm_4.c: New.
+
+2002-10-02 22:31  gbvalor
+
+	* glucas/: configure, configure.in, prefetch.h, radixmm_16.c,
+	  radixmm_8.c, version.c, ygensse2.h: *configure.in: fixed a typo
+	  *prefetch.h: changed Intel Icc prefetch hints.  *ygensse2.h:
+	  Updated some macros, fixed a bug in prefetch pointers in
+	  _mulmuladdsub_ macros.  *version.c: update.  *radixmm_8.c: fixed
+	  a prefetch hint.  *radixmm_16.c: Idem.
+
+2002-10-01 20:33  gbvalor
+
+	* glucas/: configure.in, glucas.info, glucas.info-1, radixmm_16.c,
+	  radixmm_8.c, yeafft.h, yeafft1.c, yealucas.c, ysse2.h:
+	  *configure.in: Change some defaults for Intel compiler and
+	  Pentium4 *glucas-info*: updated some old glucas-info
+	  *radixmm_8.c: Created four versions of basic routines to optimize
+	  memory	       access.	*radixmm_16.c: Idem *yeafft.h:
+	  Definitions of new versions of basic sse2 routines *yealucas.c:
+	  now it calls the right version depending of FFT pass level.
+	  *yeafft1.c: Idem.  *ysse2.h: Added a patch for icc/p4
+
+2002-09-30 13:41  gbvalor
+
+	* glucas/: Makefile.am, configure.in, prefetch.h, stamp-vti,
+	  version.c, version.texi, yeafft.h, yeafft1.c: *Makefile.am: Added
+	  files ysse2.h ygensse2.h radixmm_8.c radixmm_16.c *Configure.in:
+	  Support for --enable-ysse2. Changed some default options
+		for P4 and Intel icc compiler *prefetch.h: Added support
+	  for Intel Compiler icc intrinsic prefetch hints.  *yeafft.h:
+	  Included definitions of new sse2 routines *yeafft1.c: Now it
+	  calls to proper routine when Y_USE_SSE2 is defined *version.c:
+	  Version update
+
+2002-09-30 13:27  gbvalor
+
+	* glucas/: radixmm_8.c, radixmm_16.c, ygensse2.h, ysse2.h: Added
+	  new files to support x86 SSE2 extensions.  'ysse2.h' includes
+	  basic SSE2 ops (and simulator).  'ygensse2.h' includes generic
+	  macros using SSE2 basics.  'radixmm_*.c' files are the sse2
+	  version of routines in generic radix_*.c code.
+
+2002-09-28 22:50  kiste
+
+	* glucas/: configure.in, version.c: Fixed a typo. (--enable-yshift2
+	  w/o argument sets Y_SHIFT not Y_SHIFT2)
+
+2002-09-28 22:49  kiste
+
+	* glucas/yeafft.h: Apple (g)cc doesn't support 16 byte aligned
+	  double.
+
+2002-09-28 17:59  gbvalor
+
+	* glucas/: configure.in, yeafft.h: Added a new optional parameter
+	  Y_SHIFT2. It includes additional padding space to avoid
+	  overlapping in cache lines. It can be set with configure script
+	  adding the flag '--enable-yshift2=n'.
+
+2002-09-26 18:53  gbvalor
+
+	* glucas/version.c: Updated version
+
+2002-09-26 18:19  gbvalor
+
+	* glucas/yeafft1.c: Some 'case' block reorganized.
+
+2002-09-26 18:16  gbvalor
+
+	* glucas/yeainit.c: When defined Y_SEE_PLAN in yeainit.c now it
+	  displays the number of cache lines paded in every pass (we have
+	  to define some parameters according to the processor). It depends
+	  on FFT length but we should fix Y_BLOCKSIZE and Y_SHIFT to avoid
+	  0 pads. Some reorganization in case blocks.
+
+2002-09-26 17:29  gbvalor
+
+	* glucas/: radix_16.c, radix_4.c, radix_8.c: Introduced a patch
+	  which saves almost half of the loads and computation of
+	  trigonometric factors in Backward FFT. It is activated now as
+	  default.  It runs defining Y_SAVE_TRIGS (now hardwired) but it
+	  has to be tested to see how much we can gain. Preliminary proof
+	  in a PIII shows about 3%.
+
+2002-09-25 19:49  gbvalor
+
+	* glucas/yeainit.c: Fixed a typo bug causing seg faults for radix_6
+	  FFT lengths
+
+2002-09-08 14:30  kiste
+
+	* glucas/radix_4.c: Fixed a typo.
+
+2002-09-06 19:23  gbvalor
+
+	* glucas/: configure.in, glucas.c, yeafft.h: Added patch to correct
+	  bad stack alignment in some old GCC X-86 compiler versions (as
+	  2.95.3 in SuSE 8.0) which doubled Glucas timings :(.	AFAIK, this
+	  problem is not present for GCC 3.0 and above.
+
+2002-08-28 19:17  gbvalor
+
+	* glucas/: ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c:
+	  Added Y_MAXIMUM option. When enabled YEAFFT precomputes all
+	  needed trigonometric factors. This reduces the work at FFT-time
+	  but increases the memory traffic.
+
+2002-08-28 19:14  gbvalor
+
+	* glucas/: ynorm_12.c, ynorm_14.c, ynorm_16.c: Added Y_MAXIMUM
+	  option. When enabled YEAFFT precomputes all needed trigonometric
+	  factors. This reduces the work at FFT-time but increases the
+	  memory traffic.
+
+2002-08-28 19:11  gbvalor
+
+	* glucas/: configure, configure.in, difdit_16.c, difdit_4.c,
+	  difdit_8.c, dyadic32.c, generic.h, glucas.info, glucas.info-1,
+	  glucas.info-2, glucas.texi, radix_10.c, radix_12.c, radix_14.c,
+	  radix_16.c, radix_32.c, radix_4.c, radix_5.c, radix_6.c,
+	  radix_7.c, radix_8.c, radix_9.c, selftest.c, stamp-vti,
+	  version.c, version.texi, yeafft.h, yeainit.c, ygeneric.h,
+	  yia64.h, ynorm_10.c: Added Y_MAXIMUM option. When enabled YEAFFT
+	  precomputes all needed trigonometric factors. This reduces the
+	  work at FFT-time but increases the memory traffic.
+
+2002-07-20 12:49  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, configure, configure.in,
+	  version.c: Updated configure scripts to Intel compiler 6.0.
+	  Medium optimize flags CFLAGS1 for gio.c is not needed any more.
+
+2002-07-19 20:25  gbvalor
+
+	* glucas/: ChangeLog, glucas.html, gmp_yea.h, prefetch.h,
+	  radix_8.c, version.c, ydebug.h, yminimum.h: Minor changes, mostly
+	  blanks, and updated version
+
+2002-07-19 20:22  gbvalor
+
+	* glucas/: configure, configure.in: Added
+	  --enable-yprefetch_expensive and --enable-profiler options.
+
+2002-07-19 20:20  gbvalor
+
+	* glucas/gio.c: Fix to assure the intial shift value with -D option
+	  is less than exponent.
+
+2002-07-06 09:12  gbvalor
+
+	* glucas/: ChangeLog, configure, glucas.dvi, glucas.info,
+	  glucas.info-1, glucas.info-2, mformat.texi, version.c: Small
+	  fixes in mformat.texi for 'dvi' doc file.
+
+2002-07-04 00:15  gbvalor
+
+	* glucas/: configure, configure.in, glucas.dvi, glucas.html,
+	  glucas.info, glucas.info-1, glucas.info-2, glucas.texi,
+	  stamp-vti, version.c, version.texi: Added
+	  --enable-ymany_registers option to configure script
+
+2002-07-02 19:51  kiste
+
+	* glucas/: config.guess, config.sub: Added PVR values for PowerPC
+	  7400, 7410 and 7450.
+
+2002-07-02 19:47  kiste
+
+	* glucas/: gio.c, version.c: Added selftest 'primenet', covering
+	  current PrimeNet range.
+
+2002-06-30 20:58  gbvalor
+
+	* glucas/ChangeLog: Updated ChangeLog
+
+2002-06-29 22:47  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, README, configure,
+	  glucas.html: Removed 'Readme.Glucas.htm' and 'README.htm' files
+	  Updated glucas.html with links to old binaries
+
+2002-06-29 20:49  gbvalor
+
+	* glucas/: glucas.dvi, glucas.info, glucas.info-1, glucas.info-2,
+	  glucas.texi, mformat.texi, stamp-vti, version.c, version.texi:
+	  Supressed Summary node causing problems in summary of contents in
+	  tex.	Fixed some long lines
+
+2002-06-28 23:32  gbvalor
+
+	* glucas/prefetch.h: Modified temporary parameters for some
+	  prefetch hints and Y_TARGET=0 It seems new parameters are a bit
+	  better for PentiumIII and it has no effect on others processors.
+
+2002-06-28 19:18  gbvalor
+
+	* glucas/: configure, configure.in: Fixed a bug in previous patch
+	  when gcc < 3.1
+
+2002-06-28 19:02  gbvalor
+
+	* glucas/: configure, configure.in, stamp-vti, version.c,
+	  version.texi: Modified default values for Pentium3, Pentium4 and
+	  Athlons for gcc-3.1.	Supressed Y_MINIMUM in all cases and
+	  changed Y_TARGET=0 for Athlon/gcc-3.1
+
+2002-06-25 23:29  gbvalor
+
+	* glucas/: configure, configure.in, version.c: Set
+	  ymem_threshold=8192 as default value for Athlons (gain about 8%).
+	  Fixed a typo in configure.in
+
+2002-06-22 18:01  gbvalor
+
+	* glucas/: ChangeLog, aclocal.m4, stamp-vti, version.texi: Updated
+	  version files and ChangeLog
+
+2002-06-22 17:54  gbvalor
+
+	* glucas/: configure, configure.in: Fixed a typo in configure.in
+
+2002-06-22 17:51  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in: Added ChangeLog.0 to aditional
+	  distribution files
+
+2002-06-22 17:49  gbvalor
+
+	* glucas/: glucas.dvi, glucas.info, glucas.info-1, glucas.info-2,
+	  glucas.texi: Updated info files
+
+2002-06-17 17:41  kiste
+
+	* glucas/: glucas.texi, mformat.texi: Updated after proofreading.
+
+2002-06-12 21:23  gbvalor
+
+	* glucas/: ChangeLog, version.c: Updated ChangeLog
+
+2002-06-08 20:35  gbvalor
+
+	* glucas/: configure, configure.in: Fixed static flag for SUNWpro
+
+2002-06-08 11:46  gbvalor
+
+	* glucas/version.c: Changed build string to 'release'
+
+2002-06-08 11:29  kiste
+
+	* glucas/: selftest.c, version.c: Added selftest 'primenet',
+	  covering current PrimeNet range.
+
+2002-06-04 19:33  gbvalor
+
+	* glucas/: configure, configure.in, version.c: Added test to see
+	  whether GCC >= 3.1.  Changed default Y_TARGET for pentium3 when
+	  GCC >= 3.1
+
+2002-06-04 15:41  kiste
+
+	* glucas/gio.c: Fixed segfault in validate_inifile_string() for
+	  unknown entries in glucas.ini
+
+2002-06-02 13:42  gbvalor
+
+	* glucas/: AUTHORS, configure, configure.in, version.c: Modified
+	  configure.in to work properly when calling with --disable-FEATURE
+
+2002-06-01 22:14  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, config.guess, config.sub,
+	  configfsf.guess, configfsf.sub, configure, configure.in,
+	  version.c: Added GNU files configfsf.guess and configfsf.sub.
+	  Updated config.guess and config.sub.	Few modifications on
+	  configure.in and Makefile.am related with new config scripts
+
+2002-05-31 23:02  gbvalor
+
+	* glucas/: gio.c, glucas.c, selftest.c: Set 'line buffered' all
+	  buffered output streams, including 'stdio'
+
+2002-05-31 22:55  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, configure, version.c:
+	  Supressed 'Makefile.sunc_mp' and 'Makefile.alpha_mp' example
+	  files from package in Makefile.am (as aditional files)
+
+2002-05-30 20:22  gbvalor
+
+	* glucas/: configure, configure.in: Added '--enable-sunmp' to
+	  configure options. This will enable to SUNWspro C compiler to use
+	  SUNMP directives
+
+2002-05-30 19:27  gbvalor
+
+	* glucas/: configure, configure.in: Added '--enable-openmp'
+	  configure flag to build Glucas with OpenMP directives
+
+2002-05-30 13:50  gbvalor
+
+	* glucas/: README, glucas.html: Updated with new documentation
+	  links.
+
+2002-05-30 00:20  gbvalor
+
+	* glucas/: configure, configure.in, version.c: Fixed a problem in
+	  configure.in with k6-2 and k6-3 chips (and GCC 3.1)
+
+2002-05-29 23:01  gbvalor
+
+	* glucas/: ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c:
+	  Supressed some no-ascii characters in comments
+
+2002-05-29 21:57  gbvalor
+
+	* glucas/: version.c, yeafft1.c, yealucas.c: Fixed core dumps on
+	  SUNWspro compiler and SUNMP directives
+
+2002-05-29 00:38  gbvalor
+
+	* glucas/Makefile.in: Updated Makefile.in from last Makefile.am
+
+2002-05-29 00:36  gbvalor
+
+	* glucas/: ChangeLog, Makefile.Glucas, Makefile.am, version.c:
+	  Added version.h and version.c to Makefile.Glucas Updated
+	  version.c and ChangeLog
+
+2002-05-27 21:46  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in: Updated with 'version.x' files
+	  and better dependence rules for gio.c and tricky.c
+
+2002-05-27 20:30  gbvalor
+
+	* glucas/: configure, gio.c, glucas.c, version.c, version.h:
+	  version.h version.c : NEW. Added to better control of version and
+	  build glucas.c gio.c : Added options '-v' (display version) and
+	  '-h' (display help)
+
+2002-05-26 21:04  gbvalor
+
+	* glucas/: configure, configure.in: Configure script now accepts
+	  --enable-VAR[=n] where VAR is almost all Glucas compiler flag. If
+	  VAR is enabled from configure script then VAR is set to the
+	  default value or optional n. The flags not enabled when calling
+	  configure will be set according with the specific target.
+
+2002-05-26 20:59  gbvalor
+
+	* glucas/generic.h: Fixed a bug when defining Y_CACHE_LINE from
+	  compiler flags
+
+2002-05-25 15:11  kiste
+
+	* glucas/: gio.c, glucas.h: Added backwards compatibility for
+	  glucas.ini created with Glucas 2.8.
+
+2002-05-24 22:46  gbvalor
+
+	* glucas/: configure, configure.in, prefetch.h: Set proper
+	  Y_CACHE_LINE when using configure --enable-ytarget
+
+2002-05-24 18:29  gbvalor
+
+	* glucas/: configure, configure.in, glucas.dvi, glucas.info,
+	  glucas.info-1, glucas.texi, stamp-vti, version.texi: Added
+	  '--enable-ytarget=n' option to configure script. Updated this to
+	  info files.
+
+2002-05-24 18:27  gbvalor
+
+	* glucas/: prefetch.h, yeafft.h: Use '__builtin_prefetch()' when
+	  defined in default target (Y_TARGET=0)
+
+2002-05-24 18:25  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in: Added suffix '.c.s' to get
+	  assembler files
+
+2002-05-24 00:23  gbvalor
+
+	* glucas/: glucas.c, gthreads.h, ynorm_5.c, ynorm_6.c, ynorm_7.c,
+	  ynorm_8.c, ynorm_9.c: Added some coments about threads.
+
+2002-05-24 00:18  gbvalor
+
+	* glucas/: config.h.in, configure, configure.in: configure.in *)
+	  Added test for '__builtin_prefetch'. Supressed '-fno-defer-pop'
+	  and '-mpreferred-stack-boundary' flags when GCC version >= 3
+	  Better structure, easy to read. GLUCAS_FLAGS now is used with
+	  CFLAGS
+
+2002-05-24 00:12  gbvalor
+
+	* glucas/: glucas.texi, glucas.dvi, glucas.info, glucas.info-1,
+	  glucas.info-2, stamp-vti, version.texi: glucas.texi *) Included
+	  internals info. Derived files updated
+
+2002-05-22 23:08  gbvalor
+
+	* glucas/gthreads.c: Added some comments to document better the
+	  code
+
+2002-05-21 18:25  gbvalor
+
+	* glucas/: glucas.dvi, glucas.info, glucas.info-1, glucas.texi,
+	  stamp-vti, version.texi: Updated glucas.texi and derived files.
+	  Changed @strong directive by @code in info files. @strong fill
+	  the info files with too much '*'
+
+2002-05-20 23:51  gbvalor
+
+	* glucas/: ChangeLog, glucas.c: glucas.c :(main)  Fixed a bug with
+	  64 integer bits platforms.  ChangeLog : Updated with new commits
+
+2002-05-20 19:44  gbvalor
+
+	* glucas/: glucas.h, gthreads.h, lucasnet.c, ycx86.h, yeafft.c,
+	  yeafft1.c, yeainit.c, yx86ath.h: Updated some comments, copyright
+	  and authors
+
+2002-05-20 18:39  gbvalor
+
+	* glucas/ChangeLog: Updated ChangeLog to FSF style
+
+2002-05-20 18:35  gbvalor
+
+	* glucas/: AUTHORS, ChangeLog.0, compat.c, configure.in,
+	  difdit_16.c, difdit_2.c, difdit_4.c, difdit_8.c, dyadic.c,
+	  dyadic32.c, fft3.h, fft3ia64.h, fft3x86.h, fft5.h, fft5ia64.h,
+	  fft5x86.h, fft7.h, fft7ia64.h, fft7x86.h, generic.h, gio.c,
+	  glucas.c, gmp_yea.h, gsetup.c, gsetup.h, gstd.c, gthreads.c,
+	  lucasini.c, macos-codewarrior-prefix.h, mccomp.h, prefetch.h,
+	  selftest.c, tricky.c, ydebug.h, yeafft.h, yealucas.c, ygeneric.h,
+	  ygeneric4.h, ygeneric8.h, ygenvect.h, yia64.h, yminimum.h,
+	  ynorm.c, ynorm.h, ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c,
+	  ynorm_4.c, ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c,
+	  ynormia64.h, ynormx86.h, ynormx86p3.h, yx86.h, yx86comm.h,
+	  yx86p3.h, yx86p4.h: Updated some comments, copyright and authors.
+
+2002-05-20 18:31  gbvalor
+
+	* glucas/NEWS: Updated NEWS. It sumarizes all changes (old
+	  ChangeLog)
+
+2002-05-19 21:22  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, glucas.dvi, glucas.html,
+	  glucas.info, glucas.info-1, glucas.info-2, glucas.texi,
+	  logo.texi, mformat.texi, stamp-vti, version.texi: Added
+	  'logo.texi' and 'mformat.texi'.  Updated 'glucas.texi' and
+	  derived files
+
+2002-05-18 21:35  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, glucas.dvi, glucas.info-1,
+	  stamp-vti, texi2dvi, version.texi: Added 'texi2dvi' and
+	  'glucas.dvi' to Makefile.am
+
+2002-05-17 17:55  gbvalor
+
+	* glucas/: Makefile.Glucas, glucas.dvi, glucas.info, glucas.info-1,
+	  glucas.info-2, glucas.texi, gpl.texi, stamp-vti, version.texi:
+	  Added dvi version of glucas.info. Also added some glucas.info-#
+	  files.  Updated some doc.
+
+2002-05-17 07:17  gbvalor
+
+	* glucas/: glucas.info, glucas.texi, stamp-vti, version.texi:
+	  Updated some docs files
+
+2002-05-16 18:28  kiste
+
+	* glucas/glucas.c: Fixing some inconsistencies in
+	  glucas.out+results. (Part II)
+
+2002-05-16 18:15  kiste
+
+	* glucas/: glucas.c, gio.c, glucas.h: Fixing some inconsistencies
+	  in glucas.out+results.
+
+2002-05-15 18:06  gbvalor
+
+	* glucas/: gio.c, glucas.info, glucas.texi, selftest.c, stamp-vti,
+	  version.texi: Extended the range to 8192 K FFT runlength. Glucas
+	  now can test up to M156000000. Added selftests from 27 to 31
+	  (option -enormous)
+
+2002-05-14 18:29  gbvalor
+
+	* glucas/configure: Updated configure to configure.in 2.55
+
+2002-05-14 18:23  gbvalor
+
+	* glucas/configure.in: Fixed a bug in CVS  keyword Revision. is
+	  Revision instead of Rev.
+
+2002-05-14 18:06  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, aclocal.m4, config.h.in,
+	  configure, configure.in, depcomp, glucas.info, install-sh,
+	  mdate-sh, missing, mkinstalldirs, stamp-vti, version.texi:
+	  Improved configure script. Updated GNU autoconf-2.53/automake-1.6
+	  files
+
+2002-05-11 13:24  kiste
+
+	* glucas/glucas.h: Added mathematical constants for non-Unix98
+	  compatible compilers.
+
+2002-05-11 00:47  gbvalor
+
+	* glucas/texinfo.tex: Updated texinfo.tex
+
+2002-05-08 21:17  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in: Fixed a bug in Makefile.am.
+	  'gio.c' file has added.
+
+2002-05-02 23:19  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, configure, configure.in: Added
+	  special compiler optimize flags for gio.c to avoid a problem with
+	  Intel C++ compiler v5.0 for IA64.
+
+2002-03-27 23:21  gbvalor
+
+	* glucas/: Makefile.in, configure, configure.in: Added
+	  '--enable-static' to configure script to build static linked
+	  binaries
+
+2002-03-26 21:16  gbvalor
+
+	* glucas/: compat.c, gio.c, glucas.c, glucas.h, gstd.c, lucasini.c,
+	  selftest.c: Fixed a bug in computing initial shift after restart.
+	  Computed mod 2^64-1.
+
+2002-03-17 23:08  kiste
+
+	* glucas/glucas.c: Reinitialze Y_SBIT=0 for non-DoubleCheck
+	  assignments.
+
+2002-03-14 20:11  gbvalor
+
+	* glucas/: gthreads.c, gthreads.h, lucasini.c: Fixed a regression
+	  problem with lucasini v.2.11. Pthreads awake again.
+
+2002-03-12 18:50  gbvalor
+
+	* glucas/: gmp_yea.h, yeafft.c: Fixed a bug in gcc-3.0.X and
+	  optimized some routines in yeafft.c routines
+
+2002-03-11 00:21  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h, gstd.c: Modified results
+	  output format: Added some info at the end of line
+
+2002-03-10 19:12  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h: Added a new struct related to
+	  task. Some new entries in queue files.
+
+2002-03-08 19:09  gbvalor
+
+	* glucas/: lucasini.c, ynorm_16.c: Fixed some minor and typos and
+	  bugs when using Y_MANY_REGISTERS and OpenMP
+
+2002-03-08 17:28  gbvalor
+
+	* glucas/: glucas.c, glucas.h, gthreads.c, lucasini.c, selftest.c,
+	  ynorm.c, ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c,
+	  ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c: Fixed a
+	  semi-bug in computing DWT factors when initial shift
+
+2002-03-07 22:52  gbvalor
+
+	* glucas/gthreads.c: More needed changes to Posix pthreads
+
+2002-03-07 22:01  gbvalor
+
+	* glucas/: ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c,
+	  ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_9.c: Fixed a bug in prior
+	  change in MP environments
+
+2002-03-07 20:39  gbvalor
+
+	* glucas/: compat.c, gio.c, glucas.c, glucas.h, lucasini.c,
+	  mformat.htm, selftest.c, yealucas.c, ynorm.c, ynorm_10.c,
+	  ynorm_12.c, ynorm_14.c, ynorm_16.c, ynorm_5.c, ynorm_6.c,
+	  ynorm_7.c, ynorm_8.c, ynorm_9.c: Now Glucas can make a L-L test
+	  begining with an initial random shift
+
+2002-03-06 19:00  kiste
+
+	* glucas/: gio.c, glucas.c, glucas.h: Verify exponent isn't
+	  composite. (M6093301)
+
+2002-03-05 00:08  kiste
+
+	* glucas/: configure, configure.in: Fixed string comparison problem
+	  under True64 and Solaris.
+
+2002-03-04 22:18  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, gio.c, glucas.c, stamp-vti:
+	  Supressed (commented) primenet code
+
+2002-03-02 12:39  gbvalor
+
+	* glucas/: glucas.info, glucas.texi, version.texi: Back again to
+	  activity in writing doc
+
+2002-02-08 20:45  gbvalor
+
+	* glucas/stamp-vti: Updated to 2.9.0 CV:
+	  ----------------------------------------------------------------------
+
+2002-02-08 20:43  gbvalor
+
+	* glucas/: configure, configure.in, glucas.c, glucas.info,
+	  glucas.texi, version.texi: Named the current code as version
+	  2.9.0
+
+2002-02-07 16:51  kiste
+
+	* glucas/: gio.c, glucas.h, selftest.c: Fixed problem with
+	  non-existent queue file.
+
+2002-02-06 20:46  gbvalor
+
+	* glucas/: glucas.info, glucas.texi: Added some more nodes to doc.
+
+2002-02-05 23:37  gbvalor
+
+	* glucas/selftest.c: Deleted some lines in selftest.ini
+
+2002-02-04 22:37  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h, lucasnet.c, selftest.c:
+	  Changed the lengh of file paths. Some other minor changes.
+
+2002-02-03 23:50  gbvalor
+
+	* glucas/glucas.html: Changed the size of sourceforge logo.
+
+2002-02-03 23:46  gbvalor
+
+	* glucas/lucasnet.c: Added some comments and minor changes
+
+2002-02-03 12:43  gbvalor
+
+	* glucas/: gio.c, glucas.h, lucasnet.c: Introduced some overflow
+	  string controls
+
+2002-02-02 00:51  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h: Added some more control in
+	  fopen() calls.
+
+2002-02-01 18:34  gbvalor
+
+	* glucas/: gio.c, glucas.c, lucasnet.c, selftest.c: Some small
+	  fixes and typos. Now ProxyHost is espected to be in primenet.ini
+
+2002-02-01 00:30  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h, lucasnet.c: Fused Machine_id
+	  with ComputerID (now in glucas.ini). Some other minor changes
+
+2002-01-31 22:24  gbvalor
+
+	* glucas/lucasnet.c: Fixed a problem with worktodo.ini file
+
+2002-01-31 18:03  gbvalor
+
+	* glucas/lucasnet.c: Use close() to close the sockets.
+
+2002-01-31 00:16  gbvalor
+
+	* glucas/: glucas.c, glucas.h, lucasnet.c: Fixed the primenet
+	  checkin string format and some minor changes
+
+2002-01-30 20:15  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h, lucasnet.c: A bit near from
+	  right code for Primenet
+
+2002-01-30 17:35  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h, lucasnet.c: Added proxy
+	  support for primenet
+
+2002-01-29 22:35  gbvalor
+
+	* glucas/glucas.c: Commented a line to unable primenet access in
+	  this version
+
+2002-01-29 22:20  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h, lucasnet.c: Modified output
+	  format for dates. Included some more code for primenet.
+
+2002-01-29 18:39  gbvalor
+
+	* glucas/: config.h.in, configure, configure.in: Added a check for
+	  arpa/inet.h file in configure scripts
+
+2002-01-29 18:33  gbvalor
+
+	* glucas/lucasnet.c: Fixed minor bug
+
+2002-01-28 21:39  kiste
+
+	* glucas/gio.c: Disabled annoying warning from Metrowerks
+	  CodeWarrior.
+
+2002-01-28 20:20  gbvalor
+
+	* glucas/configure: Updated configure to last configure.in version
+
+2002-01-28 20:15  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h, lucasnet.c:  Added some more
+	  code for primenet and better code for -W option
+
+2002-01-28 20:13  gbvalor
+
+	* glucas/: config.h.in, configure.in: Added tests for chdir()
+	  sys/socket.d netinet/in.h and netdb.h
+
+2002-01-27 21:46  gbvalor
+
+	* glucas/Makefile.am: Added lucasnet.c file to makefile
+
+2002-01-27 21:44  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h: Added primenet code
+
+2002-01-27 21:23  gbvalor
+
+	* glucas/lucasnet.c: This file contains the primenet related code
+
+2002-01-26 23:54  gbvalor
+
+	* glucas/: gio.c, glucas.h: Added two more possible strings to ini
+	  files
+
+2002-01-26 23:31  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h: Some small changes and some
+	  comments.
+
+2002-01-25 21:01  gbvalor
+
+	* glucas/: gio.c, glucas.h: Better validation of strings in 'ini'
+	  files
+
+2002-01-24 22:41  gbvalor
+
+	* glucas/: glucas.info, glucas.texi: Update 24-Jan-2002
+
+2002-01-21 22:12  gbvalor
+
+	* glucas/: glucas.info, glucas.texi: Update after merge with K.
+	  Kastens modifications
+
+2002-01-21 19:50  kiste
+
+	* glucas/: glucas.info, glucas.texi: Fixing some typos.
+
+2002-01-21 17:55  gbvalor
+
+	* glucas/: glucas.info, glucas.texi: Added more node and text
+
+2002-01-20 20:19  gbvalor
+
+	* glucas/: glucas.info, glucas.texi: 20-Jan-2002 updates.
+
+2002-01-19 18:27  gbvalor
+
+	* glucas/: version.texi, stamp-vti: This files are generated by
+	  makeinfo.
+
+2002-01-19 18:20  gbvalor
+
+	* glucas/Makefile.in: Updated to 19-Jan-2002 'configure.in' and
+	  'Makefile.am'
+
+2002-01-19 18:16  gbvalor
+
+	* glucas/: glucas.info, glucas.texi: 19-Jan-2002's afternoon update
+
+2002-01-18 20:09  gbvalor
+
+	* glucas/texinfo.tex: Last version from GNU site.
+
+2002-01-18 20:08  gbvalor
+
+	* glucas/Makefile.am: Added 'gpl.texi' to glucas texinfo file list
+
+2002-01-18 20:07  gbvalor
+
+	* glucas/glucas.texi: Today's version
+
+2002-01-18 20:06  gbvalor
+
+	* glucas/glucas.info: Info version of glucas.texi
+
+2002-01-18 20:03  gbvalor
+
+	* glucas/gpl.texi: Texinfo version of GPL license.
+
+2002-01-17 19:55  gbvalor
+
+	* glucas/glucas.texi: Updated some nodes
+
+2002-01-17 18:08  gbvalor
+
+	* glucas/COPYING: Updated GNU GPL license
+
+2002-01-16 23:14  gbvalor
+
+	* glucas/Makefile.am: Added the glucas.info file as texinfo
+
+2002-01-16 23:13  gbvalor
+
+	* glucas/glucas.texi: First draft with the early skeleton of
+	  texinfo file for Glucas
+
+2002-01-16 23:12  gbvalor
+
+	* glucas/: texinfo.tex, mdate-sh: Added texinfo support
+
+2002-01-14 23:09  gbvalor
+
+	* glucas/: ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c,
+	  ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c: Supressed
+	  unused vars.
+
+2002-01-14 00:32  kiste
+
+	* glucas/gthreads.c: Workaround partially implemented POSIX threads
+	  under Darwin/MacOSX.
+
+2002-01-13 22:42  gbvalor
+
+	* glucas/glucas.html: Substitute some 'https' link by 'http'
+
+2002-01-13 13:23  gbvalor
+
+	* glucas/glucas.c: Fixed a problem in cancelling threads
+
+2002-01-12 12:40  gbvalor
+
+	* glucas/: radix_10.c, radix_12.c, radix_14.c, radix_16.c,
+	  radix_2.c, radix_32.c, radix_4.c, radix_5.c, radix_6.c,
+	  radix_7.c, radix_8.c, radix_9.c: Moved the '/' in macros in a
+	  most elegant place
+
+2002-01-11 14:02  gbvalor
+
+	* glucas/: glucas.c, gthreads.c, gthreads.h, lucasini.c,
+	  selftest.c: Trying to fix stoped threads problem.
+
+2002-01-10 23:53  gbvalor
+
+	* glucas/selftest.c: Fixed a bug in last patch.
+
+2002-01-10 22:34  gbvalor
+
+	* glucas/selftest.c: Added check for OpenMP, Sun MP or Posix
+	  Threads to selftest.
+
+2002-01-10 21:08  gbvalor
+
+	* glucas/lucasini.c: A bug fixed in the patch for small exponents
+	  and Posix threaded version.
+
+2002-01-08 22:01  gbvalor
+
+	* glucas/lucasini.c: Glucas exits when the exponent is too small
+	  for multithreaded version.
+
+2002-01-06 18:40  gbvalor
+
+	* glucas/: glucas.c, gthreads.c, lucasini.c, yeainit.c: Fixed some
+	  bugs restaring Posix Threads
+
+2002-01-04 17:54  gbvalor
+
+	* glucas/: gio.c, gthreads.c, gthreads.h, lucasini.c: Changed
+	  __GNUC__ by linux in detecting problems with the computation of
+	  user time
+
+2002-01-03 22:47  gbvalor
+
+	* glucas/: gio.c, gthreads.c, gthreads.h, lucasini.c: Fixed a
+	  problem in computing the user time for Posix Threads
+
+2002-01-02 19:14  kiste
+
+	* glucas/: configure, configure.in: Fixing minor problem with
+	  --enable-pthread.
+
+2002-01-02 17:25  gbvalor
+
+	* glucas/: ChangeLog, glucas.c: Added last multithread changes to
+	  log sections
+
+2002-01-01 23:48  gbvalor
+
+	* glucas/configure: Configure with --enable-pthread=n option.
+
+2002-01-01 23:46  gbvalor
+
+	* glucas/: Makefile.am, Makefile.in, configure.in: Configure script
+	  now admits --enable-pthread=n to build with n Posix Threads
+
+2002-01-01 23:44  gbvalor
+
+	* glucas/gio.c: Added support for Posix Threads
+
+2002-01-01 23:39  gbvalor
+
+	* glucas/: glucas.c, lucasini.c, yeafft1.c, yeainit.c, yealucas.c:
+	  Added code for Posix Threads
+
+2002-01-01 23:34  gbvalor
+
+	* glucas/: ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c,
+	  ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c, glucas.h,
+	  yeafft.h: Added code for Posix Threads
+
+2002-01-01 23:29  gbvalor
+
+	* glucas/: gthreads.c, gthreads.h: Added support code for Posix
+	  Threads.
+
+2001-12-16 21:11  gbvalor
+
+	* glucas/lucasini.c: Added multitread support for Sun Workshop (Sun
+	  MP)
+
+2001-12-16 21:04  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h, yeafft1.c, yealucas.c,
+	  ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c, ynorm_5.c,
+	  ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c: Added multithread
+	  support for Sun WorkShop (Sun MP)
+
+2001-12-14 19:22  gbvalor
+
+	* glucas/: ChangeLog, glucas.c: Fixed a typo
+
+2001-12-14 19:10  gbvalor
+
+	* glucas/gio.c: Supressed the limit of 100% CPU in multithreading
+	  environment
+
+2001-12-14 19:08  gbvalor
+
+	* glucas/: ChangeLog, glucas.c: Added last changes for version 2.8d
+
+2001-12-12 20:52  gbvalor
+
+	* glucas/: ynorm.h, ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c:
+	  Added multithread code.
+
+2001-12-12 20:48  gbvalor
+
+	* glucas/: radix_10.c, radix_12.c, radix_14.c: Fixed a bug when
+	  Y_AVAL=4 and defined Y_MANY_REGISTERS
+
+2001-12-11 20:10  gbvalor
+
+	* glucas/: ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c:
+	  Add multithread code for last_DIT, carry, norm and first_DIF
+
+2001-12-10 22:48  gbvalor
+
+	* glucas/Makefile.am: Added lucasini.c file
+
+2001-12-10 22:47  gbvalor
+
+	* glucas/ynorm_8.c: Added code to make possible multithreading.
+
+2001-12-10 22:46  gbvalor
+
+	* glucas/glucas.h: Added new vars and prototypes to multithreading
+	  with OpenMP
+
+2001-12-10 22:44  gbvalor
+
+	* glucas/glucas.c: The init_lucas() has been removed from this file
+	  to new lucasini.c.
+
+2001-12-10 22:41  gbvalor
+
+	* glucas/lucasini.c: This file is extracted from glucas.c. Include
+	  the initializing work of Lucas-Lehmer and DWT data.
+
+2001-12-08 17:30  kiste
+
+	* glucas/gio.c: Fixed a bug in manage_queue(): Importing non-LL
+	  assignments (primenet format) could result into a "0" entry in
+	  the queuefile.
+
+2001-12-05 22:29  gbvalor
+
+	* glucas/configure.in: Change to version 2.8d
+
+2001-12-05 22:28  gbvalor
+
+	* glucas/gio.c: Added the Mersenne known prime #39 in isnewprime()
+
+2001-12-05 22:26  gbvalor
+
+	* glucas/tricky.c: Nothing new.
+
+2001-12-05 22:24  gbvalor
+
+	* glucas/: glucas.h, yealucas.c: Found the key to make
+	  multithreaded the pass 1 in FFT.
+
+2001-12-05 18:23  gbvalor
+
+	* glucas/yeafft1.c: Fixed a typo
+
+2001-12-04 23:11  gbvalor
+
+	* glucas/: yeafft1.c, yealucas.c: Fisrt step of multithread Openmp
+	  support.
+
+2001-12-04 23:10  gbvalor
+
+	* glucas/glucas.c: Changed string revision to Glucas-2.8d
+
+2001-11-28 14:40  gbvalor
+
+	* glucas/: glucas.c, tricky.c, yeafft.h: Added support for
+	  Intel/linux compiler v. 5.0
+
+2001-11-16 13:18  kiste
+
+	* glucas/: Makefile.am, configure.in, fft3.h, fft5.h, fft7.h,
+	  mccomp.h, yeafft.h, ynorm.h, yx86p4.h: Added initial support for
+	  Pentium 4 (Y_TARGET == 13).
+
+2001-11-16 13:09  kiste
+
+	* glucas/prefetch.h: Added initial support for Pentium 4 (Y_TARGET
+	  == 13). Fixed a minor bug for Athlon/Duron.
+
+2001-11-16 13:07  kiste
+
+	* glucas/selftest.c: Added Y_CACHE_LINE to output. Fixed a typo.
+
+2001-11-15 00:35  kiste
+
+	* glucas/: config.guess, config.sub: Detect Pentium 4 using CPUID
+	  instruction.
+
+2001-11-06 07:56  kiste
+
+	* glucas/: glucas.h, gsetup.c, gsetup.h, selftest.c: Modifications
+	  to use Metrowerks CodeWarrior under Windows.
+
+2001-10-27 16:35  kiste
+
+	* glucas/: ChangeLog, Makefile.Glucas, Makefile.in, configure,
+	  configure.in, gio.c, glucas.c, tricky.c, ynorm.h: Fixed compile
+	  problem under Mac OS X (Bugs item #460720). Problem reported by
+	  Jonas Hansbo.
+
+2001-10-18 18:37  kiste
+
+	* glucas/gio.c: Slightly changed output format. Suggested by Thomas
+	  Perrier.
+
+2001-10-18 07:23  gbvalor
+
+	* glucas/gstd.c: Added keyword Id
+
+2001-10-18 07:19  gbvalor
+
+	* glucas/ynorm.c: Repaired the Keyword Id.
+
+2001-10-18 00:33  gbvalor
+
+	* glucas/ynorm.c: Changed some decimal ',' by '.'. A typo
+
+2001-10-18 00:24  gbvalor
+
+	* glucas/gstd.c: Fixed a bug
+
+2001-10-18 00:18  gbvalor
+
+	* glucas/: configure, Makefile.in: Updated to configure.in 2.43
+
+2001-10-18 00:14  gbvalor
+
+	* glucas/: Makefile.am, configure.in: Link all objects at once.
+	  Linker can optimize.
+
+2001-10-17 23:59  gbvalor
+
+	* glucas/: fft3.h, ynorm_9.c: A better? radix_9
+
+2001-10-14 14:16  gbvalor
+
+	* glucas/configure: Updated for configure.in
+
+2001-10-14 14:13  gbvalor
+
+	* glucas/configure.in: Back to Y_VECTORIZE2 for ev56
+
+2001-10-14 11:56  gbvalor
+
+	* glucas/configure: Updated from configure.in
+
+2001-10-14 11:52  gbvalor
+
+	* glucas/configure.in: Supressed default Y_VECTORIZE2 for ev56
+	  targets
+
+2001-10-12 22:33  gbvalor
+
+	* glucas/: difdit_16.c, difdit_2.c, dyadic.c, dyadic32.c, fft3.h,
+	  fft3x86.h, fft5.h, fft5x86.h, fft7.h, fft7x86.h, generic.h,
+	  gmp_yea.h, mccomp.h, radix_10.c, radix_12.c, radix_14.c,
+	  radix_16.c, radix_2.c, radix_32.c, radix_5.c, radix_6.c,
+	  radix_7.c, radix_8.c, radix_9.c, tricky.c, ycx86.h, ydebug.h,
+	  yeafft.c, yeafft.h, yeafft1.c, yeainit.c, ygeneric.h, yminimum.h,
+	  yx86.h, yx86ath.h, yx86comm.h, yx86p3.h: Added 2001 to copyright
+
+2001-10-10 22:46  gbvalor
+
+	* glucas/configure: Updated from configure.in
+
+2001-10-10 22:44  gbvalor
+
+	* glucas/fft3.h: Added some commented alternative source
+
+2001-10-10 22:40  gbvalor
+
+	* glucas/configure.in: Update for sparcv9/gcc
+
+2001-10-10 22:38  gbvalor
+
+	* glucas/tricky.c: Fixed an overflow warning
+
+2001-10-10 14:36  gbvalor
+
+	* glucas/: AUTHORS, configure.in, difdit_2.c, difdit_4.c,
+	  difdit_8.c, dyadic.c, dyadic32.c, fft3.h, fft3ia64.h, fft3x86.h,
+	  fft5.h, fft5ia64.h, fft5x86.h, fft7.h, fft7ia64.h, fft7x86.h,
+	  generic.h, glucas.c, gmp_yea.h, mccomp.h, prefetch.h, radix_10.c,
+	  radix_12.c, radix_14.c, radix_16.c, radix_2.c, radix_32.c,
+	  radix_4.c, radix_5.c, radix_6.c, radix_7.c, radix_8.c, radix_9.c,
+	  tricky.c, ydebug.h, yeafft.c, yeafft.h, yeafft1.c, yeainit.c,
+	  ygeneric.h, ygeneric4.h, ygeneric8.h, ygenvect.h, yia64.h,
+	  yx86.h: Modified Guillermo e-mail address
+
+2001-10-10 14:28  gbvalor
+
+	* glucas/: ChangeLog, glucas.c: Fixed some typos
+
+2001-10-09 07:23  gbvalor
+
+	* glucas/gstd.c: Fixed a warning. Suggested by B.J.Beesley
+
+2001-10-08 17:49  gbvalor
+
+	* glucas/: Makefile.in, configure: Updated for 2.8c.pre2
+
+2001-10-08 17:41  gbvalor
+
+	* glucas/Makefile.Glucas: More examples
+
+2001-10-08 17:34  gbvalor
+
+	* glucas/configure.in: Added Freebsd and Openbsd in confifure
+	  scripts
+
+2001-10-08 14:41  gbvalor
+
+	* glucas/yeafft.h: Forgot uncomment a line to align the big arrays.
+
+2001-10-07 18:19  gbvalor
+
+	* glucas/: gio.c, glucas.c, glucas.h, yeafft.h, yeainit.c: Better
+	  memory control and management.
+
+2001-10-07 18:16  gbvalor
+
+	* glucas/ChangeLog: Add the last work
+
+2001-10-05 12:20  kiste
+
+	* glucas/: gsetup.c, gsetup.h: Fixed some compiler warnings for Mac
+	  OS X, FreeBSD and OpenBSD.
+
+2001-09-23 19:31  gbvalor
+
+	* glucas/: prefetch.h, ynorm_9.c: Subsitute some mulmul by divdiv
+	  macros: Less references to global symbols
+
+2001-09-23 15:37  kiste
+
+	* glucas/: gio.c, gsetup.c, gsetup.h: gcc under Mac OS X defines
+	  __APPLE__
+
+2001-09-23 15:36  kiste
+
+	* glucas/glucas.c: With Alternative_output_flag=2, part of the
+	  output was duplicated to <glucasout> instead of going to
+	  <stdout>. Problem reported by Tom Cage.
+
+2001-09-18 19:38  gbvalor
+
+	* glucas/gsetup.h: Fixed a warning in signal management under
+	  Darwin
+
+2001-09-18 19:09  gbvalor
+
+	* glucas/: ynorm_5.c, ynorm_7.c, ynorm_8.c, ynorm_9.c: Fixed some
+	  compiler warnings under Darwin.
+
+2001-09-16 12:42  gbvalor
+
+	* glucas/ChangeLog: Comments for v2.8c
+
+2001-09-15 20:06  gbvalor
+
+	* glucas/: configure, configure.in: Pre-release version 2.8c.pre1
+
+2001-09-15 19:44  gbvalor
+
+	* glucas/gstd.c: Fixed a warning in SunPro compiler
+
+2001-09-13 17:23  gbvalor
+
+	* glucas/: ChangeLog, glucas.c: Added comments for version 2.8c
+
+2001-09-13 17:10  gbvalor
+
+	* glucas/gio.c: Fixed 2.8b <sys/time> bug for MacOS X
+
+2001-09-11 20:28  kiste
+
+	* glucas/: ChangeLog, glucas.c: Updated version info for v2.8b1
+
+2001-09-10 19:12  gbvalor
+
+	* glucas/: gsetup.c, gsetup.h: Fixed a warning in signal management
+	  for Sun-sparc systems
+
+2001-09-10 18:08  gbvalor
+
+	* glucas/ChangeLog: Added changes for version 2.8b1
+
+2001-09-09 23:30  gbvalor
+
+	* glucas/: fft5.h, fft7.h: Modified fft7 and fft5 routines for GCC
+	  compilers
+
+2001-09-08 21:04  gbvalor
+
+	* glucas/radix_4.c: Fixed a typo bug
+
+2001-09-08 19:13  gbvalor
+
+	* glucas/glucas.c: Added timer init calls when a new exponent
+	  start. They was not updated.
+
+2001-09-08 19:10  gbvalor
+
+	* glucas/: gio.c, glucas.h: Added function sec_elapsed_user()
+
+2001-09-07 17:54  kiste
+
+	* glucas/glucas.c: Fixed a typo.
+
+2001-09-05 22:21  gbvalor
+
+	* glucas/fft3.h: Supreesed commented lines
+
+2001-09-05 20:33  gbvalor
+
+	* glucas/: Makefile.in, configure: Update from last change in
+	  configure.in
+
+2001-09-05 20:22  gbvalor
+
+	* glucas/configure.in: Use Intel compiler ecc when present in IA64
+
+2001-09-05 20:12  gbvalor
+
+	* glucas/fft3.h: Fixed a bug when defined Y_LONG_MACROS
+
+2001-09-05 00:46  kiste
+
+	* glucas/: gio.c, glucas.h: Modifications to output format
+
+2001-09-04 22:58  gbvalor
+
+	* glucas/tricky.c: Supressed blank lines
+
+2001-09-04 22:55  gbvalor
+
+	* glucas/ynorm.c: Supressed assert align macro
+
+2001-09-04 22:53  gbvalor
+
+	* glucas/ynorm.h: Fixed a bug
+
+2001-09-04 22:47  gbvalor
+
+	* glucas/: ynorm_6.c, ynorm_9.c: Susbtitute some 'mulmul' macros by
+	  'divdiv'
+
+2001-09-04 22:43  gbvalor
+
+	* glucas/: fft3.h, fft5.h, fft7.h, fft7ia64.h: Supressed some
+	  references to global vars
+
+2001-09-04 22:41  gbvalor
+
+	* glucas/: ygeneric.h, yx86comm.h: Added divdiv macros to divide by
+	  trig factors
+
+2001-09-03 19:40  gbvalor
+
+	* glucas/ynormia64.h: Added yet more vetorized macros for norm and
+	  carry pass for IA64
+
+2001-09-03 19:33  gbvalor
+
+	* glucas/: radix_4.c, difdit_4.c: Added special prefetch hints for
+	  trig array
+
+2001-09-03 19:29  gbvalor
+
+	* glucas/: difdit_8.c, prefetch.h, radix_16.c, ynorm_5.c,
+	  ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c: Added special
+	  prefetch hints support for only_read trig array
+
+2001-09-03 19:26  gbvalor
+
+	* glucas/: radix_8.c, ydebug.h: Supressed some comments
+
+2001-09-03 19:25  gbvalor
+
+	* glucas/glucas.c: Added some debug lines
+
+2001-09-02 19:34  gbvalor
+
+	* glucas/ynorm_6.c: Fixed a bug when defined Y_ITANIUM. there were
+	  an 'else' instead of '#else'
+
+2001-09-02 17:21  kiste
+
+	* glucas/gsetup.c: Adding signal handling for SIGXCPU
+
+2001-09-02 17:20  kiste
+
+	* glucas/selftest.c: Adding Host/OS/Machine info for classic MacOS
+
+2001-09-02 17:18  kiste
+
+	* glucas/: Makefile.in, aclocal.m4, config.h.in, configure,
+	  configure.in, gio.c, glucas.c, glucas.h, stamp-h.in: Improved
+	  timing code for most systems.
+
+2001-09-02 13:32  gbvalor
+
+	* glucas/: ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c:
+	  Added more vectorized macros to carry and norm without roundoff
+	  error check
+
+2001-08-31 23:29  gbvalor
+
+	* glucas/configure.in: Changed options for IA64.
+
+2001-08-31 22:58  gbvalor
+
+	* glucas/: ynorm_6.c, ynorm_7.c, ynorm_9.c: Improved vectorized
+	  carry and norm pass for IA64
+
+2001-08-31 19:53  gbvalor
+
+	* glucas/: ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c:
+	  Added support for special carry and norm code for IA64
+
+2001-08-31 19:45  gbvalor
+
+	* glucas/Makefile.am: Added ynormia64.h to package
+
+2001-08-31 19:44  gbvalor
+
+	* glucas/fft3ia64.h: Some small optimizations
+
+2001-08-31 19:42  gbvalor
+
+	* glucas/ynormia64.h: Added this file to optimize the carry and
+	  norm process for IA64
+
+2001-08-30 17:58  gbvalor
+
+	* glucas/fft3ia64.h: Supressed some global references
+
+2001-08-30 17:57  gbvalor
+
+	* glucas/ynorm_6.c: Supressed some old commented lines
+
+2001-08-30 17:54  gbvalor
+
+	* glucas/ynorm_8.c: Cleaned some old commented lines
+
+2001-08-30 17:49  gbvalor
+
+	* glucas/ynorm.h: Supressed some local vars
+
+2001-08-30 17:39  gbvalor
+
+	* glucas/radix_16.c: Added preload support
+
+2001-08-30 00:08  gbvalor
+
+	* glucas/fft3ia64.h: Saved some Global constants
+
+2001-08-30 00:06  gbvalor
+
+	* glucas/: yia64.h, ynorm_9.c: Added simul divs macros.
+
+2001-08-29 21:01  gbvalor
+
+	* glucas/: fft3.h, fft7.h: Some small changes
+
+2001-08-29 20:58  gbvalor
+
+	* glucas/ygeneric.h: Some small changes
+
+2001-08-29 20:44  gbvalor
+
+	* glucas/: difdit_4.c, difdit_8.c, radix_4.c, radix_8.c, ynorm_5.c,
+	  ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c: Added support for
+	  -Y_ITANIUM
+
+2001-08-29 20:31  gbvalor
+
+	* glucas/yeafft.h: Added a patch to be save with preload scheme.
+
+2001-08-29 20:29  gbvalor
+
+	* glucas/: Makefile.am, configure.in: Modified for v.2.8c
+
+2001-08-29 20:25  gbvalor
+
+	* glucas/: fft3ia64.h, fft5ia64.h, fft7ia64.h, yia64.h: Added
+	  special code for IA64
+
+2001-08-29 20:20  gbvalor
+
+	* glucas/: glucas.c, selftest.c: Actualized to v2.8c
+
+2001-08-29 20:19  gbvalor
+
+	* glucas/gio.c: Fixed a warning
+
+2001-08-17 19:44  gbvalor
+
+	* glucas/: ynorm.h, ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c,
+	  ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c: Now is
+	  possible to set Y_VECTORIZE without Y_KILL_BRANCHES. Itaniums
+	  like it.
+
+2001-08-07 18:51  gbvalor
+
+	* glucas/: ChangeLog, glucas.c: Fixed some typos
+
+2001-08-06 23:51  gbvalor
+
+	* glucas/glucas.c: Added latest changes to comments
+
+2001-08-06 23:49  gbvalor
+
+	* glucas/ChangeLog: Added latest changes
+
+2001-08-06 23:01  kiste
+
+	* glucas/: Makefile.in, aclocal.m4, configure, configure.in,
+	  stamp-h.in: Updating configure.in for 'powerpc*-*-darwin*' and
+	  'powerpc*-*-gnu'
+
+2001-08-06 22:39  kiste
+
+	* glucas/: gio.c, glucas.h, macos-codewarrior-prefix.h: Removing
+	  workaround for Metrowerks CodeWarrior 5 compiler
+
+2001-08-06 22:34  kiste
+
+	* glucas/: mccomp.h, prefetch.h: Adding prefetch hinting for
+	  PowerPC 601, 604e
+
+2001-08-06 19:15  gbvalor
+
+	* glucas/gio.c: Fixed an overflow warning
+
+2001-08-05 20:52  gbvalor
+
+	* glucas/yx86p3.h: Supressed some duplicated macros left in
+	  previous version
+
+2001-08-05 20:09  gbvalor
+
+	* glucas/configure.in: Modified x86 warning options. Now -Wall
+	  instead of -w
+
+2001-08-05 19:52  gbvalor
+
+	* glucas/: Makefile.am, yx86.h, yx86ath.h, yx86p3.h: Supressed all
+	  multiline strings and the common macros.
+
+2001-08-05 19:50  gbvalor
+
+	* glucas/yx86comm.h: Added this file with all the common macros
+	  from yx86.h yx86p3.h and yx86ath.h
+
+2001-08-05 10:02  gbvalor
+
+	* glucas/fft7x86.h: Supressed multiline strings in assembler macros
+
+2001-08-04 13:05  gbvalor
+
+	* glucas/fft5x86.h: Supressed multiline strings in assembler macros
+	  to make gcc-3.0 happy.
+
+2001-08-04 12:27  kiste
+
+	* glucas/: gio.c, glucas.c, glucas.h: Higher precision timings for
+	  systems without getrusage.
+
+2001-08-04 09:55  gbvalor
+
+	* glucas/: ynormx86.h, ynormx86p3.h: Supressed multiline strings in
+	  assembler macros to be gcc-3.0 happy.
+
+2001-08-03 22:52  gbvalor
+
+	* glucas/fft3x86.h: Supressed multiline strings in assembler macros
+
+2001-07-30 21:52  kiste
+
+	* glucas/: Makefile.in, configure, configure.in: Updated
+	  configure.in for 'powerpc*-*-darwin*' and 'powerpc*-*-gnu'
+
+2001-07-29 17:41  gbvalor
+
+	* glucas/gio.c: Fixed a bug when Alternative_output_flag == 2.
+
+2001-07-29 12:05  gbvalor
+
+	* glucas/: ChangeLog, gio.c, glucas.c, selftest.c: If
+	  Alternative_output_flag == 2, the output is driven to both stdout
+	  and file.
+
+2001-07-26 22:14  gbvalor
+
+	* glucas/configure.in: Changed the default options for Alpha ev6
+	  under Linux
+
+2001-07-25 10:26  gbvalor
+
+	* glucas/Makefile.am: Added file macos-codewarrior-prefix.h to the
+	  distribution
+
+2001-07-25 00:23  gbvalor
+
+	* glucas/AUTHORS: Added Klaus Kastens
+
+2001-07-25 00:17  kiste
+
+	* glucas/: gio.c, glucas.h: Workaround to disable redeclaration of
+	  'strchr()' for Metrowerks Codewarrior compiler
+
+2001-07-25 00:07  kiste
+
+	* glucas/macos-codewarrior-prefix.h: "Prefix File" for Metrowerks
+	  CodeWarrior compiler
+
+2001-07-25 00:06  kiste
+
+	* glucas/prefetch.h: Using two registers to calculate EA for
+	  prefetch hinting on PowerPC. Added prefetch hinting for
+	  Metrowerks Codewarrior compiler.
+
+2001-07-24 20:56  kiste
+
+	* glucas/: ChangeLog, glucas.c: Fixed some typos.
+
+2001-07-24 14:26  kiste
+
+	* glucas/mccomp.h: Added missing targets
+
+2001-07-23 20:15  gbvalor
+
+	* glucas/: configure, configure.in: Configure scripts for v.2.8b
+
+2001-07-23 20:10  gbvalor
+
+	* glucas/glucas.c: Changed release date and some comments.
+
+2001-07-23 20:07  gbvalor
+
+	* glucas/ChangeLog: Changed the release date
+
+2001-07-16 08:49  gbvalor
+
+	* glucas/: ygeneric4.h, ygeneric8.h: Inserted ## between nubers and
+	  letters in macros. Some preprocessors diaplay warnings.
+
+2001-07-15 00:27  gbvalor
+
+	* glucas/yeafft.h: Fixed a bug to align with 64 bits pointers
+
+2001-07-14 23:42  gbvalor
+
+	* glucas/yeafft.h: Defined Y_ALIGN for all targets
+
+2001-07-14 20:45  gbvalor
+
+	* glucas/: configure.in, configure: Last tunings
+
+2001-07-14 20:43  gbvalor
+
+	* glucas/fft7.h: Back to old code for most targets
+
+2001-07-14 13:58  gbvalor
+
+	* glucas/yeafft.h: Defined Y_ALIGN in all cases
+
+2001-07-14 13:55  gbvalor
+
+	* glucas/selftest.c: 3548 should be 3584. B.J.Beesley found that
+
+2001-07-14 00:24  gbvalor
+
+	* glucas/fft7.h: Basic fft -7 recoded to use less local variables.
+
+2001-07-13 19:41  gbvalor
+
+	* glucas/glucas.c: Added comments about changed output for
+	  selftests
+
+2001-07-13 19:40  gbvalor
+
+	* glucas/ChangeLog: Comments on changed selftest output
+
+2001-07-13 19:24  gbvalor
+
+	* glucas/prefetch.h: Added Y_TARGET=51 Itanium
+
+2001-07-13 18:00  gbvalor
+
+	* glucas/glucas.html: Added Spanish traduction
+
+2001-07-13 14:04  gbvalor
+
+	* glucas/ynorm_7.c: Modified an overlaped  prefetch call
+
+2001-07-12 19:51  gbvalor
+
+	* glucas/: ygeneric4.h, ygeneric8.h: Added comments
+
+2001-07-12 19:47  gbvalor
+
+	* glucas/selftest.c: Now selftest displays all the Glucas Flags.
+
+2001-07-11 20:04  gbvalor
+
+	* glucas/: configure.in, configure: Changed to version 2.8b.pre4
+
+2001-07-11 20:03  gbvalor
+
+	* glucas/glucas.c: Some actualized comments
+
+2001-07-11 00:17  gbvalor
+
+	* glucas/: compat.c, gio.c: Fixes to avoid problems with GNU/gcc in
+	  ultrasparc-v9
+
+2001-07-11 00:13  gbvalor
+
+	* glucas/: Makefile.am, configure.in: Actualization of scripts
+
+2001-07-11 00:10  gbvalor
+
+	* glucas/ygeneric.h: Some minor changes
+
+2001-07-11 00:08  gbvalor
+
+	* glucas/ChangeLog: Added the features for v2.8b
+
+2001-07-11 00:06  gbvalor
+
+	* glucas/yeainit.c: Added lines to see the plan
+
+2001-07-11 00:04  gbvalor
+
+	* glucas/yeafft.h: Added some targets
+
+2001-07-11 00:03  gbvalor
+
+	* glucas/mccomp.h: Added new targets
+
+2001-07-10 23:59  gbvalor
+
+	* glucas/: ynormx86.h, ynormx86p3.h: Changed to use Y_VECTORIZE
+
+2001-07-10 23:58  gbvalor
+
+	* glucas/ynorm.h: Unrolled some carry-and-norm macros
+
+2001-07-10 23:53  gbvalor
+
+	* glucas/radix_8.c: changed a prefetch pointer
+
+2001-07-10 23:52  gbvalor
+
+	* glucas/radix_4.c: The loops can be unrolled defining Y_VECTORIZE2
+
+2001-07-10 23:49  gbvalor
+
+	* glucas/prefetch.h: Coded prefetch hints for Compaq-c compiler.
+
+2001-07-10 23:48  gbvalor
+
+	* glucas/ygenvect.h: Added this file to unroll small radices.
+
+2001-07-08 22:35  gbvalor
+
+	* glucas/difdit_16.c: Fixed a bug when Y_AVAL==4 and defined
+	  Y_MANY_REGISTERS. Reported by B. J. Beesley.
+
+2001-07-07 23:34  gbvalor
+
+	* glucas/: prefetch.h, ygeneric4.h, ygeneric8.h: Added
+	  GPL/copyrigth license
+
+2001-07-07 23:28  gbvalor
+
+	* glucas/: prefetch.h, radix_16.c, radix_4.c, radix_8.c,
+	  ygeneric.h, ygeneric4.h, ygeneric8.h, yx86ath.h, yx86p3.h: Added
+	  code to avoid prefetch when posible if defined
+	  Y_PREFETCH_EXPENSIVE
+
+2001-07-06 20:51  gbvalor
+
+	* glucas/ygeneric.h: Turn back to old macros mul_addsum_F_1_4 and
+	  similar ones
+
+2001-07-06 20:42  gbvalor
+
+	* glucas/: difdit_16.c, dyadic32.c, radix_10.c, radix_12.c,
+	  radix_14.c, radix_16.c, radix_32.c, ynorm_10.c, ynorm_12.c,
+	  ynorm_14.c, ynorm_16.c: Supressed most of heavy code when it is
+	  no needed. It makes the compile time shorter
+
+2001-07-05 20:03  gbvalor
+
+	* glucas/: ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c,
+	  ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c: Added some
+	  vectorized macros
+
+2001-07-05 00:15  uid49997
+
+	* glucas/radix_4.c: Fixed a prefetch pointg error
+
+2001-07-05 00:12  uid49997
+
+	* glucas/prefetch.h: Include prefetch hints for ppc750
+
+2001-07-04 01:04  gbvalor
+
+	* glucas/yx86ath.h: Added some prefetch
+
+2001-07-04 00:58  gbvalor
+
+	* glucas/: Makefile.Glucas, configure, configure.in, difdit_4.c,
+	  difdit_8.c, mccomp.h, prefetch.h, radix_8.c, ygeneric.h,
+	  ygeneric4.h, ygeneric8.h, ynorm_10.c, ynorm_12.c, ynorm_14.c,
+	  ynorm_16.c, ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c,
+	  ynorm_9.c, yx86p3.h: Prefetch hints pointers revised. Most of
+	  them was pointing to wrong direction.
+
+2001-06-30 23:20  gbvalor
+
+	* glucas/glucas.c: There was a missing '*' in the comment of last
+	  line
+
+2001-06-30 10:35  gbvalor
+
+	* glucas/: configure, configure.in: Introduced Y_LONG_MACROS
+	  instead of USE_LONG_MACROS
+
+2001-06-30 10:33  gbvalor
+
+	* glucas/: configure, configure.in: Entering -DY_LONG_MACROS
+
+2001-06-30 10:21  gbvalor
+
+	* glucas/: mccomp.h, prefetch.h: Included prefetch for gcc/GNU and
+	  alpha processors
+
+2001-06-30 10:18  gbvalor
+
+	* glucas/: ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c,
+	  ynorm_4.c, ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c:
+	  Some bugs fixed when other than x86 or generic targets were
+	  present
+
+2001-06-29 21:54  gbvalor
+
+	* glucas/: ygeneric.h, ynorm_4.c: [no log message]
+
+2001-06-29 21:50  gbvalor
+
+	* glucas/: yx86.h, yx86ath.h, yx86p3.h: Some prefetch coding work
+
+2001-06-29 21:39  gbvalor
+
+	* glucas/Makefile.am: Included some files to Makefile.am
+
+2001-06-29 21:35  gbvalor
+
+	* glucas/glucas.c: New version
+
+2001-06-29 21:31  gbvalor
+
+	* glucas/: difdit_4.c, difdit_8.c, prefetch.h, radix_4.c,
+	  radix_8.c, ygeneric4.h, ygeneric8.h, ynorm_8.c: Introduced some
+	  large macros to help compilers
+
+2001-06-25 19:35  gbvalor
+
+	* glucas/: configure, configure.in: The Y_KILL_BRANCHES for Itanium
+	  has disabled
+
+2001-06-24 21:13  gbvalor
+
+	* glucas/: ChangeLog, glucas.c: Some typos corrected. Thanks to
+	  Klaus Kastens
+
+2001-06-23 10:28  gbvalor
+
+	* glucas/glucas.c: Oops! y have to add a blank ' '. Selftest sign
+	  was no OK
+
+2001-06-22 21:59  gbvalor
+
+	* glucas/glucas.c: Assing the final version 2.8a
+
+2001-06-22 18:52  gbvalor
+
+	* glucas/yeafft.c: A multiline string warning fixed.
+
+2001-06-22 18:51  gbvalor
+
+	* glucas/: configure, configure.in: Some tuning from Klaus Kastens
+	  for G3 processor.  For gcc v3.0 there is thousands of warnings
+	  about multilines literal string there are in assembler macros. To
+	  fix that it will take a lot of time. At the moment, I've
+	  dissabled the warnings for assembler optimized targets
+
+2001-06-22 18:48  gbvalor
+
+	* glucas/Makefile.am: generic.h has returned to package again, but
+	  changed a lot.
+
+2001-06-22 18:45  gbvalor
+
+	* glucas/: dyadic32.c, generic.h: No more paste ## preprocessor for
+	  pure complex mode used in dyadic32
+
+2001-06-22 18:43  gbvalor
+
+	* glucas/: yeafft.h, yx86ath.h: B.B Beesley reported it seems is no
+	  good idea to set Y_BLOCKSIZE=2048 for Athlons. Turn to 1024
+
+2001-06-17 19:51  gbvalor
+
+	* glucas/: ChangeLog, glucas.c: Included information about new
+	  selftest feature (only 50 iteartions for roundoff check)
+
+2001-06-17 19:33  gbvalor
+
+	* glucas/: glucas.c, selftest.c, ynorm_10.c, ynorm_12.c,
+	  ynorm_14.c, ynorm_16.c, ynorm_4.c, ynorm_5.c, ynorm_6.c,
+	  ynorm_7.c, ynorm_8.c, ynorm_9.c: Selftest now has enabled
+	  Roundoff error check during first 50 iterations.
+
+2001-06-17 18:20  gbvalor
+
+	* glucas/: configure, configure.in: For x86 processors now
+	  Y_MINIMUM is defined as default
+
+2001-06-17 18:16  gbvalor
+
+	* glucas/: yeafft.h, yx86ath.h: Now the default Y_BLOCKSIZE for
+	  athlons is 2048
+
+2001-06-17 18:15  gbvalor
+
+	* glucas/dyadic32.c: Fixed erroneous code when Y_MINIMUM is defined
+
+2001-06-17 14:42  gbvalor
+
+	* glucas/: Makefile.am, configure, configure.in, dyadic32.c,
+	  fft7x86.h, yeafft.h, yeainit.c: Fixed some bugs in dyadic32.
+	  Reorganized all complex arithmetic. Less files in the package
+
+2001-06-16 22:15  gbvalor
+
+	* glucas/glucas.c: Modified some comments
+
+2001-06-16 22:14  gbvalor
+
+	* glucas/yeafft.h: Y_BLOCKSIZE and Y_SHIFT now can be different for
+	  different targets.
+
+2001-06-16 22:13  gbvalor
+
+	* glucas/fft7x86.h: Fixed a bug when no defined USE_ASM
+
+2001-06-16 20:25  gbvalor
+
+	* glucas/yx86ath.h: Prefetch 64 ahead. B.J.Beesley has discovered a
+	  big improvement doing so
+
+2001-06-16 20:01  gbvalor
+
+	* glucas/glucas.html: Fixed some spelling errors suggested by Tom
+	  Cage
+
+2001-06-16 09:17  gbvalor
+
+	* glucas/: fft3x86.h, fft5x86.h, fft7x86.h: Fixed some warning of
+	  last versions GCC preprocessor
+
+2001-06-14 18:59  gbvalor
+
+	* glucas/configure.in: Included the file version
+
+2001-06-14 18:55  gbvalor
+
+	* glucas/: configure, configure.in: Included configure options for
+	  Mac OS X / GCC-FreeBSD
+
+2001-06-14 12:20  gbvalor
+
+	* glucas/ChangeLog: Changed the date of release 2.8
+
+2001-06-14 12:16  gbvalor
+
+	* glucas/configure: New options for itanium, Alphas ev56 ev6 and
+	  ev67
+
+2001-06-14 12:15  gbvalor
+
+	* glucas/configure.in: Some options added for Itanium. Different
+	  options for Alpha ev56 and alphaev6 or ev67.
+
+2001-06-14 12:11  gbvalor
+
+	* glucas/Makefile.Glucas: There is no target actived
+
+2001-06-14 12:09  gbvalor
+
+	* glucas/glucas.c: The version number in the results file now is
+	  the release number, instead of the version of file glucas.c. It
+	  could make some confussion.
+
+2001-06-10 19:08  gbvalor
+
+	* glucas/glucas.c: Added the comments of new features for this
+	  version
+
+2001-06-10 18:35  gbvalor
+
+	* glucas/: configure, configure.in: Oops!. I forgot to uncomment a
+	  line in configure.in
+
+2001-06-10 18:29  gbvalor
+
+	* glucas/: configure, configure.in: Fixed a bug in configure.in.
+	  Now configure does not interrup whether gcc is not present. This
+	  problem affected to Alpha/Tru64 machines.
+
+2001-06-10 18:26  gbvalor
+
+	* glucas/: gsetup.c, gsetup.h: Fixed a warning in Alpha-Tru64
+
+2001-06-09 20:04  gbvalor
+
+	* glucas/yx86ath.h: Changed prefetch distances in some assembler
+	  macros
+
+2001-06-09 19:43  gbvalor
+
+	* glucas/: configure, configure.in: Some small changes
+
+2001-06-09 18:49  gbvalor
+
+	* glucas/: ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c,
+	  ynorm_4.c, ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c:
+	  Fixed a bug active when Y_TARGET=0 and Y_KILL_BRANCHES not active
+
+2001-06-09 18:11  gbvalor
+
+	* glucas/generic.h: Corrected a warning in the new GNU/gcc version
+	  in expresions on macros like _d[_t].##re , where _t=t[3] in the
+	  calling arguments
+
+2001-06-08 18:42  gbvalor
+
+	* glucas/glucas.html: Some url corrections
+
+2001-06-08 18:21  gbvalor
+
+	* glucas/glucas.html: Modified the sourceforge icon
+
+2001-06-06 21:29  gbvalor
+
+	* glucas/: ChangeLog, Makefile.Glucas, Makefile.am, README:
+	  Actualization of documentation
+
+2001-06-02 09:35  gbvalor
+
+	* glucas/yx86.h: modified a bug in yx86.h
+
+2001-05-29 20:26  gbvalor
+
+	* glucas/: AUTHORS, ChangeLog, Makefile.Glucas, Makefile.am,
+	  Makefile.in, NEWS, README, compat.c, configure, configure.in,
+	  difdit_16.c, difdit_2.c, difdit_4.c, difdit_8.c, dyadic.c,
+	  dyadic32.c, fft3.h, fft3x86.h, fft5.h, fft5x86.h, fft7.h,
+	  fft7x86.h, generic.h, gio.c, glucas.c, glucas.h, gmp_yea.h,
+	  gsetup.c, gsetup.h, gstd.c, mccomp.h, mkinstalldirs, radix_10.c,
+	  radix_12.c, radix_14.c, radix_16.c, radix_2.c, radix_32.c,
+	  radix_4.c, radix_5.c, radix_6.c, radix_7.c, radix_8.c, radix_9.c,
+	  selftest.c, tricky.c, ycx86.h, ydebug.h, yeafft.c, yeafft.h,
+	  yeafft1.c, yeainit.c, yealucas.c, ygeneric.h, yminimum.h,
+	  ynorm.c, ynorm.h, ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c,
+	  ynorm_4.c, ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c,
+	  ynormx86.h, ynormx86p3.h, yx86.h, yx86ath.h, yx86p3.h: Some
+	  optimizations: mainly Less computing addresses.
+
+2001-04-23 19:07  gbvalor
+
+	* glucas/: mccomp.h, radix_10.c, radix_12.c, radix_14.c,
+	  radix_16.c, radix_2.c, radix_32.c, radix_4.c, radix_5.c,
+	  radix_6.c, radix_7.c, radix_8.c, radix_9.c, yeafft.h, ynorm.h,
+	  ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c, ynorm_4.c,
+	  ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c, yx86.h,
+	  yx86ath.h, yx86p3.h: There are included some prefetch hints for
+	  generic target. Actually it does not works in other but pentium3
+	  or athlon platforms, but in a future it can be useful. There is
+	  also a different assembler prefetch for athlons, They will be
+	  target 12 (pentium3 11). Some minor bugs also corrected.
+
+2001-04-20 20:19  gbvalor
+
+	* glucas/: ygeneric.h, ynorm_10.c, ynorm_12.c, yx86.h, yx86p3.h:
+	  Some small fixes
+
+2001-04-19 23:25  gbvalor
+
+	* glucas/: ChangeLog, Makefile.am, configure.in, mccomp.h,
+	  selftest.c, yx86p3.h: Added some hints to prefetch data for
+	  pentium3 and athlon. The changes are in the added file yx86p3.h
+
+2001-04-19 20:26  gbvalor
+
+	* glucas/yeainit.c: Included a patch to avoid the use of difdit_16
+	  when Y_AVAL > 3. For x86, the use of didit_16 decreases the
+	  performance a lot.
+
+2001-04-17 23:05  gbvalor
+
+	* glucas/: glucas.c, ynorm.c, ynorm.h, ynorm_10.c, ynorm_12.c,
+	  ynorm_14.c, ynorm_16.c, ynorm_4.c, ynorm_5.c, ynorm_6.c,
+	  ynorm_7.c, ynorm_8.c, ynorm_9.c: The arrays for DWT now also has
+	  padding. It should avoid some cache thrashing.
+
+2001-04-17 23:00  gbvalor
+
+	* glucas/yx86.h: I've introduced some assembler macros for x86 I
+	  have not still written
+
+2001-04-13 23:45  gbvalor
+
+	* glucas/: AUTHORS, COPYING, ChangeLog, INSTALL, Makefile.Glucas,
+	  Makefile.am, Makefile.in, NEWS, README, aclocal.m4, compat.c,
+	  config.guess, config.h.in, config.h.manual, config.sub,
+	  configure, configure.in, difdit_16.c, difdit_2.c, difdit_4.c,
+	  difdit_8.c, dyadic.c, dyadic32.c, fft3.h, fft3x86.h, fft5.h,
+	  fft5x86.h, fft7.h, fft7x86.h, generic.h, gio.c, glucas.c,
+	  glucas.h, gmp_yea.h, gsetup.c, gsetup.h, gstd.c, install-sh,
+	  mccomp.h, mformat.htm, missing, mkinstalldirs, radix_10.c,
+	  radix_12.c, radix_14.c, radix_16.c, radix_2.c, radix_32.c,
+	  radix_4.c, radix_5.c, radix_6.c, radix_7.c, radix_8.c, radix_9.c,
+	  selftest.c, stamp-h.in, tricky.c, ycx86.h, ydebug.h, yeafft.c,
+	  yeafft.h, yeafft1.c, yeainit.c, yealucas.c, ygeneric.h, ynorm.c,
+	  ynorm.h, ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c,
+	  ynorm_4.c, ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c,
+	  ynormx86.h, yx86.h: This revision does not include any change.
+	  The only thing changed is the revision number. This is done to
+	  sync the versions I already had stored locally with the CVS
+	  repository now imported to sourceforge
+
+2001-04-13 18:52  gbvalor
+
+	* glucas/: generic.h, yx86.h, fft3.h, ycx86.h, fft5.h, fft7.h,
+	  fft3x86.h, fft5x86.h, fft7x86.h, gmp_yea.h, glucas.c, gio.c,
+	  gstd.c, compat.c, gsetup.c, selftest.c, yealucas.c, ynorm.c,
+	  ynorm_4.c, ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c,
+	  ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c, ynorm.h,
+	  gsetup.h, glucas.h, tricky.c, ynormx86.h, mformat.htm,
+	  Makefile.Glucas, config.h.manual: First revision imported to
+	  sourceforge. The prior CVS tree has been stored locally.
+
+2001-04-13 18:52  gbvalor
+
+	* glucas/: generic.h, yx86.h, fft3.h, ycx86.h, fft5.h, fft7.h,
+	  fft3x86.h, fft5x86.h, fft7x86.h, gmp_yea.h, glucas.c, gio.c,
+	  gstd.c, compat.c, gsetup.c, selftest.c, yealucas.c, ynorm.c,
+	  ynorm_4.c, ynorm_5.c, ynorm_6.c, ynorm_7.c, ynorm_8.c, ynorm_9.c,
+	  ynorm_10.c, ynorm_12.c, ynorm_14.c, ynorm_16.c, ynorm.h,
+	  gsetup.h, glucas.h, tricky.c, ynormx86.h, mformat.htm,
+	  Makefile.Glucas, config.h.manual: Initial revision
+
+2001-04-13 18:49  gbvalor
+
+	* glucas/: AUTHORS, Makefile.in, README, stamp-h.in, COPYING,
+	  ChangeLog, INSTALL, Makefile.am, NEWS, aclocal.m4, config.guess,
+	  config.h.in, config.sub, configure, configure.in, install-sh,
+	  missing, mkinstalldirs, yeafft.c, yeafft1.c, yeainit.c,
+	  radix_2.c, radix_4.c, radix_5.c, radix_6.c, radix_7.c, radix_8.c,
+	  radix_9.c, radix_10.c, radix_12.c, radix_14.c, radix_16.c,
+	  dyadic.c, radix_32.c, dyadic32.c, difdit_2.c, difdit_4.c,
+	  difdit_8.c, difdit_16.c, yeafft.h, mccomp.h, ydebug.h,
+	  ygeneric.h: First revision imported to sourceforge. The prior CVS
+	  tree has been stored locally.
+
+2001-04-13 18:49  gbvalor
+
+	* glucas/: AUTHORS, Makefile.in, README, stamp-h.in, COPYING,
+	  ChangeLog, INSTALL, Makefile.am, NEWS, aclocal.m4, config.guess,
+	  config.h.in, config.sub, configure, configure.in, install-sh,
+	  missing, mkinstalldirs, yeafft.c, yeafft1.c, yeainit.c,
+	  radix_2.c, radix_4.c, radix_5.c, radix_6.c, radix_7.c, radix_8.c,
+	  radix_9.c, radix_10.c, radix_12.c, radix_14.c, radix_16.c,
+	  dyadic.c, radix_32.c, dyadic32.c, difdit_2.c, difdit_4.c,
+	  difdit_8.c, difdit_16.c, yeafft.h, mccomp.h, ydebug.h,
+	  ygeneric.h: Initial revision
+

@@ -1,0 +1,178 @@
+@appendix INTERCHANGEABLE FORMAT FOR MERSENNE NUMBERS RESIDUES
+@center Version  2 
+
+@unnumberedsec Introduction
+Every day, the length of numbers being analyzed in @strong{GIMPS} contest 
+grows and grows, and so, the time needed to perform a Lucas-Lehmer test. 
+An user can be tired of search, buy a new machine or change the client. 
+In all cases, it would be nice having an interchangeable format to
+avoid loosing many CPU hours. 
+
+@strong{Glucas} program can use this format and so, the save files can be 
+used by all platforms ( 32/64 bits, BIG-ENDIAN / LITTLE-ENDIAN) with two
+complement integer arithmetic. Reading and writing this kind of files is a bit
+slower than other formats (it cost about half a L-L iteration) but how often 
+do we read/write a save file ?. 
+
+What follows is a brief description of the format. 
+  
+@unnumberedsec System compatibility requirements
+
+The minimum requirements needed to read or write a save file with the 
+proposed format are: 
+@itemize @minus
+@item
+Two-complement integer arithmetic. 
+@item
+Unsigned integer types of 32 or 64 bits length. 
+@item
+Unsigned 8-bits char or byte type. 
+@end itemize  
+  
+@unnumberedsec The format.
+
+The save file is divided into blocks of 8-bytes length.  Every block must be 
+considered as a 64-bits unsigned integer type.
+@example 
+
+    FORMAT OF A 8-BYTES BLOCK: 
+    byte 0:  bits 7-0 . First position in file (least significant byte) 
+    byte 1:  bits 8-15 
+    byte 2:  bits 16-23 
+    byte 3:  bits 24-31 
+    byte 4:  bits 32-39 
+    byte 5:  bits 40-47 
+    byte 6:  bits 48-55 
+    byte 7:  bits 56-63  last position in file (most significant byte) 
+
+@end example  
+
+The blocks are: 
+@table @var
+  
+@item  BLOCK 0: bytes 1-8 .Format version 
+This is reserved to identify the file as a @strong{Interchangeable Mersenne Residue File Format}. 
+@example
+BLOCK 0 FORMAT:
+bytes 0-4: The signature 0x006A64B1. This is the hexadecimal
+           representation of 6972593 (the last known Mersenne
+           prime exponent when development of this format 
+           begun). 
+bytes 4-7: the version. This is version 2. So 0x00000002 
+  
+@end example
+  
+@item BLOCK 1: bytes 9-16 .Program identification 
+This is reserved to identify the program and version which generate the file.
+As an orientation, the proposal is: 
+@example
+
+BLOCK 1 FORMAT:
+byte 0: the program: 
+     Example. Byte 2 of block 0 can be, in hexadecimal 
+              0x11 for prime95/mprime 
+              0x22 for Mlucas 
+              0x33 for Glucas 
+                      ....... 
+bytes 1-3: the version. Every program should use these three bytes 
+           in its own format. 
+byte 4: What the residue is: 
+        0 : Lucas-Lehmer test residue. 
+        1 : p-1 residue. 
+        2 : A general mersenne residue, 
+        (example : a residue in a ECM factorization). 
+bytes 5-7: at the moment set two 0. Reserved for future use. 
+
+@end example
+
+@item BLOCK 2: bytes 17-24. Exponent.
+This block is changed from version 1. In version 1 the exponent 
+occupied the complete block. Now the upper half has other information.
+@example
+
+BLOCK 2 FORMAT:
+Bytes 0-3: The exponent of the Mersenne number, e.g, 657849 for 
+           M657849. Unsigned integer format.
+
+Bytes 4-7: The optional shift account. To get the proper residue, 
+           it has to be rotated to the right this number of bits. 
+           In a non rotated version it is set to 0. 
+
+@end example
+
+@item BLOCK 3: bytes 25-32. The FFT runlength used if any. 
+An integer indicating the FFT run-length, in size_of_reals, used to compute 
+the residue saved. Actually, it is only an informative data, every binary can
+continue the work with a FFT-runlength according to their own accuracy 
+capabilities. 
+@sp 1
+@item BLOCK 4: bytes 33-40. Iteration / B1 LIMIT. 
+In a L-L test: The iteration of the Lucas-Lehmer test saved. This is important
+to unify: 
+@example
+
+        4 would be the iteration 0 
+        14 would be the iteration 1 
+        ..... 
+
+@end example
+
+If the starting point L(0) is not 4, like prime95 does, the residue should be
+rotated according with the number of bits read in block 2. Once rotated 
+L(0)=4, L(1)=14 and so on. 
+
+In a P-1 factorization it must be the B1 limit. 
+
+For other uses it is undefined. 
+@sp 1
+@item Block 5: bytes 41-48. Round off Error 
+In a L-L test: the round off error of the iteration being saved. Because we 
+need to store it in integer format, the error is transformed according to: 
+
+@example
+
+error_saved = (unsigned int)(fabs(frac_roundoff_err) * 1000000.0) 
+
+@end example
+For other kinds of residues it is yet undefined. (may be a B2 limit) 
+
+@sp 1  
+@item Blocks 6 to @math{5+N}: bytes 49 to @math{N*8+48}: The residue 
+This part contains the residue. It is stored in compact two-complement integer
+form, using all the blocks needed to store the @code{q} bits of the Mersenne 
+Number @code{Mq}. The needed N blocks can be easily computed by
+@example 
+
+N := floor ( (q-1)/64 + 1)
+
+@end example 
+The unused bits (if any) in the last block must be filled by zeroes. The 
+first block of the residue (first on file) will contain bits 0-63, the second 
+64-127 and so on.
+
+@sp 1
+@item  Block 6+N: bytes N*8+49 to N*8+56: The last carry. 
+In the normalization process from the float array in DWT to the compact
+integer form, one must play with a carry propagation. After the last float
+DWT array element has been transformed, it remains a @code{last carry} one
+needs to add to the residue (usually only to the first bits). If the write
+routines already have written the first residue blocks (to save memory) this
+blocks should need to be read again. To avoid this problem, this block
+contains the last carry. 
+
+@strong{NOTE}: The last carry, if non-zero, usually is -1, so all the bits are
+zeroes or ones. @strong{Glucas} adds the last carry to the residue before 
+writing, so this block always is zero. 
+
+@sp 1
+@item Block 7+N: bytes N*8+57 to N*8+64: The sum check control. 
+This block contains the sum of the previous blocks mod(2^32 - 1). It is easy 
+and fast to compute with both 32 and 64 bits scheme. 
+
+@sp 1  
+@item Blocks 8+N to the end of file: UNDEFINED YET 
+More blocks can be added at the end of the file. This part of file can be used
+for purposes like a brief history of the machines/users and errors from the 
+beginning of work to the actual state. 
+  
+@end table  

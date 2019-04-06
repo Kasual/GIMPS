@@ -1,0 +1,83 @@
+/* config.h.manual.  You should edit this file and rename it 'config.h' if
+the Unix script ./configure fails. This is an ugly task but ... */
+
+/* YOU MUST UNCOMMENT THE RIGHT LINE PER OPTION */
+
+/* Define to empty if the keyword does not work.  */
+/* #undef const */
+
+/* Define to `unsigned' if <sys/types.h> doesn't define.  */
+/*#undef size_t*/
+
+/* Define if you have the ANSI C header files.  */
+/*#define STDC_HEADERS 1*/
+/*#undef STDC_HEADERS*/
+
+/* Define if your <sys/time.h> declares struct tm.  */
+/*#undef TM_IN_SYS_TIME*/
+
+/* The number of bytes in a double.  */
+/*#define SIZEOF_DOUBLE 8*/
+
+/* The number of bytes in a unsigned long int.  */
+/*#define SIZEOF_UNSIGNED_LONG_INT 8*/
+/*#define SIZEOF_UNSIGNED_LONG_INT 4*/
+
+
+/* Define if you have the atoi function.  */
+/*#undef HAVE_ATOI */
+/*#define HAVE_ATOI 1 */
+
+
+/* Define if you have the getopt function.  */
+/*#undef HAVE_GETOPT */
+/*#define HAVE_GETOPT 1 */
+
+/* Define if you have the getrusage function.  */
+/*#undef HAVE_GETRUSAGE */
+/*#define HAVE_GETRUSAGE 1 */
+
+/* Define if you have the strchr function.  */
+/*#undef HAVE_STRCHR */
+/*#define HAVE_STRCHR */
+
+/* Define if you have the strlen function.  */
+/*#undef HAVE_STRLEN */
+/*#define HAVE_STRLEN 1 */
+
+/* Define if you have the <limits.h> header file.  */
+/*#undef HAVE_LIMITS_H */
+/*#define HAVE_LIMITS_H 1 */
+
+/* Define if you have the <sys/resource.h> header file.  */
+/*#undef HAVE_SYS_RESOURCE_H */
+/*#define HAVE_SYS_RESOURCE_H 1 */
+
+/* Define if you have the <sys/utsname.h> header file.  */
+/*#undef HAVE_SYS_UTSNAME_H */
+/*#define HAVE_SYS_UTSNAME_H 1 */
+
+/* Define if you have the <unistd.h> header file.  */
+/*#undef HAVE_UNISTD_H */
+/*#define HAVE_UNISTD_H 1 */
+
+
+/* Define if you have the m library (-lm).  */
+/*#undef HAVE_LIBM */
+/*#define HAVE_LIBM 1 */
+
+/* Name of package */
+#define PACKAGE "Glucas"
+
+/* Version number of package */
+#define VERSION "1.100"
+
+
+
+
+
+
+
+
+
+

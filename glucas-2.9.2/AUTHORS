@@ -1,0 +1,13 @@
+The libyeafft.a routines:
+
+Guillermo Ballester Valor, gbv@oxixares.com
+Klaus Kastents, kiste@bawue.de (*)
+
+(*) From v2.8b. 24/jul/2001 
+
+There are code in the other Glucas routines collecting ideas from a lot 
+of authors. These routines cannot be considered as Guillemo and Klaus's, 
+but almost all code is from their own hands.
+
+There are also GNU utilities in the package, licensed with GPL and 
+copyright of FSF. 

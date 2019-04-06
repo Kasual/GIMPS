@@ -1,0 +1,1900 @@
+\input texinfo @c -*-texinfo-*-
+
+@c %**start of header
+@setfilename glucas.info
+@include logo.texi
+@include version.texi
+@settitle Glucas @value{EDITION} 
+@c %**end of header
+
+@c $Id: glucas.texi,v 1.32 2003/12/02 22:12:54 gbvalor Exp $
+@c ...........................................................
+@c This file has been inspired by the texinfo file for GMP 4.0
+@c you can download at http://swox.com/gmp/
+@c I have to publically thank the GMP team for this invaluable
+@c help
+@c ...........................................................
+
+@c ...........................................................
+@c This is the code to set the info info files into the system
+@c info directory when installed with 'make install'
+@c ..........................................................
+@dircategory Local programs
+@direntry
+* Glucas: (Glucas).              Glucas. A Mersenne number primality tester.
+@end direntry
+
+@c ..........................................................
+@c This is to set A4 paper
+@c ..........................................................
+@afourpaper
+
+@c ..........................................................
+@c This is to avoid black rectangles. Toner/ink is not cheap
+@c ..........................................................
+@finalout
+
+@c This is an alias to strong or code commands 
+@ifinfo
+@alias st = code
+@end ifinfo
+@ifnotinfo
+@alias st = strong
+@end ifnotinfo
+
+@c ...........................
+@c set some utility items
+@c ..........................
+@set YEARS 2000-2008
+@set AUTHOR1 Guillermo Ballester Valor
+@set AUTHOR2 Klaus Kastens
+
+@c .....................................
+@c Title page
+@c .....................................
+@titlepage
+@title Glucas-YEAFFT
+@subtitle Edition @value{EDITION}
+@subtitle @value{UPDATED}
+@author @value{AUTHOR1} @email{gbv@@oxixares.com}
+@author @value{AUTHOR2} @email{kiste@@bawue.de}
+@page
+@c @vskip Opt plus 1filll
+Copyright @copyright{} @value{YEARS}
+@sp 1 
+@value{AUTHOR1}
+@sp 1
+@value{AUTHOR2}
+
+@end titlepage
+
+
+@c ..........................................................
+@c This will not appear into printed manuals
+@c It is the Top node 
+@c ..........................................................
+@node Top, Copying, (dir), (dir)
+@ifnottex
+@top Glucas-YEAFFT
+This manual describes how to install, use, and some internals of the library
+@st{YEAFFT} and @st{Glucas}, a Mersenne number primality tester based
+on it.
+@end ifnottex
+
+@ifinfo
+This file documents the use and the internals of the @st{YEAFFT} library 
+and the @st{Glucas} application.
+
+Copyright @value{YEARS} @value{AUTHOR1}, @value{AUTHOR2}
+
+This is edition @value{EDITION} for release @value{VERSION}. 
+Last updated @value{UPDATED}
+
+The @st{YEAFFT} code is licensed under GPL @uref{GPL license}. The 
+specific Lucas-Lehmer test contains many ideas from several authors (@xref{Copying}.)
+
+@end ifinfo
+
+
+@menu
+* Copying::                    YEAFFT Copying Conditions (GPL).
+* Glucas and YEAFFT::          How is related this software.
+* Introduction to YEAFFT::     Brief introduction to YEAFFT.
+* Introduction to Glucas::     Brief introduction to Glucas.
+* Installing Glucas::          How to configure and compile Glucas.
+* Glucas basics::              What every Glucas user should know.
+* Invoking Glucas::            How to call Glucas.
+* Glucas internals::           Internal details of Glucas.
+* Contributors::               Who has contributed to this code?
+* Save file format::           Interchangeable Mersenne number format
+* Concept Index::              Concept and keyword index.
+* GPL license::                GPL License document
+@end menu
+
+@iftex
+@contents
+@end iftex
+
+@node Copying, Glucas and YEAFFT, Top, Top
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered Glucas-YEAFFT Copying Conditions
+@cindex Copying conditions
+@cindex Conditions for copying Glucas-YEAFFT
+@cindex License conditions
+
+@st{YEAFFT} (@st{YE}t @st{A}nother @st{F}ast @st{F}ourier 
+@st{T}ransform) is licensed under GPL (@xref{GPL license}.)
+@st{Glucas} is a part of code using @st{YEAFFT}, which makes primality 
+tests of Mersenne numbers. This code is related to user interface and 
+Lucas-Lehmer specific code.
+It can be considered as free code, because it includes code and ideas
+from many other authors and we honestly are not the owners. Once said that, 
+almost all this code is from the @st{YEAFFT} authors (@xref{Contributors}.) 
+
+What follows is referred to @st{YEAFFT} library. To see what part of code 
+belongs to this license see the source code. At the top of every file in the 
+package you will see the license GPL (if any). (@xref{GPL license}.)
+
+
+@c ........................................................................
+@c 
+
+@node Glucas and YEAFFT, Introduction to YEAFFT, Copying, Top
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered How Glucas and YEAFFT are related
+
+@cindex YEAFFT
+@cindex FFT
+@cindex Fast Fourier Transform
+@st{YEAFFT} (@st{YE}t @st{A}nother @st{F}ast @st{F}ourier 
+@st{T}ransform) is a library designed to 
+perform integer multiplication of very big numbers using @dfn{FFT} (Fast
+Fourier Transforms). This library is written based on 
+@uref{http://www.perfsci.com/free/techpapers/confgt.pdf,this paper}.
+It is mostly a C-coded library, but it has lots of assembler macros for 
+GNU/gcc assembler call style for x86 processor family. 
+
+@cindex Glucas
+@st{Glucas} is an application using @st{YEAFFT} in a very optimized 
+way. It is the first program using the @st{YEAFFT} library, and because
+it is written by the same authors as @st{YEAFFT}, it squeezes this 
+library in a very efficient way. The main goal of @st{Glucas} is to 
+analyze Mersenne numbers checking whether they are prime numbers.
+
+There are differences between the copying licenses of both codes. 
+@st{YEAFFT} is a GPL licensed library (@xref{GPL license}.), while
+the Glucas specific code is free. (@xref{Copying}.)
+
+
+@c .......................................................................
+@node Introduction to YEAFFT, Introduction to Glucas, Glucas and YEAFFT, Top
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered What is YEAFFT
+
+@cindex YEAFFT
+@cindex FFT
+@cindex Fast Fourier Transform
+@cindex GNU/gcc
+@st{YEAFFT} (@st{YE}t @st{A}nother @st{F}ast @st{F}ourier 
+@st{T}ransform) performs integer multiplications of very big numbers using 
+@st{FFT} (Fast Fourier Transforms). This library is written based on 
+@uref{http://www.perfsci.com/free/techpapers/confgt.pdf,this paper}.
+It is mostly a C-coded library, but it has lots of assembler macros for 
+GNU/gcc assembler call style for x86 processor family. It also has some 
+memory prefetch hints for other compilers and processors.
+
+@st{YEAFFT} is not a general purpose FFT package. It essentially makes 
+convolutions of two real arrays. It is a floating point based FFT, not
+an all integer transform. Because of that, there are some controls to
+make sure the results are correct.
+To read more about @st{YEAFFT}: (@xref{Glucas internals}.) 
+
+@c .......................................................................
+@node Introduction to Glucas, Installing Glucas, Introduction to YEAFFT, Top
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered Introduction to Glucas
+
+@cindex Glucas
+@cindex Mersenne number
+@cindex Lucas-Lehmer test
+@st{Glucas} is the first code intensively using @st{YEAFFT}. Up to 
+version 2.x, it basically does Lucas-Lehmer tests of Mersenne numbers. 
+(@xref{Mersenne number}.)(@xref{Lucas-Lehmer test}.) 
+
+@st{Glucas} is designed to test the primality of Mersenne numbers using 
+idle cycles of your system at the lowest priority (nice). So you have
+a chance to discover the biggest known prime number.
+
+@cindex GIMPS 
+There is a big project in the Internet: @st{GIMPS} 
+(@uref{http://www.mersenne.org/,Great Internet Mersenne Prime Search}).
+As the name says, it tries to find Mersenne prime numbers.
+
+@cindex PrimeNet
+@cindex prime95
+@cindex reserving exponents
+@dfn{PrimeNet} is a server service hosted by 
+@uref{http://www.entropia.com,entropia.com}. It is a great server for
+@st{prime95} family clients, which automatically contacts PrimeNet to
+reserve Mersenne numbers for testing, reporting of results and other account
+management. These clients are exclusively for x86 family processors because 
+they are assembler coded applications. Indeed, they are faster than 
+everything else running on these systems.
+
+For all other processors out there, an alternative client is @st{Glucas}. 
+At the moment, there is no automated server to reserve numbers or report
+results, but we think there will be one soon.
+
+In a few words, the user has to reserve a number from @st{GIMPS} or PrimeNet 
+pool. Then @st{Glucas} makes the test, saying us whether the chosen number
+is a prime and finally we have to send this result to the server.
+To reserve Mersenne numbers for testing or reporting results use the
+@uref{http://www.mersenne.org/ips/manualtests.html, PrimeNet Manual Testing Forms}
+or alternatively choose an exponent from
+@uref{http://www.mersenne.org/range2.htm, GIMPS Reserve Exponents page} and
+report the results per e-mail.
+
+But before doing anything, I would recommend reading the basics of 
+@st{Glucas}.(@xref{Glucas basics}.) 
+
+   
+
+@c .......................................................................
+@node Installing Glucas, Glucas basics, Introduction to Glucas, Top
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered Download, configure, make and installing Glucas
+@cindex download Glucas
+
+@st{Glucas} source and binaries are available from the download area at
+@uref{http://sourceforge.net/project/showfiles.php?group_id=24518, sourceforge.net}.
+You also can download older binaries @uref{http://glucas.sourceforge.net/oldbin.html, here}.
+
+You can either choose to download a prebuilt binary suitable for your 
+OS/system or build your own binary from the source code. 
+
+@cindex prebuilt binary
+@section Installing a prebuilt binary
+This is the easiest solution, you only have to download, unzip, make a 
+short selftest and move the binary to your preferred directory.
+
+@cindex unzipping file
+Once you've downloaded the zipped binary file @file{Glucas-version.CPU.OS.tar.gz}
+you need to uncompress using tar and gzip. On UNIX like systems
+
+@example
+@kbd{tar zxf Glucas-version.CPU.OS.tar.gz}
+@end example
+
+or in two seperate steps
+
+@example
+@kbd{gzip -d Glucas-version.CPU.OS.tar.gz}
+@kbd{tar xf Glucas-version.CPU.OS.tar}
+@end example
+
+This will create a directory @code{Glucas-version.CPU.OS}, containing the
+executable @code{Glucas} and some short documentation.
+It is recommended to run a short selftest (@xref{Selftest}.).
+
+@example
+@kbd{cd Glucas-version.CPU.OS}
+@kbd{./Glucas -s [small | big | huge | enormous | primenet | all]}
+@end example
+
+If successful you could move @code{Glucas} to one of your systems
+binary directories (i.e. @code{/usr/local/bin/} or  @code{~/bin/}).
+
+@example
+@kbd{mv Glucas  /your_Glucas_directory_path}
+@end example
+
+Make sure this directory is in your environments PATH, otherwise you always
+have to execute it with the PATH preceded. (i.e. @code{/usr/local/bin/Glucas}).
+
+
+@section Building your own binary.
+
+This section is for users who want (or need) to build their own binary from
+the source code. If you're not skilled in these things, you might
+find it somewhat difficult. At the moment, it is not easy to build and
+install for non-UNIX/Linux platforms. It requires editing some files.
+
+@cindex configure
+@cindex make
+Anyway, the usual @kbd{./configure} and @kbd{make} procedure works for
+most Processors/OS. This should build a binary tuned for your system.
+For systems not detected by the configure script, there will be a warning displayed,
+but in most cases it should nevertheless be possible to use @kbd{make} and
+build a binary (Though not tuned for your system).
+
+@menu
+* Configure Make and Install::    How to Configure Make and Install Glucas
+* Alternative builds::            How to make Glucas with your preferences
+* Glucas compiler options::       Options to build Glucas
+@end menu
+
+@c ........................................................................
+@node Glucas basics, Invoking Glucas, Installing Glucas, Top
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered What every Glucas user should know
+
+@cindex Mersenne number
+@cindex Lucas-Lehmer test
+@st{Glucas} is a free program to test the primality of Mersenne numbers.
+(@xref{Mersenne number}.) Its results say us whether a Mersenne number is
+a prime number. It uses a special recurrence sequence to test the primality.
+(@xref{Lucas-Lehmer test}.)
+
+It is supposed you previously have read the introduction. 
+(@xref{Introduction to Glucas}.)
+
+@st{Glucas} source and binaries are available from the download area at
+@uref{http://sourceforge.net/project/showfiles.php?group_id=24518, sourceforge.net}.
+
+You can either choose to download a prebuilt binary suitable for your 
+OS/system or build your own binary from the source code. 
+
+@menu
+* Selftest::                 Glucas selftest.
+* Glucas_test::              Even more complete selftest.
+* Usage::                    How to invoke Glucas
+* Configure files::          How we can set some options.
+* Output::                   What means the output files.
+@end menu
+
+
+@c .......................................................................
+@node Invoking Glucas, Glucas internals, Glucas basics, Top
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered How to invoke Glucas. 
+
+Once @st{Glucas} is installed correctly, you can invoke it like any other
+executable in your system. There are some command line options you should
+know about. (@xref{Usage}.) 
+
+Some other features can be configured by editing an @code{ini} file. (@xref{Configure files}.)
+ 
+
+
+@c .......................................................................
+@node Glucas internals, Contributors, Invoking Glucas, Top
+@comment  node-name, next, previous,  up
+@include logo.texi
+
+To know more about @st{Glucas}, it is necessary to be familiar with some 
+concepts
+
+@menu
+* Mersenne number::                  What is a Mersenne Number
+* Lucas-Lehmer test::                What a Lucas-Lehmer test does
+@end menu            
+
+As you can read about Lucas-Lehmer test (@xref{Lucas-Lehmer test}.), basically
+this test is a series of modular squares and subtractions. To have any chance
+to understand what follows you have to be familiar with modular arithmetic and 
+Fast Fourier Transforms.
+
+@st{Glucas} is an application to deal with Mersenne Numbers while @st{YEAFFT}
+is a collection of routines designed to perform general integer convolutions.
+
+@cindex Glucas structure
+@unnumbered Glucas general structure
+Here we only want to give a general view of @st{Glucas}'s structure. 
+Better than being verbose about algorithms, techniques and tricks used,
+it is better to directly look at the source.
+
+The main routine of @st{Glucas} is located in the file @file{glucas.c}.
+It is the top level routine. Here the argument parsing control, the main 
+Lucas-Lehmer test control, the calls to input/output, initializing,... can be
+found. The main header for @st{YEAFFT} is @file{yeafft.h} and for
+@st{Glucas} is @file{glucas.h}
+
+The Input/output code is mainly located in the file @file{gio.c}. The initial 
+work for @st{YEAFFT} is done in the file @file{yeainit.c}. @file{lucasini.c}
+initializes special arrays needed for Lucas-Lehmer test and DWT.
+
+The signal management is done in the file @file{gestup.c}.
+
+The builtin selftest code is located in @file{selftest.c}.
+
+@cindex posix threads
+The POSIX threads are directed from @file{gthreads.c} file. @st{OpenMP}, 
+@st{_SunMP}, or POSIX thread directives or special routines can be found in 
+@file{gthreads.h}, @file{glucas.c}, @file{ynorm_*.c} files, @file{lucasini.c},
+@file{yealucas.c} and @file{yeafft1.c}.
+
+@cindex round trick
+When rounding the float elements, a fast round trick is used. The round trick
+constants can be found in @file{tricky.c}
+
+@cindex prefetch data
+Prefetch data macros are located in the file @file{prefetch.h}. You can also find tons of
+assembler macros for x86 architecture in the @file{*yx86*.h} header files.
+
+The passes in a L-L test and the calls to @st{YEAFFT} routines are in 
+@file{yeafft.c}, @file{yeafft1.c} and @file{yealucas}.
+
+The general passes in a Lucas-Lehmer iteration, after reading from a save file
+(@code{ginput()} and @code{read_check_point()} in @file{gio.c} file) are 
+@sp 1
+@cindex Mersenne interchangeable residue format
+@enumerate 
+@item Transform the data:
+The data is transformed from Mersenne Interchangeable Residue Format.
+(@xref{Save file format}.) to an array of double floats. This task is performed
+by the read_standar() routine in @file{gstd.c} file. The data is cut into 
+small chunks of about 19 or 20 bits and balanced.  
+
+@cindex discrete weighted factors
+@item Multiply the data by DWT factors:
+Here the data is prepared to be used by @st{YEAFFT}. It is needed to multiply 
+by weighed factors. This is done by the normalize_first() routine in the file @file{ynorm.c}.
+
+@cindex Decimation in frequency
+@cindex DIF
+@item First initial forward FFT pass:
+Already suited for FFT, a first forward FFT pass is performed with 
+the aid of routines @file{radix_*.c} from the @st{YEAFFT} library. Once this step
+is done, the data is ready to enter the normal Lucas-Lehmer loop iteration 
+cycle.  
+
+@item Optimized Lucas-Lehmer iteration:
+Starting from data after step 3, a normal optimized Lucas-Lehmer iteration 
+includes the following steps. Note that a normal cycle begins in F. At the end of E
+is where it can jump to multi thread execution or abandon it.
+
+@enumerate A
+@cindex FFT pass 1
+@item Forward DIF FFT pass 1:
+It includes all forward FFT radices reduction steps while the needed data
+cannot be encapsuled into independent data arrays of @code{Y_MEM_THRESHOLD}
+complex size. (routines in files @file{radix_4.c}, @file{radix_8.c}, 
+@file{radix_16.c} and @file{radix_32.c}.
+
+@cindex FFT pass 2
+@item Forward DIF FFT pass 2:
+The remaining forward steps except for the last one. Made by the same routines than prior
+item.
+
+@cindex dyadic square
+@item Last forward DIF FFT step, dyadic square and first backward DIT FFT step.
+To optimize memory accesses: All these three processes are made by the same 
+routines (see @file{difdit_4.c}, @file{difdit_8.c}, @file{difdit_16.c} and
+@file{dyadic_32.c}).
+
+@item Backward DIT FFT pass 2:
+Backward DIT FFT steps while moving between @code{Y_MEM_THRESHOLD} limits.
+Items B, C and D are made successively in a loop of blocks of independent 
+data after A. Once finished, all blocks of memory are passed to the next item.
+  
+@item Backward DIT FFT pass 1:
+Backward DIT FFT steps. The last backward step is excluded. After this pass
+the type of the next iteration is analyzed. If the next L-L iteration is normal, then
+it continues in the next item and jumps to multithreaded (if required), if not
+jump to single thread and go to item 5.
+
+@cindex inverse DWT factors
+@cindex DWT factors
+@item Last backward DIT FFT step, mul by inverse DWT factors, normalize data,
+subtract two, mul by DWT factors, and first forward DIF FFT step: All these
+tasks are performed at once by the @code{ynorm_*.c} files. Once this is done, 
+go again to A to the next L-L iteration.
+ 
+@end enumerate
+
+@cindex save file
+When an interrupt signal is received, or it is required to write a save file,
+or the Lucas-Lehmer is finished, then F is substituted by
+
+@item Last backward DIT FFT: 
+It is completed the inverse FFT. (routines in @file{radix_*.c} files).
+
+@item Subtract two, mul by inverse DWT factors, normalize:
+This is done by the routine last_normalize() in the file @file{y.norm.c}. 
+Here can be checked if the residue is zero after a finished L-L test
+or extract the first 64 bits in the residue if it is required. (routines 
+@code{iszero()} and @code{res64()} in file @file{gio.c}).
+
+If it have to write a save file then next two items are  
+@item Convert float data to integer format: (@file{gstd.c}, @file{compat.c} 
+files)
+
+@item Write a save file: (@file{gio.c})
+
+@end enumerate
+
+@unnumbered References and further reading.
+
+@cindex GIMPS
+The best place to begin reading about Mersenne Primes, GIMPS and related stuff is
+@uref{http://www.mersenne.org/prime.htm, Mersenne.org}  
+  
+@cindex mathematical concepts
+There is a very nice site @uref{http://mathworld.wolfram.com, World of Mathematics}, where you can 
+consult almost every mathematical concept. I really recommend to consult this site.
+Is by far deep and better about mathematics than anything we can write here.
+
+@cindex prime glossary
+A good index about primes is Chris Caldwell's 
+@uref{http://www.utm.edu/research/primes/, The Prime Pages}. You can see a lot 
+of theorems and proofs related to primality tests.
+ 
+@cindex Discrete Weighted Transform 
+To know more about R. Crandall and B. Fagin 
+@code{Discrete Weighted Transform (DWT)} see the original paper: 
+"Discrete weighted transforms and large-integer arithmetic", Math Comp, 
+62 (1994),305-324.
+
+@cindex fast Galois Transform
+To understand the special algorithm @st{YEAFFT} uses, it is necessary to read
+the paper "Integer convolution via split-radix fast Galois transform", by R.
+Crandall. You can download a free postscript copy from
+@uref{http://www.perfsci.com/free/techpapers/confgt.ps , perfsci.com}. Note that
+@st{YEAFFT} uses floating point trigonometric FFT, not Fast Galois Transform. Anyway
+the algorithm is easy to use in trig. FFT. 
+
+@c .......................................................................
+@node Contributors, Save file format , Glucas internals, Top
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered Who contributed to this code
+
+@cindex authors
+@value{AUTHOR1} has written most of the code, both @st{YEAFFT} and 
+@st{Glucas}. First drafts are from April 2000. 
+
+@value{AUTHOR2} has joined the project from release 2.8b, July-2001. He has
+made a great work.
+
+There are other people who have contributed to make this code possible in 
+several ways:
+
+@cindex acknowledgments
+@pindex mers
+@pindex MacLucasUNIX
+Glucas specific code is an adaptation of Richard Crandall @file{lucdwt.c},
+Sweeney @file{MacLucasUNIX.c} and Will Edgington @code{mers} package.  
+
+@pindex Mlucas
+Ernst W. Mayer suggested to write a specific C-coded FFT package based
+on Richard Crandall paper scheme. He kindly gave Guillermo a telnet account
+on his machines, and Glucas-YEAFFT also has some ideas borrowed from
+his excellent f90 code @st{Mlucas}. 
+
+@pindex prime95
+George Woltman, the heart of the @b{Great Internet Mersenne Prime Search}  
+He has written @st{prime95}, the fastest code for Pentium ever seen. The
+speed of this code has been the wanted milestone in the design of 
+@st{YEAFFT}.
+
+@pindex FFTW
+The alignment of doubles on stack, using @st{GNU/GCC} compiler on intel 
+x86 has been a problem. It is almost the most important thing which affect to 
+performance. Thanks to @st{FFTW} developer team to point at the solution. 
+Actually, @st{YEAFFT} uses its tricks to align the stack.
+     
+B.J. Beesley has made a great QA work. He also told us the way how to
+include assembler prefetch hints in Compaq-c compiler for alphas, and 
+reported several smaller bugs. 
+
+Tom Cage has made an excellent work as a beta tester and also ported 
+@st{Glucas} to Mac OS.
+
+Thomas Perrier also helped tuning and building binaries for Mac OS X.
+
+Gregory Matus, who reported memory problems under OpenBSD.  
+
+
+@c .......................................................................
+@node Mersenne number, Lucas-Lehmer test, , Glucas internals
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered What is a Mersenne number
+
+@cindex Mersenne number
+
+A Mersenne number is an integer number in the the form 
+
+@display
+@math{M(p) = 2^p - 1}
+@end display
+
+@cindex Mersenne exponent.
+The number @code{p} is the @dfn{Mersenne exponent}. 
+Its binary representation is just a chain of @code{p} ones. This kind of 
+numbers have a lot of nice properties which make them easier than a general
+integer. You can read a lot more about Mersenne numbers at Chris Caldwell's 
+@uref{http://www.utm.edu/research/primes/mersenne/, Mersenne Primes} pages.
+
+The special form of Mersenne numbers gives us three big advantages:
+
+@itemize @bullet
+@item
+@cindex Lucas-Lehmer test
+There is a fast test (@xref{Lucas-Lehmer test}.) If it succeeds we are sure the
+analyzed number is a prime number. If it fails then we are sure the number is
+not prime.
+
+@cindex modular reduction
+@item
+The modular reduction we need can be made in a easy way.
+(@xref{Glucas internals}.)
+
+@item
+@cindex Discrete Weighted Transform 
+@cindex DWT
+@cindex FFT
+@cindex Fast Fourier Transform
+The algorithm used to multiply the very big numbers we usually need (about
+some million bits) uses a special form of Fast Fourier Transform, the 
+@dfn{Discrete Weighted Transform} (@st{DWT}) described by R. Crandall 
+and Fagin (1994). With @st{DWT}, the speed is almost double than 
+traditional @st{FFT} schemes. 
+
+@end itemize
+
+@section Mersenne primes
+@cindex Mersenne primes
+@cindex prime
+It is a well known result that @code{M(p)} is prime only if @code{p} is prime.
+Unfortunately, if @code{p} is prime this does not mean @code{M(p)} is prime.
+Actually, up to @value{UPDATED} there are only 47 known Mersenne primes. 
+
+@cindex Known Mersenne primes
+The values of mersenne exponents @code{p} for @code{M(p)} prime are: 
+
+@display
+2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127, 521, 607, 1279, 2203, 2281,
+3217, 4253, 4423, 9689, 9941, 11213, 19937, 21701, 23209, 44497, 86243,
+110503, 132049, 216091, 756839, 859433, 1257787, 1398269, 2976221, 3021377,
+6972593, 13466917, 20996011, 24036583, 25964951, 30402457, 32582657,
+37156667, 42643801, 43112609
+@end display
+
+@c .......................................................................
+@node Lucas-Lehmer test,  , Mersenne number, Glucas internals
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered What is the Lucas-Lehmer test.
+@cindex Lucas-Lehmer test.
+ 
+The Lucas-Lehmer test is a test of primality for Mersenne numbers 
+(@xref{Mersenne number}.). This test was discovered by Lucas in 1870, and written
+in the definitive form by Lehmer in 1930. You can see more details about Lucas
+sequences @uref{http://mathworld.wolfram.com/LucasSequence.html, here} and 
+about Lucas-Lehmer test 
+@uref{http://mathworld.wolfram.com/Lucas-LehmerTest.html,in this page}.
+
+In short, the nicest thing of the Lucas-Lehmer test is its simplicity and
+power. The recurrence sequence is as follows:
+
+@display
+@math{L(0) = 4}
+@math{L(i+1) = ((L(i)*L(i) - 2) Mod M(p)}
+@end display
+here
+@display 
+@math{A mod B}
+@end display 
+is the remainder of the integer division A/B.
+
+And it is proven that M(p) is prime if and only if @math{L(p-2) = 0}
+ 
+Thus, to see whether a Mersenne number M(p) is prime is very easy.
+
+@cindex initial shift
+@cindex double-check
+With the @code{-D} and @code{-d} command line options, it uses an initial 
+shift displacement of L(0) so the subsequent residues are related with the 
+unshifted original sequence by shifting (rotating) the proper amount of bits. 
+This allows @st{Glucas} to double-check L-L tests already tested with the
+same program. DWT scrambles the data in such a way that two different initial 
+shifted sequences can be considered as independent.
+   
+@c ..................................................................
+@node Selftest, Glucas_test,  , Glucas basics
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered Glucas builtin selftest.
+
+@cindex selftest
+If the @st{Glucas} binary has been compiled without problems or you've
+downloaded a precompiled binary, it is recommended to run a short builtin
+selftest. This will show if @st{Glucas} runs properly and also displays
+some basic timings.
+
+There are 31 basic different selftests, every one belonging to a FFT 
+runlength. There are also two kinds of selftests. A selftest is a run
+of few Lucas-Lehmer iterations. If it used the @code{-s option} there
+will run only first 100 iterations per selftest. When using the 
+@code{-S option} there will be 1000 iterations per selftest.
+
+We can select the sample of test to run.
+
+To run a selftest you have to invoke Glucas with the @code{-s option}
+or @code{-S option}. 
+@code{option} is one of the following
+
+@table @samp
+@item n
+Here @code{n} is a number from 1 to 31. It simply selects which selftest to 
+run. 
+
+@cindex FFT runlength
+@item runlength
+@code{runlength} selects the FFT runlength test to run directly (expressed in 
+@math{2^10 = K} units). The available values are 128, 144, 160, 192, 224, 256,
+288, 320, 384, 448, 512, 576, 640, 768, 896, 1024, 1152, 1280, 1536, 1792,
+2048, 2304, 2560, 3072, 3584, 4096, 4608, 5120, 6144, 7168, 8192.
+
+@cindex selftest primenet
+@item primenet
+@code{primenet} will run selftest 6 to 21, i.e, from 256 to 2048 K FFT
+runlength. This roughly covers the complete range of exponents currently
+tested by PrimeNet (5M - 35M), including ten million digit prime candidates.
+
+@cindex selftest small
+@item small
+@code{small} will run selftest 1 to 11, from 128 to 512 K FFT
+runlength.
+
+@cindex selftest primenet
+@item big
+@code{big} will run selftest 5 to 21, i.e, from 256 to 2048 K FFT
+runlength.
+
+@cindex selftest big
+@item big
+@code{big} will run selftest 11 to 21, i.e, from 512 to 2048 K FFT
+runlength.
+
+@cindex selftest huge
+@item huge
+@code{huge} will run selftest 21 to 26, i.e, from 2048 to 4096 K FFT
+runlength.
+
+@cindex selftest enormous
+@item enormous
+@code{enormous} will run selftest 26 to 31, i.e, from 4096 to 8192 K FFT
+runlength. @strong{to run this test you will need a system with plenty
+of memory. Selftest 31 typically uses about 128 M of memory}.
+
+@cindex selftest all
+@item all
+@code{all} will run all 31 selftests. @strong{to run this test you will
+need a system with plenty of memory. Selftest 31 typically uses about
+128 M of memory}.
+
+@end table
+
+
+As example
+
+@example
+./Glucas -s small  
+@end example
+
+will run the selftests from 128 to 512 K FFT runlength.
+
+@cindex Memory requirements
+The amount of memory needed can be big enough to get you into problems. So 
+@strong{be careful with the memory requirements}. @st{Glucas} uses about a
+byte per bit, ie, to test M(66060289) it will need a minimum of 64M bytes,
+but if the errors in initial phase are bigger than a threshold the amount of
+memory can increase up to 80 Mbytes. Please, don't try to run big selftests
+unless you have enough memory.
+
+@cindex Timing Glucas
+@pindex Mlucas
+@pindex mprime
+@pindex MacLucasUNIX
+For timing purposes it is important to note that @st{Glucas} is very 
+sensitive to cache misses. If another @code{memory hungry} program is 
+running at the same priority @st{Glucas} performance will drop because 
+the available L2 cache memory will be reduced. So, if you want to compare 
+the timings with other programs/platforms, be sure that programs like 
+@st{Mlucas}, @st{mprime} or @st{MacLucasUNIX} are sleeping during 
+the test.
+
+@cindex selftest.res
+@cindex selftest.out
+During selftests @st{Glucas} will run at normal priority, automatically enabling
+the @code{no nice} flag. So be careful and don't select runs too big.
+A short result of each selftest will be printed to @code{stdout}.
+In addition more detailed results about errors and timings will be printed
+to the two files @file{selftest.res} and @file{selftest.out}. This information
+can be used to tune the @st{Glucas} binary.
+  
+Because at run time @st{Glucas} makes an initial accuracy adjustment phase,
+the FFTs actually used can be different than expected. This depends on the 
+roundoff errors obtained in the  first iterations. The only important thing
+here is to pass the test giving the correct 64 bits residue.
+
+
+@c ..................................................................
+@node Glucas_test, Usage, Selftest, Glucas basics
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered Even more complete Glucas builtin selftest.
+
+@cindex Glucas_test
+@cindex save files
+A critical part of the code is the one who writes and read de
+@dfn{save files}. In this files @st{Glucas} stores complete
+information about the work done so far, and it can restart the work in
+the point where it left. @st{Glucas_test} will check whether it can do 
+safe.  
+
+@st{Glucas_test} is a small Bash script for Unix like OS calling
+Glucas selftest (@xref{Selftest}.). The usage is 
+
+@example
+
+Glucas_test arg
+
+@end example
+
+Where arg is any of the arguments described in selftest section 
+(@xref{Selftest}.). As example if you want to make a test for 1024
+FFT runlenght (selftest 16) you can do
+
+@example
+
+Glucas_test 16
+
+@end example
+
+If you want to check the ranges used in primenet (selftest 5 to 21)
+you can try
+
+@example
+
+Glucas_test primenet
+
+@end example
+
+
+@c ..................................................................
+@node Usage, Configure files, Glucas_test, Glucas basics
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered Glucas Configure files.
+
+@cindex Configure files
+@cindex ini files
+@cindex results file
+At the moment, Glucas only does Lucas-Lehmer tests. Glucas manages the work
+to do in a @dfn{queue file} we can select. In addition to some features selectable
+on the command line, there is an @dfn{ini file} we can also use to configure more
+important aspects of Glucas and a @dfn{results file} where Glucas writes the
+most important results (not the verbose-output). 
+(@xref{Configure files}.)
+
+@cindex usage
+The usage of @st{Glucas}:
+
+@example
+Glucas [-c][-d][-o][-n][-K kill_iters][-N nice_adjustement][-f][-v]
+       [-i inifile][-s option][-r resultfile][-q queuefile][-z]
+       [-W Work_directory][file1][file2]
+@end example
+
+The optional [ ] items are:
+
+@table @samp
+@cindex -c Command line option
+@item -c
+@strong{Enable universal compatible save file format}. This is the
+default. To enable old sytle format use @strong{-o} option.
+
+@cindex -d Command line option
+@cindex initial random shift
+@cindex double-check 
+@item -d
+@strong{Use initial random shift}. With this option, @st{Glucas} performs
+an initial random shift. The first Lucas-Lehmer iteration is 
+(@xref{Lucas-Lehmer test}.) @math{L(0)=4<<(initial_random_shift)}, with
+the default set to @math{L(0)=4}. With this initial random shift algorithm, two
+different Lucas-Lehmer tests made with same program on the same platform (but 
+different random shifts) can be considered as independent. This option is used
+when doing double-checks.
+
+@cindex -h Command line option
+@item -h
+@strong{Display help lines}. This option displays some help lines with
+the most common command line options.
+
+@cindex -K Command line option
+@item -K kill_iters
+@strong{Auto Kill}. This option auto kill Glucas every kill_iters
+iterations. The only propose of this option is to check the routines and
+the medium to read and write save files. Calling @st{Glucas}
+sucesively with this option we can check the routines that read and
+write save files. The script for Unix like OS @xref{Glucas_test}. does
+that for us.
+
+@cindex -o Command line option
+@item -o
+@strong{Write the save files in old style format}. By default, @st{Glucas} writes 
+the save files using the compact integer format for residues. When this flag 
+is enabled, the save files are compatible with @code{MERS rw()} format. The save
+files in this form are three times bigger than the default format. Most 
+important, the default uses the compatible Mersenne residue format, making
+the save files compatible among most platforms and processors out there. So, 
+if you don't need it, don't use the @code{-o} flag.
+
+@cindex -n Command line option
+@cindex no nice flag
+@item -n
+@strong{No nice flag}. When selected, @st{Glucas} will run at normal 
+user priority. This can slowdown other tasks. Don't use it unless you are 
+going to do a short test, especially if you are not the owner of the
+system. If you want a customized nice priority use @code{-N} option.
+
+
+@cindex -N Command line option
+@cindex Nice adjustment option
+@item -N nice_adjustement
+@strong{Nice adjustment option}. When selected, @st{Glucas} will run at priority 
+@code{nice_adjustement}. Higher value means lower priority. @code{-n}
+flag is equivalent to @code{-N 0}. If the OS allows you to set
+negative values, Glucas will run at high priority. Don't use it unless you are 
+going to do a short test, especially if you are not the owner of the system.
+
+@cindex -T Command line option
+@cindex Select number of threads
+@item -T number_of_threads
+@strong{Select number of threads}. When compiled with
+@code{--enable-pthread} in configure step, @st{Glucas} will use @code{number_of_threads} 
+threads. You even can use @code{-T 1} but it is recommended to use the
+non-threaded compiled version if you one to run a single-threaded
+version, otherwise you will lost performance.
+
+@cindex -z Command line option
+@cindex Force bigger FFT runlength.
+@item -z 
+@strong{Force bigger FFT runlength}. The FFT run length is bigger than 
+necessary so the roundoff error are very small. Useful to discard
+roundoff errors in verification tasks, but it will run about 25% slower than
+with the default FFT runlength.
+
+@cindex -v Command line option
+@cindex version flag
+@item -v
+@strong{Output Glucas version}. This option prints the version of
+Glucas to stdout and exit.
+
+@cindex -f Command line option
+@item -f
+@strong{Force this work to be done first}. When @st{Glucas} is called 
+with a worktodo file as argument on the commandline, by default this files
+work is appended at the end of the @code{queue file}.
+Using this flag, the the work is prepended at the the beginning of the @code{queue file}
+instead and will be done first. 
+
+@cindex -r Command line option
+@cindex Result file option.
+@item -r resultfile
+@strong{The file where summarized result will be stored is
+@file{resultfile}}. The default file is @file{result}.
+   
+@cindex -s Command line option
+@cindex selftest option
+@item -s options
+@strong{selftest}. Glucas will perform small selftests for selected
+exponents / FFTs . (100 iterations per selected FFT runlength)(@xref{Selftest}.)
+
+@cindex -S Command line option
+@cindex selftest option (large) 
+@item -S options
+@strong{selftest}. Glucas will perform selftests for selected
+exponents / FFTs . (1000 iterations per selected FFT runlength)(@xref{Selftest}.)
+
+@cindex -i Command line option
+@cindex inifile option
+@item -i inifile
+@strong{The inifile is @file{inifile}}. Here you can set the @code{ini} file.
+The default file is @file{glucas.ini}. An existing @code{ini} file in the
+working directory is optional.
+
+@cindex -q Command line option
+@cindex queue file option
+@cindex glucas.que
+@cindex worktodo.ini
+@item -q queuefile
+@strong{The queue file is @file{queuefile}}. Here you can set the 
+@code{queue} file. If you don't select any, the default queue file will be
+@file{glucas.que}. @strong{NOTE}: It is important to note that the queue files
+are for internal use of Glucas. Some users have tried to use files from
+@dfn{PrimeNet} as queue files and reported getting errors. To @strong{import}
+files in PrimeNet format, simply add their name as last argument on
+the commandline (see below).
+Anyway the format of queue files is easy. A plain ascii line per
+exponent with four numbers. First is the exponent, second is the task
+(0 = First L-L, 1 = Double Check) and then other two parameters (at
+the moment 0).
+
+@cindex -D Command line option
+@cindex initial shift
+@item -D initial_shift
+@strong{Force initial shift}. This option is similar to the @code{-d} option.
+Instead of using a random initial shift, this uses the commandline argument
+@code{initial_shift}. Used in some QA work.
+
+@cindex -W Command line option
+@cindex work directory
+@item -W work_directory
+@strong{The working directory}. Except binary, @st{Glucas} will read 
+from/write to this @code{work_directory}. Don't use this option with selftest 
+flag before. Write first the @code{-W} option and then @code{-s} option 
+instead.
+
+@cindex input file  
+@item file1 file2 ...
+@strong{Do the valid work in files: file1,file2 ...} First, these arguments
+will be tried as file names. If existing, the valid work will be extracted
+and queued. Otherwise the arguments will be considered as an exponents to test.
+If there is no valid work, the queuefile remains unaltered.
+
+@st{Glucas} is prepared to import 
+the @code{worktodo} files from @dfn{PrimeNet} manual test forms. Paste the work
+obtained from PrimeNet in a file and restart @st{Glucas}:
+
+@example
+Glucas [options] file
+@end example
+
+the work will be appended to the @code{queue} file. @st{Warning}: A queue file can only have up to 128 
+exponents to test. Do not make larger queue files.
+
+@end table
+@cindex queue file
+Obviously, @st{Glucas} will stop when there is no other job in the @code{queue} 
+file. When a job is interrupted, Glucas will store the work already done to save files.
+When restarting, Glucas will continue at the point it left the work for a 
+given exponent. Remember @st{Glucas} will continue the task of the 
+@code{queue} file we enter (or the default @file{glucas.que}).
+
+@c ..................................................................
+@node Configure files, Output, Usage, Glucas basics
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered Configuring and preferences.
+
+In addition to the command line options we can use when invoking @st{Glucas},
+there are some other options we can set in an @code{ini} file. By
+default this file's name is @file{glucas.ini}. If we want to use 
+another than the default file we have to enter it as command line argument
+(@xref{Usage}.). The options must be in the form @code{Option=value}, one 
+per line. No blank space is permitted. These are the supported Options:
+
+@table @samp
+@cindex Alternative output flag
+@item Alternative_output_flag=[0/1/2]
+If @code{Verbose_Flag} is active, then the output is written to a file pointed
+by @code{File_output} when @code{Alternative_Output_Flag} is set to @code{1}.
+If zero, the output is @file{stdout}. If two, the output is send to both
+@code{File_output} and @code{stdout}.
+
+@sp 1
+@cindex check iteration flag
+@item Check_iteration=value
+Set the number of iterations to do if @code{Only_check_flag} is enabled. It is
+useful in test/timings tasks.
+
+@sp 1
+@cindex output file
+@item File_output=my_output_file
+When this line is included and @code{Verbose_flag} is active, then the 
+verbose output is written to this file. If both @code{Verbose_flag} and
+@code{Alternative_output_flag} are active and no output file is given, the
+default is @file{glucas.out} file. Here only the name of the file is entered.
+The directory path must be added with @code{-W} option on the command line
+whenever this file is not in the current working directory.
+
+@sp 1
+@cindex iteration output
+@item Iteration_output=value
+Set the rate of information when @code{Verbose_flag} is enabled.
+@code{Iteration_output=n} outputs information every @code{n} iterations.
+The default value is 20000.
+
+@sp 1
+@cindex last error flag
+@item Last_error_flag=[0/1]
+If enabled (@code{=1}) and Verbose_flag is enabled, then the output includes
+the last computed roundoff error. The default is @code{0}.
+
+@sp 1
+@cindex only check flag
+@item Only_check_flag=[0/1]
+If enabled (@code{=1}), @strong{Glucas} performs only a partial Lucas-Lehmer 
+test. The number of iterations to do is controlled by @code{Check_iteration}.
+This option is useful for debugging and timing purposes. The default is @code{0}.
+ 
+@sp 1
+@cindex QA interim file
+@item QA_interim_file=n
+To make QA tasks easy, @st{Glucas} will save an interim file every @code{n}
+iterations with this line. The format of the filename is 
+@file{sMMMMM_NNNN}, where @code{MMMMM} is the exponent and @code{NNNN}
+the iteration saved. As example @file{s9791209_00100000} would be the 
+interim file for M(9791209) with the residue at iteration 100000. On
+the verbose output file, and on the @code{results} file, an output with
+the less significant bits of residue @dfn{RES64} will be printed. If
+you are a lot lucky and find a new prime, then the file @file{sMMMMM_last}
+will remain in your working directory, and it will be used as a first
+check to see whether the results are likely correct and discard 
+software/hardware errors. 
+
+
+@sp 1
+@cindex roundoff check error
+@item Roundoff_check=[0/1]
+When it is active (@code{=1}), then the roundoff error check is activated for
+every iteration.
+When it is set to zero, then roundoff checking is completely disabled.
+@strong{Be careful with this option, a critical roundoff error might not be detected}.
+Without this line Glucas will make a roundoff check for every iteration during the
+first 131032 iterations and every 64 iterations after that.
+If Glucas was compiled with the @code{Y_SECURE} flag, the roundoff check 
+will be made for every iteration regardless of this setting.
+
+@sp 1
+@cindex save file
+@item Save_iterations=n
+By default, @st{Glucas} writes a save file every 5000 iterations. The 
+purpose of this file is to preserve the work already done. This file
+will be used as starting point when Glucas restarts after terminating
+or during the initial accuracy adjustment phase.
+If the verbose_flag is enabled, then the less
+significant bits of the residue (RES64) will be printed.
+
+@sp 1
+@cindex time output flag
+@item Time_flag=[0/1]
+If enabled, @st{Glucas} prints the real time wasted from last output. If
+the system has the user time available it also prints it.
+
+@end table
+
+@sp 1
+@cindex machine Id 
+@strong{NOTE:} From version 2.7, @st{Glucas} writes a random 32-bit
+integer as Identifier machine whether the @code{ini} file still has not one.
+The line appended is in the form 
+
+@example
+@code{Computer_ID=n}
+@end example
+
+and you should not modify this line. The @code{g} file also has this
+identifier of the machine which made the work. If the @code{Computer_ID} from
+@code{ini} and @code{g} files don't match, @st{Glucas} will take this
+as a change in the Hardware/Software context and will enable the roundoff 
+error checking as in the first iterations of a Lucas-Lehmer test. This feature was
+added because the default format for save and interim files uses the 
+interchangeable format, and therefore can be used by most platforms. It is thought
+as a method to detect if the @code{save} file used is from another machine.
+
+@section Examples
+@cindex ini file examples
+Here are two examples of @code{ini} files.
+
+The first example only runs a partial Lucas-Lehmer test.
+
+@example
+Verbose_flag=1
+Alternative_output_flag=1
+File_output=my_file
+Last_error_flag=1
+Time_flag=1
+Iteration_output=100
+Only_check_flag=1
+Check_iteration=1000
+@end example
+
+With this @code{ini} file. @st{Glucas} will write information to the file 
+@file{my_file} every 100 iterations.
+The Lucas-Lehmer test will be terminated at iteration 1000.
+The output will include timings and roundoff errors. By default,
+the @code{queue} file will be @file{glucas.que}, unless we use another
+filename on the command line. 
+
+The second example is for a long and complete QA Lucas-Lehmer test.
+
+@example
+
+Save_iterations=5000
+QA_save_file=1000000
+Verbose_flag=1
+Alternative_output_flag=1
+File_output=my_file
+Last_error_flag=1
+Time_flag=1
+Iteration_output=10000
+Only_check_flag=0
+
+@end example
+
+Here @st{Glucas} will write verbose information to the file @file{my_file}
+every 10000 iterations. It will write a save file every 5000 iterations and
+the residue RES64 will be printed. Every 1000000 iterations an interim file
+will be saved, and the RES64 will be printed in both @file{my_file} and 
+@file{results} file.
+
+@c ..................................................................
+@node Output, Configure Make and Install, Configure files, Glucas basics
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered Understanding the output.
+
+In the working directory, there will be some files generated by Glucas in
+addition to the @code{ini} and @code{queue} files (@xref{Configure files}.)
+
+@section Verbose output file
+@cindex verbose output file
+The verbose output file is selected in the @code{ini} file. The amount of 
+information and the rate of output is also set there. (@xref{Configure files}.)
+
+This example is the bottom of the original @file{glucas.out} file in the 
+verification of the known Mersenne prime #39.  
+
+@example
+
+Iter. 13400000 ( 99.50%), Err= 0.000, 9530.03 user 100% CPU (0.095 sec/iter).
+M13466917. Saved file at iteration 13400000. Res64: DC52C736CDD29AF0.
+M13466917. Saved file at iteration 13410000. Res64: 643D8A498F776675.
+M13466917. Saved file at iteration 13420000. Res64: 67FA818CC2047371.
+M13466917. Saved file at iteration 13430000. Res64: 29CDBF23AC751968.
+M13466917. Saved file at iteration 13440000. Res64: 8BC288C541B08E08.
+M13466917. Saved file at iteration 13450000. Res64: 6DA3BCDBBECCA0F8.
+M13466917. Saved file at iteration 13460000. Res64: 60C103D148E86603.
+M13466917 is prime!
+NEW MERSENNE PRIME DISCOVERED !!!!
+PLEASE, send email to woltman@@alum.mit.edu AND
+gbv@@oxixares.com
+Wed Dec  5 07:23:49 2001
+Terminated all the queued job in file: glucas.que.
+
+@end example
+
+Unfortunately, it is rare to find a new prime, so it's more likely  you will
+get output like this:
+
+@example
+
+Iter. 4590000 ( 99.84%), Err= 0.053, 2548.27 user �99% CPU (0.258 sec/iter).
+M4597427. Saved file at iteration 4590000. Res64: 163F9694751046D6.
+M4597427 is not prime. Res64: 23AF5669C96728DE. Glucas v2.8c
+
+@end example
+
+@section Selftest output
+What follows is a short example from a short selftest. 
+
+@example
+
+SELFTEST INFORMATION
+Host: veleta.
+OS: Linux. Release: 2.2.19. Version: #5 Mon Jun 4 10:05:30 CEST 2001
+Machine: i686
+-DY_AVAL=4 -DY_MEM_THRESHOLD=2048 -DY_BLOCKSIZE=1024 -DY_SHIFT=8
+-DY_TARGET=11 -DY_MINIMUM -DY_CACHE_LINE=4
+Selftest 31 (8192 K FFT-runlength). 100 iterations for M145000033...
+[Thu May 16 12:28:05 2002]
+Going to work with exponent 145000033
+Starting from iteration 1. Exponent 145000033. Initial shift 54852273.
+Iter.  10 ( 10.00%), Err= 0.000, 50.07 user  67% CPU (7.456 sec/iter).
+Iter.  20 ( 20.00%), Err= 0.009, 48.77 user  90% CPU (5.407 sec/iter).
+Iter.  30 ( 30.00%), Err= 0.292, 48.50 user  92% CPU (5.298 sec/iter).
+Iter.  40 ( 40.00%), Err= 0.268, 48.47 user  91% CPU (5.298 sec/iter).
+Iter.  50 ( 50.00%), Err= 0.276, 48.34 user  91% CPU (5.310 sec/iter).
+Iter.  60 ( 60.00%), Err= 0.000, 47.76 user  92% CPU (5.219 sec/iter).
+Iter.  70 ( 70.00%), Err= 0.000, 48.11 user  92% CPU (5.254 sec/iter).
+Iter.  80 ( 80.00%), Err= 0.000, 48.30 user  91% CPU (5.281 sec/iter).
+Iter.  90 ( 90.00%), Err= 0.000, 48.12 user  91% CPU (5.278 sec/iter).
+Iter. 100 (100.00%), Err= 0.000, 49.69 user  91% CPU (5.434 sec/iter).
+M145000033. Iteration 100. Res64: 2E0662F113E1871A. Glucas v2.9.0 selftest
+Selftest 31 success!
+[Thu May 16 12:37:18 2002]
+Terminated all the queued job in file: selftest.que.
+
+@end example
+
+The first part displays some information about the host. Then, it writes the
+flags selected at compilation time (@xref{Installing Glucas}.) and some
+information about the test, the initial random shift, timing every
+ten iterations and the final result of selftest.
+
+@c ..................................................................
+@node Configure Make and Install, Alternative builds, Output, Installing Glucas 
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered Configure, Make and Install Glucas.
+@cindex automake
+@cindex autoconf
+The @st{Glucas} package includes GNU tools from @st{automake} and 
+@st{autoconf} and scripts to make the build and install tasks as easy as 
+possible. As usual, the steps are
+
+@enumerate
+@cindex configure script
+@item configure
+
+The configure script checks your system to see how to compile @st{Glucas}. You
+can see a list of the options available for configure by using
+@example
+@kbd{./configure --help}
+@end example
+
+Most of these options are generic for GNU-autoconf configure scripts. Others 
+are specific for @st{Glucas}.
+
+@cindex configure script options
+@enumerate a
+@item @code{--enable-openmp[=n]}
+This option enables Glucas to use OpenMP threads. The default for n is @code{2}.
+@st{Glucas} will use @code{n} threads. You should not use this feature
+unless you have a multiprocessor system.
+
+@item @code{--enable-profiler}
+This option enables compiler profiler flags. 
+
+@item @code{--enable-pthread[=n]}
+This option enables Glucas to use POSIX threads. The default for n is @code{2}.
+@st{Glucas} will use @code{n} threads. You should not use this feature
+unless you have a multiprocessor system.
+
+@item @code{--enable-static}
+This allows to build static binaries. Enter this option if you want to use
+statically linked binary.
+
+@item @code{--enable-sunmp[=n]}
+This option enable Glucas to use SunMP threads. The default for n is @code{2}.
+@st{Glucas} will use @code{n} threads. You should not use this feature
+unless you have a multiprocessor system.
+
+@item @code{--enable-yaval[=n]}
+This option overwrites the value of @code{Y_AVAL}. The default for n is @code{3}.
+This will change the default value for your system to @code{Y_AVAL=n}
+(@xref{Glucas compiler options}.)
+
+@item @code{--enable-yblocksize[=n]}
+This option overwrites the value of @code{Y_BLOCKSIZE}. The default for n is @code{512}.
+This will change the default value for your system to @code{Y_BLOCKSIZE=n}
+(@xref{Glucas compiler options}.)
+
+@item @code{--enable-ycache_line[=n]}
+This option overwrites the value of @code{Y_CACHE_LINE}. The default for n is @code{4}.
+This will change the default value for your system to @code{Y_CACHE_LINE=n}
+(@xref{Glucas compiler options}.)
+
+@item @code{--enable-ykill_branches}
+This option enables @code{Y_KILL_BRANCHES}. By default this is disabled.
+Some targets have this option enabled.(@xref{Glucas compiler options}.).
+
+@item @code{--enable-ylong_macros}
+This option enables @code{Y_LONG_MACROS}. By default this is disabled.
+Some targets have this option enabled.(@xref{Glucas compiler options}.)
+
+@item @code{--enable-ypadding_level[=n]}
+This option sets the level of padding of main array data. Overwrites
+the value of @code{Y_PADDING_LEVEL} The allowed values for @code{n}
+are from 0 up to 4. Padding level 0 will not actually perform any padding.  
+Padding level 4 will insert four different pad sizes to avoid as possible
+cache thrashing. (@xref{Glucas compiler options}.)
+ 
+@item @code{--enable-ymany_registers}
+This option enables @code{Y_MANY_REGISTERS}. By default this is disabled.
+(@xref{Glucas compiler options}.)
+
+@item @code{--enable-ymaximum}
+This option enables @code{Y_MAXIMUM}. By default this is disabled.
+(@xref{Glucas compiler options}.)
+
+@item @code{--enable-ymem_threshold[=n]}
+This option overwrites the value of @code{Y_MEM_THRESHOLD}. The default for n is @code{2048}.
+This will change the default value for your system to @code{Y_MEM_THRESHOLD=n}
+(@xref{Glucas compiler options}.)
+
+@item @code{--enable-yminimum}
+This option enables @code{Y_MINIMUM}. By default this is disabled.
+Some targets have this option enabled.(@xref{Glucas compiler options}.)
+
+@item @code{--enable-ysecure}
+This option enables @code{Y_SECURE}. By default this is disabled. Some
+targets have this option enabled.(@xref{Glucas compiler options}.)
+
+@item @code{--enable-yshift[=n]}
+This option overwrites the value of @code{Y_SHIFT}. The default for n is @code{8}.
+This will change the default value for your system to @code{Y_SHIFT=n}
+(@xref{Glucas compiler options}.)
+
+@item @code{--enable-ysse2}
+This option enables the use of SSE2 extensions for Intel Pentium4(r) and
+AMD64 (r) processors. This option will build binaries that only can be 
+executed on this targets, otherwise we will get an @strong{Illegal
+instruction} error message.
+
+@item @code{--enable-yvectorize}
+This option enables @code{Y_VECTORIZE}. By default this is disabled.
+Some targets have this option enabled.(@xref{Glucas compiler options}.).
+
+@item @code{--enable-yvectorize2}
+This option enables @code{Y_VECTORIZE2}. By default this is disabled.
+Some targets have this option enabled.(@xref{Glucas compiler options}.)
+
+@item @code{--enable-ytarget[=n]}
+This option overwrites the value of @code{Y_TARGET}. The default for n is @code{0}.
+This will change the default value for your system by @code{Y_TARGET=n}
+(@xref{Glucas compiler options}.)
+
+@end enumerate
+
+
+Among the generic configure options one very important is the compiler being used.
+You can select your favorite compiler for your platform with
+@example
+@kbd{CC=your_compiler}.
+@end example
+
+As example, if you want to use Intel @copyright{} C++ compiler instead of 
+GNU-gcc in your x86 machine
+
+@example
+@kbd{./configure CC=icc}
+@end example
+
+You also can include some macro definitions directly defining
+@code{GLUCAS_FLAGS} when configuring. As example, if you want to
+include preload code made for Itaniums, you could try
+
+@example
+@kbd{./configure GLUCAS_FLAGS=-DY_ITANIUM}
+@end example
+
+ 
+@item make
+@cindex make
+@cindex makefile
+
+Once the configure step has checked your system successfully, it generates the 
+@file{Makefile} 
+
+Then you only need to invoke the @file{make} utility to generate a binary
+
+@example
+@kbd{make} 
+@end example
+
+It will create the binary. Usually named @file{Glucas} on Unix systems.
+
+@cindex make install
+@item install
+
+To install the binary you should invoke again @file{make} utility
+
+@example
+@kbd{make install} 
+@end example
+
+this will install the binary in your local binary directory. See @file{INSTALL}
+file in the source directory to know more about install options. 
+
+@end enumerate 
+
+@c ..................................................................
+@node Alternative builds, Glucas compiler options, Configure Make and Install, Installing Glucas 
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered How to make your own binary.
+
+This section is for users who want to build @st{Glucas} using other than the
+default settings in the @code{configure} script or try tuning @st{Glucas}
+for their specific hardware.
+
+You will need to know about your compiler settings, especially the
+optimization flags. You will also need to know about @st{Glucas} and 
+@st{YEAFFT} configuration flags and @code{ini} files. 
+
+@cindex Makefile.Glucas
+@cindex CFLAGS
+@cindex CFLAGS0
+@cindex CFLAGS1
+@file{Makefile.Glucas} is a skeleton of the @file{Makefile}. You have to
+edit the proper flags and macro definitions in that file. This file is
+commented and also has examples for several architectures. Here is an
+excerpt of the top of this file. You have to edit it and fill CC, O, LINK,
+C, OUT, CFLAGS, CFLAGS1, CFLAGS0, and DEFINE_GLUCAS.
+(@xref{Glucas compiler options}.)
+
+@example
+
+# HOW TO CALL THE COMPILER. SELECT HERE YOUR COMPILER
+CC=
+# YOU CAN CHANGE HERE THE SUFFIXES FOR OBJECT 
+O=
+# HOW TO LINK
+LINK=
+#ONLY COMPILE FLAG
+C=
+#OUTPUT FLAG
+OUT=
+
+# EXAMPLE for GNU/GCC compiler
+#CC=gcc
+#O=o
+#LINK=$(CC) 
+#C=-c
+#OUT=-o
+
+#
+# SET THE OPTIMAL COMPILER FLAGS AND GLUCAS DEFINE HERE
+#
+CFLAGS=
+
+#
+# SOME COMPILERS DON'T WORK WELL WITH CFLAGS, SO WE NEED A LESSER
+# OPTIMIZATION FLAGS
+#
+CFLAGS1=
+
+#
+# tricky.c file needs even lesser optimization flag
+#
+CFLAGS0=
+
+#
+# SET THE OPTIMAL MACROS FOR GLUCAS
+#
+DEFINE_GLUCAS=
+
+@end example 
+
+@cindex DEFINE_GLUCAS
+Only DEFINE_GLUCAS is specific for @st{Glucas}, the other flags depend
+on the users compiler/architecture. 
+
+@c ..................................................................
+@node Glucas compiler options, , Alternative builds, Installing Glucas 
+@comment  node-name, next, previous,  up
+@include logo.texi
+@unnumbered Passing Glucas options to the compiler.
+
+To make @st{Glucas} as fast and reliable as possible, we have to include
+some flags and macro definitions at compile time. Some flags are specific for
+the compiler and others for @st{Glucas} or the @st{YEAFFT} library.
+
+We cannot help about the specific compiler flags. You should read the 
+compiler's documentation. Select those flags which make the binary as fast
+as possible.
+
+There are some macro definitions we can set using the macro definition
+facility of most compilers. Then you have to include
+
+@example
+@kbd{-DYOUR_OPTION1[=value1] [-DYOUR_OPTION2[=value2]] ...} 
+@end example
+
+with the compiler flags when invoking the compiler.
+
+For Metrowerks CodeWarrior a similar functionality can be achieved
+by editing the parameters in the file @file{macos-codewarrior-prefix.h}
+and including it in the Prefix File setting of the C/C++ Compiler Settings.
+
+@section YEAFFT options
+
+@table @var
+
+@cindex Y_AVAL
+@item Y_AVAL=value
+It gives the type and size of radices that will be used in FFTs. 
+(@xref{Glucas internals}.)
+The default value is @code{3}. We can define @code{4} or @code{5}. It is 
+recommended to use the default and then you can see the performance with other
+choices.
+
+@example
+@code{Y_AVAL=3} @st{YEAFFT} uses radices 4,5,6,7,8 and 9 in FFTs passes.
+It is the default and the best option on most systems. 
+@end example
+@example
+@code{Y_AVAL=4} It uses radices 4,5,6,7,8 and 9 in first FFTs pass and 
+8,16 in the other passes. 
+@end example
+@example
+@code{Y_AVAL=5} It also can use radix32 reduction in middle passes.
+There are few processors which we can gain some speed. 
+@end example
+
+@sp 1
+@cindex Y_BLOCKSIZE
+@item Y_BLOCKSIZE=value
+This parameter sets the size of contiguous elements in the main array
+data without padding (in size of doubles). This padding is necessary
+to avoid cache thrashing. Without it, the performance drops drastically. It is
+related with @code{Y_SHIFT} and @code{Y_PADDING_LEVEL}. 
+
+@sp 1
+@cindex Y_SHIFT
+@item Y_SHIFT=value
+This parameter and @code{Y_BLOCKSIZE} set the basic size of the array
+pad. It is computed as 
+@example 
+basic_pad_size = (Y_BLOCKSIZE) >> Y_SHIFT
+@end example 
+Note, that the basic pad size must be greater than one to avoid
+alignement problems.
+
+@sp 1
+@cindex Y_PADDING_LEVEL
+@item Y_PADDING_LEVEL=value
+This parameter sets the complexity in the padding. If
+@code{Y_PADDING_LEVEL=0} then actually there is no padding. If
+@code{Y_PADDING_LEVEL=n} holes have sizes from 1 to n, depending on
+the result of padding algorithm. If level is 1 then all holes have the
+same size.
+ 
+@sp 1
+@cindex Y_MANY_REGISTERS
+@item Y_MANY_REGISTERS
+Defining it, in addition to @code{Y_AVAL > 3}, you can use a first radix pass 
+reduction from 10 to 16 (@xref{Glucas internals}.) Due to the many local 
+variables these routines use, it is only an advantage when the processor has 
+a lot of registers (32 FPU registers or more). Indeed, we still have not 
+seen a machine which uses this feature with gain. 
+ 
+@sp 1
+@cindex Y_MEM_THRESHOLD
+@item Y_MEM_THRESHOLD=value
+To avoid when possible cache misses, the FFT passes are different depending on 
+the pad between data (@xref{Glucas internals}.) The threshold from pass 1 to 2 
+is defined by this parameter. The default is set to 2048. It is a good choice
+for most systems, but others like Alpha ev67 will run faster by using 8192 instead.
+The @code{value} should be a power of two.
+
+@sp 1
+@cindex Y_TARGET
+@item Y_TARGET=value
+The @st{YEAFFT} library intensively uses preprocessor C macros. Most of the FFT
+tasks are made by using bits of macros defined in the file @file{ygeneric.h}.
+This file is written with a generic processor in mind. This generic
+processor is the default and is set defining @code{Y_TARGET=0}. Sure, there
+are many things one could write better for a specific processor. If you are brave
+enough, do it. You can even write a collection of assembler macros. This is
+an advanced feature, we recommend do not touch it. You should change some 
+lines in @file{mccomp.h} file and write your own @file{my_proc.h} file.
+
+@sp 1
+@cindex prefetch
+Recently, from release v.2.8a. Prefetch hints has been introduced. It increases
+the performance a lot in some cases. To use this feature, you have to define 
+other than generic Y_TARGET. Up to release 2.8b this is the list of 
+@code{value} for targets. Options 16,17,41 and 51 are not recommended, 
+they are still experimental.
+
+@table @code 
+@cindex generic target
+@cindex prefetch
+@cindex assembler code
+@item 0 
+@st{Generic}. No prefetch other than builtin GCC v3.1 used. All pure C code.
+Generic C compiler.
+@item 1
+@cindex Pentium
+@cindex Pentium MMX
+@cindex Pentium II
+@st{Pentium, Pentium MMX, Pentium II}. No prefetch. A lot of assembler 
+lines. GNU/gcc compiler or compatible @code{_asm_} extensions.
+@item 11
+@cindex Pentium 3
+@st{Pentium 3}. Prefetch used. A lot of assembler code. GNU/gcc compiler
+or compatible @code{_asm_} extensions.
+@item 12
+@cindex AMD Athlon
+@st{AMD Athlon}. Prefetch used. A lot of assembler code. GNU/gcc compiler
+or compatible @code{_asm_} extensions. 
+@item 16
+@cindex Pentium 3
+@st{Pentium 3}. Prefetch used. Only two lines of assembler code. GNU/gcc
+compiler or compatible @code{_asm_} extensions. Not recommended.
+@item 17
+@cindex AMD Athlon
+@st{AMD Athlon}. Prefetch used. Only two lines of assembler code. GNU/gcc
+compiler or compatible @code{_asm_} extensions. Not recommended.
+@item 21
+@cindex PowerPC 601
+@st{PowerPC 601}. Prefetch used. Only two lines of assembler code.
+GNU/gcc compiler or compatible @code{_asm_} extensions or Metrowerks
+Codewarrior intrinsics.
+@item 23
+@cindex PowerPc 604e
+@cindex PowerPC 7xx
+@cindex PowerPC 74XX
+@st{PowerPC 604e, 7xx, 74xx}. Prefetch used. Only two lines of assembler
+code. GNU/gcc compiler or compatible @code{_asm_} extensions or Metrowerks
+Codewarrior intrinsics. 
+@item 31
+@cindex Alpha ev56
+@cindex Alpha e6
+@cindex Alpha e67
+@cindex Alpha e68
+@st{Alpha ev56, ev6, ev67, ev68}. Prefetch used. Only two lines of 
+assembler code. Compaq-C compiler with @code{asm} calls. 
+@item 32
+@st{Alpha ev56, ev6, ev67}. Prefetch used. Only two lines of assembler
+code. GNU/gcc compiler or compatible @code{_asm_} extensions. 
+@item 41
+@cindex Ultrasparc-II
+@st{Ultrasparc-II}. No prefetch. Only two lines of assembler
+code. GNU/gcc compiler or compatible @code{_asm_} extensions. Not recommended.
+@item 51
+@cindex Intel Itanium IA-64
+@st{Intel Itanium IA-64}.  No prefetch. Only two lines of assembler
+code. GNU/gcc compiler or compatible @code{_asm_} extensions. Not recommended,
+use @code{Y_ITANIUM} option for a terrific performance.
+@end table
+
+@cindex Y_PREFETCH_EXPENSIVE
+@item Y_PREFETCH_EXPENSIVE
+When prefetch is available using @code{Y_TARGET} other than generic, some
+routines can be unrolled to avoid unnecessary calls to prefetch hints. It 
+could be useful when prefetch hints are expensive in performance terms. At the
+moment, it is still an experimental feature.
+
+@sp 1
+@cindex Y_LONG_MACROS
+@item Y_LONG_MACROS
+@st{YEAFFT} code is coded based mostly on small macros doing elemental
+FFT work. Sometimes it is more convenient to use big macros to adjust and tune some
+long latencies operations in a more convenient way.
+
+@sp 1
+@cindex Y_VECTORIZE2
+@item Y_VECTORIZE2
+Don't take this option as a multithreaded one. For radix-4 reduction it is 
+possible to unroll inner loops with a register pressure similar to radix-8.
+It can help a bit for some processors.
+
+@sp 1
+@cindex Y_ITANIUM
+@item Y_ITANIUM
+This option activates special code for IA64 processors since 2.8c. It has no 
+effect in earlier releases. This code is plain C code, no assembler lines,
+but gives a big penalty in performance for other than Intel IA64 processors.
+It is strongly recommended to use this option for IA64 machines, you can
+double the performance.
+
+@sp 1
+@cindex Y_MINIMUM
+@item Y_MINIMUM
+This option configures @st{YEAFFT} to use the minimum possible amount
+of precomputed trigonometric factors. This increase the work at
+FFT-time but reduces the memory traffic. On some systems it is
+worthwhile. The default is to precompute only a part of trigonometric
+factors and complete at FFT-time.
+
+@sp 1
+@cindex Y_MAXIMUM
+@item Y_MAXIMUM
+This option is the opposite to Y_MINIMUM. Here, all the trigonometric
+factors are precomputed, and so there are less work to do at
+FFT-time. The negative part is that this increases the memory traffic 
+and can slowdown the speed. 
+  
+@sp 1
+@cindex _PTHREADS
+@cindex PTHREADS
+@item _PTHREADS=value
+This option enables the use of POSIX threads. This option is automatically
+filled building the binary with @file{configure} script and using
+@option{--enable-pthread=n}. If you want to use @var{n} threads you 
+should then add @option{-D_PTHREADS=n} to your command line compiler options.
+When using @file{configure} the option @option{--enable-pthread} is
+equivalent to @option{--enable-pthread=2}. This option is not
+recommended for single processor machines.
+
+@sp 1
+@cindex _OPENMP
+@cindex OPENMP
+@item _OPENMP
+This option enables the use of @uref{http://www.openmp.org, OpenMP} directives.
+If you want to set the number of threads to use you have to include the 
+option @option{Y_NUM_THREADS}. @strong{Warning}. If you want to use OpenMP
+multiprocessing you have to enable it with the proper compiler flag (usually 
+@option{-omp}). Then, the compiler have already defined @option{_OPENMP} 
+macro so @strong{YOU DON'T HAVE TO DEFINE IT EXPLICITLY}. This option is not
+recommended for single processor machines.
+
+@sp 1
+@cindex _SUNMP
+@item _SUNMP
+This option enables Sun MP C directives @uref{http://docs.sun.com/, see docs about 
+SunWSpro C compiler}. @strong{Warning}: You have to define  @option{PARALLEL=n}
+in your shell environment, and you also have to define @option{Y_NUM_THREADS}
+and the specific compiler flag @option{-xexplicitpar}.
+This option is not recommended for single processor machines.
+
+@sp 1
+@cindex Y_NUM_THREADS
+@item Y_NUM_THREADS=value
+This option is used to set EXPLICITLY how many threads are used in 
+@option{OpenMP} or @option{SunMP} multithreaded options. You have to assign a 
+value when using @option{SunMP} but not when using @option{OpenMP} (here the
+best choice can be computed at runtime). Anyway, to avoid other than power of
+two number of threads, it is better to use this option whenever you use 
+both @option{_OPENMP} or @option{_SUNMP}.
+
+@end table
+
+@section GLUCAS options
+
+The following macros are defined to manage some aspects of Lucas Lehmer tests,
+not the FFT routines. 
+@table @var
+@cindex Y_SECURE
+@item Y_SECURE
+When defined, @st{Glucas} makes a round off check every iteration 
+(@xref{Glucas internals}.) It costs about 5% of performance, but in some cases
+it is convenient. We recommend to use it in systems with unreliable
+hardware/software (low end PC's, overclocked systems, etc ...). In
+@value{EDITION}, when it is not defined the round off error is checked
+in the first 131072 iterations after start. If any error of these
+iterations is over 0.40 then @st{Glucas} restarts trying to adjust its 
+accuracy. Once the initial phase is passed, @st{Glucas} still
+continues checking the roundoff error but now every 64 iterations and 
+with a higher threshold (0.45). A further error will reinit the test, 
+with accuracy increased, from the last save file.
+
+You can also manage the roundoff check at run time by editing the ini file 
+(@xref{Configure files}.)
+
+@sp 1
+@cindex Y_KILL_BRANCHES
+@item Y_KILL_BRANCHES
+The carry and normalization phase of @code{Discrete Weighted Transform}
+(@xref{Glucas internals}.) has some unpredictable branches. This can slowdown
+the performance in some processors. @st{Glucas} has an alternative code
+to avoid all these branches but with some float and integer instructions as
+cost. Some processors can gain with this option activated. 
+
+@sp 1
+@cindex Y_VECTORIZE
+@item Y_VECTORIZE
+If this option is used, it is possible to avoid some dependency stalls in carry 
+and normalization phase of @code{Discrete Weighted Transform}.  
+
+@end table
+
+@c .......................................................................
+@node GPL license,  , Concept Index, Top
+@comment  node-name, next, previous,  up
+@include logo.texi
+@include gpl.texi
+
+@c .......................................................................
+@node Save file format, Concept Index, Contributors, Top
+@comment  node-name, next, previous,  up
+@include logo.texi
+
+@include mformat.texi
+
+
+@c .......................................................................
+@node Concept Index,GPL license, Save file format, Top
+@comment  node-name, next, previous,  up
+@include logo.texi
+@appendix Concept and keyword Index
+
+@printindex cp
+
+
+@bye

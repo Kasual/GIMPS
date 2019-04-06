@@ -1,0 +1,22 @@
+/*$Id: README,v 2.13 2002/06/29 20:47:14 gbvalor Exp $*/
+
+All the information has been moved to texinfo files.
+
+You have complete information in 'glucas.info*' files. It is
+genereated from master '*.texi' files with GNU 'makeinfo'
+utility. The info files will be installed in your system info.
+You even can generate a directory with html version of the
+documentation files with `makeinfo --html glucas.texi`
+
+You can visit the lastest version of html docs here:
+
+http://glucas.sourceforge.net/glucas/index.html
+
+A 'dvi' version of the documentation is in 'glucas.dvi' released 
+with the package. You also can download it
+
+http://glucas.sourceforge.net/docs/glucas.dvi.gz
+
+The COPYING file conditions are *ONLY* for source in the
+package where the License is inserted at the top of files.
+

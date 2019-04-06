@@ -1,0 +1,198 @@
+#!/usr/bin/perl -w
+# $Id: cmpGlucas,v 2.2 2003/09/07 11:13:55 gbvalor Exp $
+# Simple script to compare 'selftest.out' files from Glucas.
+#
+# Averages timings from iterations 21-50, assuming roundoff checking enabled.
+# Averages timings from iterations 51-90, assuming roundoff checking disabled.
+#
+# KKas 03/2002
+#
+
+use strict;
+use File::Basename;
+use Getopt::Std;
+use vars qw/ $opt_E $opt_U /;
+ 
+my $st = 0;
+my $fft = 0;
+my $iter = 0;
+my %usertime = ();
+my %realtime = ();
+my %percentcpu = ();
+my @xy = ();
+my %old = ();
+my $old = '';
+my %new = ();
+my $new = '';
+my @sum = 0;
+
+getopts('EU');
+
+if (!defined($opt_E) && !defined($opt_U)) {
+  print "\n";
+  printf("Usage: %s {-U|-E} selftest1.out [selftest2.out]\n", basename($0));
+  print "Summarize and compare Glucas selftest.out files.\n";
+  print "If only one file is given, uses 'selftest.out' in the current directory.\n";
+  print "\n";
+  print " -U\tsummarize user time\n";
+  print " -E\tsummarize elapsed time calculated from sec/iter\n";
+  exit;
+}
+
+# Uses 'selftest.out' in the current directory by default.
+$old = $ARGV[0];
+open(OLD, shift) or die "can't open $ARGV[0]: $!";
+@ARGV = ("selftest.out") unless @ARGV;
+$new = $ARGV[0];
+open(NEW, shift) or die "can't open $ARGV[0]: $!";
+
+while(<OLD>){
+  # Find start of new FFT-runlength
+  if (/^Selftest (\d+) \((\d+) K FFT-runlength\)/) { 
+    $st = $1;
+    $fft = $2;
+    %usertime = ();
+    %realtime = ();
+    %percentcpu = ();
+  }
+
+  if (/^Iter\.\s+(\d+) \(\s*\d+\.\d+%\), Err= \d+\.\d+, (\d+\.\d+) user\s+(\d+)% CPU \((\d+\.\d+)/) {
+    $usertime{$1} = $2;
+    $percentcpu{$1} = $3;
+    $realtime{$1} = $4;
+  }
+
+  # Warn if accuracy gets increased
+  if (/^Restarting\. Accuracy increased\./) {
+    printf("%4d Accuracy increased\n", $fft);
+  }
+
+  # Warn if FFT length gets changed
+  if (/^Restarting\. Changed FFT length\./) {
+    printf("%4d FFT length changed\n", $fft);
+  }
+
+  # Just in case ...
+  if (/^Selftest (\d+) failed!/) { 
+    printf("\nSelftest %d (%d K) failed!\n\n", $1, $fft);
+  }
+
+  # Done with this runlength - summarize
+  if (/^Selftest \d+ success/) { 
+    @sum = ();
+    foreach $iter (30,40,50) {
+      $sum[0] += $usertime{$iter};
+      $sum[1] += $realtime{$iter};
+      $sum[2] += $percentcpu{$iter};
+    }
+    foreach $iter (60,70,80,90) {
+      $sum[3] += $usertime{$iter};
+      $sum[4] += $realtime{$iter};
+      $sum[5] += $percentcpu{$iter};
+    }
+    $old{$fft} = [$sum[0]/30,$sum[1]/3,$sum[2]/3,$sum[3]/40,$sum[4]/4,$sum[5]/4];
+  }
+}
+while(<NEW>){
+  # Find start of new FFT-runlength
+  if (/^Selftest (\d+) \((\d+) K FFT-runlength\)/) { 
+    $st = $1;
+    $fft = $2;
+    %usertime = ();
+    %realtime = ();
+    %percentcpu = ();
+  }
+
+  if (/^Iter\.\s+(\d+) \(\s*\d+\.\d+%\), Err= \d+\.\d+, (\d+\.\d+) user\s+(\d+)% CPU \((\d+\.\d+)/) {
+    $usertime{$1} = $2;
+    $percentcpu{$1} = $3;
+    $realtime{$1} = $4;
+  }
+
+  # Warn if accuracy gets increased
+  if (/^Restarting\. Accuracy increased\./) {
+    printf("%4d Accuracy increased\n", $fft);
+  }
+
+  # Warn if FFT length gets changed
+  if (/^Restarting\. Changed FFT length\./) {
+    printf("%4d FFT length changed\n", $fft);
+  }
+
+  # Just in case ...
+  if (/^Selftest (\d+) failed!/) { 
+    printf("\nSelftest %d (%d K) failed!\n\n", $1, $fft);
+  }
+
+  # Done with this runlength - summarize
+  if (/^Selftest \d+ success/) { 
+    @sum = ();
+    foreach $iter (30,40,50) {
+      $sum[0] += $usertime{$iter};
+      $sum[1] += $realtime{$iter};
+      $sum[2] += $percentcpu{$iter};
+    }
+    foreach $iter (60,70,80,90) {
+      $sum[3] += $usertime{$iter};
+      $sum[4] += $realtime{$iter};
+      $sum[5] += $percentcpu{$iter};
+    }
+    $new{$fft} = [$sum[0]/30,$sum[1]/3,$sum[2]/3,$sum[3]/40,$sum[4]/4,$sum[5]/4];
+  }
+}
+close(OLD);
+close(NEW);
+my %union = ();
+foreach $fft ((keys %old), (keys %new)) { $union{$fft}++ };
+printf("------------------------------------------------------------------------------\n");
+printf(" FFT/K  [1]   %%CPU   [2]   %%CPU  [1]/[2]      [1]   %%CPU   [2]   %%CPU  [1]/[2]\n");
+printf("        roundoff check enabled                roundoff check disabled\n");
+printf("------------------------------------------------------------------------------\n");
+for $fft (sort {$a <=> $b} keys %union) { 
+  if (defined($opt_E) && $union{$fft} > 1) {
+    printf("%4d  %7.3f %4.0f %7.3f %4.0f %7.2f     %7.3f %4.0f %7.3f %4.0f %7.2f\n", $fft, $old{$fft}[1], $old{$fft}[2], $new{$fft}[1], $new{$fft}[2], $old{$fft}[1]/$new{$fft}[1], $old{$fft}[4], $old{$fft}[5], $new{$fft}[4], $new{$fft}[5], $old{$fft}[4]/$new{$fft}[4]);
+  }
+  elsif (defined($opt_U) && $union{$fft} > 1) {
+    printf("%4d  %7.3f %4.0f %7.3f %4.0f %7.2f     %7.3f %4.0f %7.3f %4.0f %7.2f\n", $fft, $old{$fft}[0], $old{$fft}[2], $new{$fft}[0], $new{$fft}[2], $old{$fft}[0]/$new{$fft}[0], $old{$fft}[3], $old{$fft}[5], $new{$fft}[3], $new{$fft}[5], $old{$fft}[3]/$new{$fft}[3]);
+  }
+}
+print "\n";
+printf(" [1]: %s\n", $old);
+printf(" [2]: %s\n", $new);
+
+
+sub RPI400 {
+  my ($fft, $sec, $mhz) = @_;
+  my $rpi = 0;
+
+# reference timings from George Woltman's prime95 (prime95/mult.asm)
+  my %p400 = (
+     128, 0.0604,
+     160, 0.0830,
+     192, 0.0982,
+     224, 0.1193,
+     256, 0.1316,
+     320, 0.1726,
+     384, 0.2107,
+     448, 0.2520,
+     512, 0.2808,
+     640, 0.372,
+     768, 0.453,
+     896, 0.536,
+    1024, 0.600,
+    1280, 0.776,
+    1536, 0.934,
+    1792, 1.113,
+    2048, 1.226,
+    2560, 1.636,
+    3072, 1.990,
+    3584, 2.380
+    );
+
+  if (exists($p400{$fft})) {
+    return sprintf("%6.0f", 100*($p400{$fft}*400)/($sec*$mhz));
+  }
+  else {
+    return "   N/A";
+  }
+}

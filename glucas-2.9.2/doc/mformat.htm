@@ -1,0 +1,231 @@
+<!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+        
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        
+  <meta name="GENERATOR" content="Mozilla/4.61 [en] (X11; I; Linux 2.2.10 i586) [Netscape]">
+        
+  <meta name="Author" content="Guillermo Ballester Valor">
+        
+  <meta name="Description" content="Gives an universal and compact format to interchange residues of Mersenne numbers.">
+        
+  <meta name="Keywords" content="Mersenne numbers">
+  <title>MERSENNE RESIDUES INTERHCANGEABLE FORMAT</title>
+</head>
+  <body text="#000000" bgcolor="#ffffff" link="#0000ef" vlink="#55188a" alink="#ff0000">
+    
+<h1><font face="Courier New, Courier, monospace"> I<u>NTERCHANGEABLE&nbsp;
+FORMAT FOR MERSENNE NUMBERS RESIDUES</u></font></h1>
+<font face="Courier New, Courier, monospace">  &nbsp;  </font>
+<h2> <font face="Courier New, Courier, monospace"><u>1.Introduction</u></font></h2>
+<font face="Courier New, Courier, monospace">  Every day, the length of numbers
+being analyzed in GIMPS contest grows and grows, and so, the time needed
+to perform a Lucas-Lehmer test. A person can be tired of search, buy a new
+machine or change the client usually uses. In all cases, It would be nice
+an interchangeable format to avoid lost many CPU hours time.  </font>
+<p><font face="Courier New, Courier, monospace"><b>Glucas</b> program can
+use this format and so, the save files can be used by all platforms ( 32/64
+bits, BIG-ENDIAN / LITTLE-ENDIAN)&nbsp; with&nbsp; two complement integer
+arithmetic. Read and write this kind of files is a bit slower than other
+formats (it cost about half a L-L iteration) but how often we read/write
+a save file ?. </font></p>
+ 
+<p><font face="Courier New, Courier, monospace">What follows is a brief description
+of the format. <br>
+ &nbsp; <br>
+ &nbsp; </font></p>
+ 
+<h2> <font face="Courier New, Courier, monospace"><u>2.System compatibility
+requirements</u></font></h2>
+<font face="Courier New, Courier, monospace">  The minimum requirements needed
+to read or write a save file with the proposed  format are:  </font>
+<p><font face="Courier New, Courier, monospace">- Two-complement integer
+arithmetic. </font></p>
+ 
+<p><font face="Courier New, Courier, monospace">- Unsigned integer types
+of 32 or 64 bits length. </font></p>
+ 
+<p><font face="Courier New, Courier, monospace">- Unsigned 8-bits char or
+byte type. <br>
+ &nbsp; <br>
+ &nbsp; </font></p>
+ 
+<h2> <font face="Courier New, Courier, monospace"><u>3. The format.</u></font></h2>
+<font face="Courier New, Courier, monospace">  The save file is divided into
+blocks of 8-bytes length.&nbsp; Every block  must be considered as a 64-bits&nbsp;
+unsigned integer type.  </font>
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; FORMAT OF A 8-BYTES
+ BLOCK:</font> </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; byte 0:&nbsp; bits
+ 7-0 . First position in file (least significant byte)</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; byte 1:&nbsp; bits 8-15</font>
+  <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; byte 2:&nbsp; bits 16-23</font>
+  <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; byte 3:&nbsp; bits 14-31</font>
+  <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; byte 4:&nbsp; bits 32-39</font>
+  <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; byte 5:&nbsp; bits 40-47</font>
+  <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; byte 6:&nbsp; bits 48-55</font>
+  <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; byte 7:&nbsp; bits 56-63&nbsp; 
+last position in file (most significant byte)</font> <br>
+ &nbsp; </p>
+ 
+<p><font face="Courier New, Courier, monospace">The blocks are: </font><br>
+ &nbsp; </p>
+ 
+<p><b><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; BLOCK 0: bytes
+1-8 .Format version</font></b> <br>
+ <font face="Courier New,Courier"><b>&nbsp;&nbsp;&nbsp; </b>This is reserved 
+to identify the file as a Interchangeble Merssene Residue File Format.</font>
+  <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; bytes 0-4: The signature 
+0x006A64B1. Is the exadecimal representation of 6972593 (the last known Mersenne 
+prime exponent).</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; bytes 4-7: the version. 
+This is version 2. So 0x00000002</font> <br>
+ <b><font face="Courier New,Courier"></font></b>&nbsp; <br>
+ <b><font face="Courier New,Courier"></font></b>&nbsp;<b><font face="Courier New,Courier"></font></b>
+  </p>
+ 
+<p><b><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; BLOCK 1: bytes
+9-16 .Program identification</font></b> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; This is reserved to
+identify the program and version which generate the file. As an orientation,
+the proposal is:</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; byte 0: the program:</font>
+  <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ Example. Byte 2 of block 0 can be, in hexadecimal</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 0x11 for prime95/mprime</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 0x22 for Mlucas</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 0x33 for Glucas</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ .......</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; bytes 1-3: the version. 
+Every program should use this three bytes in his own format.</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; byte 4: What the residue 
+is:</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 0 : Lucas-Lehmer test residue.</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 1 : p-1 residue.</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 2 : A general mersenne residue, (example : a residue in a ECM factorization).</font>
+  <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; bytes 5-7: at the moment 
+set two 0. Reserved for future uses.</font> </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; <b>BLOCK 2: bytes
+17-24. Exponent</b></font>.<br>
+<font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; This is the block changed
+from version 1. In version 1 it was the exponent all the block. Now the upper
+half has other information.</font></p>
+<p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; <font face="Courier New, Courier, monospace">
+&nbsp;Bytes 0-3: The exponent of the Mersenne number, e.g, 657849 for M657849.
+Unsigned integer format.<br>
+</font></p>
+<p><font face="Courier New,Courier"> &nbsp;&nbsp;&nbsp; Bytes 4-7: The optional
+shift account. To get the proper residue, it have to be rotate to rigth this
+number of bits. In a non rotated version is set to 0. <br>
+ </font> </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; <b>BLOCK 3: bytes
+25-32. The FFT-length used, if any.</b></font> <br>
+ <font face="Courier New,Courier"><b>&nbsp;&nbsp;&nbsp; </b>An integer indicating 
+the FFT run-length, in size_of_reals, used to compute the residue saved.</font>
+ &nbsp; <font face="Courier New,Courier">Actually, it is only an informative 
+data, every binary can continue the work with a FFT-runlenght according to 
+their own accuracy capabilities.</font> </p>
+ 
+<p><b><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; BLOCK 4: bytes
+33-40. Iteration / B1 LIMIT.</font></b> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; In a L-L test: The iteration 
+of the Lucas-Lehmer test saved. This is important to unify:</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 4 would be the iteration 0</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 14 would be the iteration 1</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ .....</font> </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; If the starting point 
+L(0) is not 4, like prime95 does, the residue should be rotated according 
+&nbsp;with the number of bits readed in block 2. Once rotated L(0)=4, L(1)=14 
+and so on.</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; In a P-1 factorization
+ must be the B1 limit.</font> </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; For other uses is
+undefined.</font>  </p>
+ 
+<p><b><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; Block 5: bytes
+41-48. Round off Error</font></b> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; In a L-L test: the round 
+off error of iteration being saved. Because of we need to store it in a integer 
+format, the error is transformed according to:</font> </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; error_saved := (unsigned
+ int) (fabs(frac_roundoff_error) * 1000000.0)</font> </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; In other kinds of
+residues it is yet undefined. (may be a B2 limit)</font> <br>
+ &nbsp; </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; <b>Blocks 6 to (5+N):
+ bytes 49 to (N*8+48): The residue</b></font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; This part contains the 
+residue. It is stored in compact two-complement integer form, using all the 
+blocks needed to store the 'q' bits of the Mersenne Number Mq. The needed 
+N blocks can be easily computed by</font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; N := floor ( (q-1)/64
+ + 1)</font> </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; The unused bits (if 
+any) in the last block must be filled by zeroes. The first block of residue 
+(first on file) will contain bits 0-63, the second 64-127 and so on.</font>
+  </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; <b>Block 6+N: bytes
+ N*8+49 to N*8+56: The last carry.</b></font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; In the normalization
+process from the float array in DWT to the compact integer form, one must
+play with a carry propagation. After the last float DWT array element has
+been transformed, it remains a 'last carry' one need to add to the residue
+(usually only to the first bits). If the write routines already has written
+the first residue blocks (to save memory) this blocks should need to be readed
+again. To avoid this problem, this block contain the last carry.</font> </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; NOTE: The last carry,
+ if no zero, usually is -1, so all the bits are zeroes or ones.</font> </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; Glucas add the last
+ carry to the residue before writing, so this block always is zero.</font>
+  </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; <b>Block 7+N: bytes
+ N*8+57 to N*8+64: The sum check control.</b></font> <br>
+ <font face="Courier New,Courier"><b>&nbsp;&nbsp;&nbsp; </b>This block contains 
+the sum of the previous blocks mod(2^32 - 1). It is easy and fast to compute 
+with both 32 and 64 bits scheme.</font> <br>
+ &nbsp; </p>
+ 
+<p><font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; <b>Blocks 8+N to the 
+end of file: UNDEFINED YET</b></font> <br>
+ <font face="Courier New,Courier">&nbsp;&nbsp;&nbsp; More blocks can be added 
+at the end of the file. This part of file can be used for proposes like a 
+brief history of the machines/users and errors from the beginning of work 
+to the actual state.</font> <br>
+ &nbsp; <br>
+ &nbsp; </p>
+ 
+</body>
+</html>

@@ -1,0 +1,208 @@
+$Id: ChangeLog.0,v 2.1 2002/05/20 16:35:32 gbvalor Exp $
+
+	THIS FILE SUMARIZES THE CHANGED PRIOR TO VERSION 2.8a
+
+	Ulterior detailed changes are in ChangeLog
+	
+******************************************************************************
+	
+    v.2.7 12/mar/2001
+
+	Some QA facilities has been added, and some new features:
+
+	-The default format for i/o save files is the 'interchangeable format'. It will be so
+    for the next versions.
+
+	-The default file 'glucas.ini' will be created whether there is no _ini_ file in 
+    the working directory.
+
+	-When Glucas start, if there is no 'Machine_id=n' line in the ini file, it will 
+    append a Machine Identifier line.
+
+	-The g<exponent> file now will have two more lines, the Identifier machine and the
+    first iteration with roundcheck done in that machine. If one use a save file from other
+    machine, then there will be not a g<> file and then, as prevention, it will make roundoff
+    check during 131072 next iterations. In addition, if the Machine_id and the identifier 
+    read in g<exponent> file  are not the same then is supposed a 'Glucas_environment_change':
+        1) g<exponent> file will be updated with the actual iteration and the Machine_id read
+    from _ini_ file
+	2) A roundoff check error will be made next 131072 iterations.
+
+	-When Glucas writes a save file, if Verbose_flag is activated it also display the Res64
+    of the iteration being saved. 
+
+	-For QA proposes, it is possible to write Interim files every n iterations including 
+    the line
+
+	QA_interim_file=n
+	
+    in the _ini_ file. The Res64 will be also displayed.
+
+	
+	Fixed bugs:
+       
+	-It has been reported coredumps when there is no _ini_ file. Now there is no problem
+    with that.
+
+	-When the working directory was other than current and the path was too large, a core
+    dump was probable. It is fixed now.
+
+	-The max number of exponent in a queue file was 50. Now is 128, I think it is enough.
+
+*******************************************************************************
+	
+   v.2.6 28/feb/2001
+        This version has included:
+        -The possibility to set the roundoff error check in the 'inifile'
+	Roundoff_check=1. Glucas will make this check all the iterations
+	Roundoff_check=0. The roundoff_check is disabled.
+
+	-The threshold is less conservative. By default the roundoff check works as
+	follows:
+	1)Is activated the first 2^17=131072 iterations.
+	2)Is activated the first 2^10=1024 iterations after a restart.
+	3)If no 1) and 2) then there is a roundoff check every 64 iterations.
+	The threshold in 1) is 0.40. The threshold in 2 and 3 is 0.45.
+	
+	Fixed bugs:
+	-A bug found by Brian J. Beesley when is defined Y_MANY_REGISTERS. Now Glucas
+    does not search the unwritten routine 'ynorm_18'
+    
+	-A semi-bug in selftest 25 and 26. The check exponents are changed and so Glucas 
+    does not jump to the next FFT-length.
+
+*******************************************************************************
+
+   
+   v.2.5 06/feb/2001 
+        -Added the command line option -W to work with other than actual directory.
+
+*******************************************************************************
+
+   v.2.4 28/jan/2001 (not released)
+        -A bug increasing the memory requirements every time a save file 
+	is written fixed.
+
+*******************************************************************************
+	
+   v.2.3 20/jan/2001 (not released)
+        -Fixed a bug in displaying the sec/iter.
+
+*******************************************************************************
+	
+   v.2.2 16/dec/2000
+        -A hidden bug affecting little exponents fixed
+	-The info also displays the sec/iter.
+
+*******************************************************************************
+
+   v.2.1 06/dec/2000
+        -Now Glucas can be compiled by Codewarrior on iMac
+
+*******************************************************************************
+
+   v.2.0 01/dec/2000
+        -New Interchangeable Mersenne Residue Format is introduced.
+	-A lot of small other improvements
+
+*******************************************************************************
+	
+   v.1.9x 28/aug/2000:
+	This is the first stand alone version for glucas. No more use of MERS
+   routines, but still there is a lot of code lines from it, in special the
+   setup routines. Not affected the core and/or speed. Deep changes on usage
+   and input/output features:
+	-Now Glucas does the work queued in a queue file we can select. 
+   Using some command arguments  options, we can select how Glucas manage
+   the queue. There are several forms and input file formats we can add work
+   to  queue (see the documentation files to information).
+	-We can select, using command input arguments, the 'ini' file, 
+   the 'queue' file, and the 'results' file.
+	-We can enter a no_nice option. (see the README.Glucas.html, it can 
+   slow down other jobs, be careful).
+	Other important improvements:
+	-The response time to a break signal has been reduced. In earlier 
+   versions we had to wait about two iterations, now we wait less than
+   a iteration.
+	-There is now two save files formats we can choose. The default
+   stores the residue of a iteration in integer mode but we can select the
+   old style (compatible with MERS save format) which saves the residue 
+   using the internal floats. The integer format is only a bit slower but 
+   the save files are more than three times shorter, there is almost a 
+   universal compatibility, and Glucas can now resize the FFT length at run
+   time taking the results obtained with other FFT run length.
+
+*******************************************************************************
+
+   v.1.4x 12/jul/2000
+        Best non_power_of_two radix-reduction. Now Glucas uses Nussbaumer 
+   method with some improvements from E.W. MAYER. 5% faster.
+        Improved check-results-security. Now Glucas makes a roundoff error
+   check every iteration. During first init_iterations Glucas assures the 
+   roundoff error is less than init_kErrLimit, and dynamically adjust the
+   precision to achieve that. In the following iterations the roundoff 
+   error must be less than kErrLimit. See the code to the actual defined
+   values.
+        A semi_bug fixed. Now Glucas saves the update rate of weight factors 
+   during the adjust_of_accuracy phase. When restarting, Glucas reads the 
+   optimal values found.
+        New features: 
+	-A verbose mode can actived via glucas.ini file. See
+   README.Glucas file to the details. Glucas can output, every established
+   iterations, the last roundoff error, the user and system time, and the
+   real time between two outputs. 
+        -For test/check proposes, an only_check mode can be activated from
+   glucas.ini file. See again README.Glucas file.
+
+*******************************************************************************
+
+   v.1.3x 18/jun/2000
+        New radix-9 introduced. If Y_AVAL > 3, YEAFFT can now use radix-9 
+   reduction and then gain 10% performance in some exponents.
+
+*******************************************************************************
+
+   V.1.2x 12/jun/2000
+        I introduced a bug in radix_12.c a bad day trying to write something
+   better. Fortunately my script test has detected it and I fixed. The main
+   header file yeafft.h has changed to let define some important defs in
+   compile time using the -Dmacro=def facility of most C compilers. I wrote
+   a little README.file
+
+*******************************************************************************
+
+   v.1.1 10/jun/2000
+        A hidden bug in y_norm*.c fixed. This bug only worked when testing 
+   very big exponents and randomly. It was in the init bjs on carry_norm 
+   process. There was a lack of precision for 32 bits unsigned integers. 
+
+*******************************************************************************
+
+   v.1.0 05/jun/2000
+	A lot of small improvements. Over all, Glucas now makes the last
+   backward DIT pass, carry and normalization, and first DIF pass using only 
+   a single memory access. 10%-15% performance improvement. Results similar
+   to Mlucas. Now the program adjusts its accuracy dynamically.    
+
+*******************************************************************************
+
+   v.0.1 20/may/2000
+	Uses the new dyadic mul. features of YEAFFT package. to avoid 
+   memory accesses when possible, YEAFFT makes the last forward DIF pass,
+   the dyadic mul and first backward DIT pass in a single pass. 10% average
+   gain of performance. Timings similar to FFTW on small exponents (in a 
+   Pentium). For big FFT lengths YEAFFT is better. Now, tested in my Pentium 
+   and in Ernst Mayer MIPS and Alpha machines. It seems really good. About 
+   only 10% slower than E.Mayer Mlucas fortran-90 code. Not released.
+
+******************************************************************************
+
+   v0.0 15/apr/2000 
+	The starting point. It only uses the convolution provided by
+   my convolver package YEAFFT (Yet Another Fast Fourier Transform). 
+   It was the first YEAFFT version. It makes an in-place forward Decimation 
+   in Frequency transform (DIF), a dyadic multiplication (using the 
+   nested-complex representation of a real float array), and a backward 
+   decimation in time (DIT). Only tested in my Pentium-166 MMX. Timings
+   10% higher than FFTW. Not bad at all for a first version. Not released.
+
