@@ -1,4 +1,4 @@
-; Copyright 1995-2017 - Mersenne Research, Inc.  All rights reserved
+; Copyright 1995-2019 - Mersenne Research, Inc.  All rights reserved
 ; Author:  George Woltman
 ; Email: woltman@alum.mit.edu
 ;
@@ -28,6 +28,17 @@ IFDEF	X86_64
 OPTION	EVEX:1
 INCLUDE ksamd64.inc
 ENDIF
+
+;; Macros to use with Intel Code Analyzer
+
+IACA_START MACRO
+	mov ebx, 111
+	db 0x64, 0x67, 0x90
+	ENDM
+IACA_END MACRO
+	mov ebx, 222
+	db 0x64, 0x67, 0x90
+	ENDM
 
 ;; We must be very careful to obey the various ABIs on the OSes we run.
 ;; These macros help us do just that.
@@ -1467,14 +1478,15 @@ c_call MACRO routine
 	;; that the called routine expects the stack aligned 8 mod 16.
 	;; Prolog code should have aligned stack properly.
 	IFDEF WINDOWS64
-	mov	rcx, r11		;; Load offset of asm_data
+	sub	rsp, 32			;; Allocate 32 bytes of "shadow space" for C routine to use
+	mov	rcx, r11		;; Pass asm_data pointer argument in rcx
 	mov	rbx, r11		;; And save a copy for later restore
 	ENDIF
 	;; See Agner Fog's document on calling conventions.  It states
 	;; that the called routine expects the stack aligned 8 mod 16.
 	;; Prolog code should have aligned stack properly.
 	IFDEF LINUX64
-	mov	rdi, r11		;; Load offset of asm_data
+	mov	rdi, r11		;; Pass asm_data pointer argument in rdi
 	mov	rbx, r11		;; And save a copy for later restore
 	ENDIF
 
@@ -1489,6 +1501,9 @@ c_call MACRO routine
 	push_amt=push_amt-16
 	ELSE
 	mov	r11, rbx		;; Restore asm_data pointer
+	IFDEF WINDOWS64
+	add	rsp, 32			;; Free 32 bytes of "shadow space" allocated for C routine to use
+	ENDIF
 	ENDIF
 
 	ENDM
@@ -1563,12 +1578,10 @@ ENDIF
 ; to find the fastest implementation to include in the final release.
 
 ;IMPL_ALL_CORE = 1
-;IMPL_ALL_FMA3 = 1
 ;IMPL_ALL_P4 = 1
 ;IMPL_ALL_P4TP = 1
 ;IMPL_ALL_K8 = 1
 ;IMPL_ALL_K10 = 1
-;IMPL_ALL_BULL = 1
 
 ; Handy macro to only include statement if we are prefetching
 
@@ -1578,9 +1591,12 @@ pfing MACRO stmt:vararg
 	ENDIF
 	ENDM
 
-;; A handy shortcut:
+;; Handy shortcuts:
 
 Q	EQU	<QWORD PTR>
+XX	EQU	<XMMWORD PTR>
+YY	EQU	<YMMWORD PTR>
+ZZ	EQU	<ZMMWORD PTR>
 
 ;; Bump a pointer by an amount - generates no code if amount is zero
 ;; On Core 2 architecture, use add or sub as that can be dispatched to
@@ -1756,7 +1772,7 @@ loops_set_prefetch MACRO pfamt, pffreq, pfreg
 ;; of bumping the prefetch pointer by one cache line (64 bytes) on every prefetch.  This
 ;; macros lets us choose a smaller increment so that the caller can avoid prefetching
 ;; too many cache lines.  For example, if the caller loops 100 times but only wants to
-;; prefetch 80 cache lines then we can set out prefetch increment to 64 * 80 / 100 bytes.
+;; prefetch 80 cache lines then we can set our prefetch increment to 64 * 80 / 100 bytes.
 ;; Note this is not the preferred solution.  In the example above it would be better to
 ;; back up the prefetch pointer by 20 cache lines sometime during the looping process.
 ;; This is preferred because there is no guarantee (due to rounding) that we can prefetch
@@ -1765,8 +1781,8 @@ loops_set_prefetch MACRO pfamt, pffreq, pfreg
 
 loops_set_alternate_prefetch_increment MACRO cache_lines_to_prefetch, number_of_loops
 	;; Set increment so that we prefetch at least the requested number of cache lines
-	;; The formula is (cache_lines_to_prefetch * 64 - 1) / number_of_loops
-	loops_pfincr = ((cache_lines_to_prefetch) * PREFETCHING - 1) / (number_of_loops)
+	;; The formula is (cache_lines_to_prefetch * 64) / number_of_loops
+	loops_pfincr = ((cache_lines_to_prefetch) * 64) / (number_of_loops)
 	ENDM
 
 ;; Main looping macro.  Normally third argument is blank meaning increment loop counter by 1.
@@ -2128,6 +2144,9 @@ ENDIF
 	ENDM
 
 PROCFP	MACRO x
+IFDEF zarch
+	PROCF	@CATSTR(&x,%zarch)
+ELSE
 IFDEF yarch
 	PROCF	@CATSTR(&x,%yarch)
 ELSE
@@ -2145,10 +2164,14 @@ ENDIF
 ENDIF
 ENDIF
 ENDIF
+ENDIF
 	ENDM
 
 
 PROCFLP	MACRO x
+IFDEF zarch
+	PROCFL	@CATSTR(&x,%zarch)
+ELSE
 IFDEF yarch
 	PROCFL	@CATSTR(&x,%yarch)
 ELSE
@@ -2166,6 +2189,7 @@ ENDIF
 ENDIF
 ENDIF
 ENDIF
+ENDIF
 	ENDM
 
 ;
@@ -2175,6 +2199,9 @@ ENDIF
 ;
 
 EXTRNP	MACRO x
+IFDEF zarch
+EXTRN	@CATSTR(&x,%zarch):PROC
+ELSE
 IFDEF yarch
 EXTRN	@CATSTR(&x,%yarch):PROC
 ELSE
@@ -2192,9 +2219,13 @@ ENDIF
 ENDIF
 ENDIF
 ENDIF
+ENDIF
 	ENDM
 
 ENDPP	MACRO x
+IFDEF zarch
+@CATSTR(&x,%zarch) ENDP
+ELSE
 IFDEF yarch
 @CATSTR(&x,%yarch) ENDP
 ELSE
@@ -2208,6 +2239,7 @@ IFDEF PPRO
 &x&PPRO ENDP
 ELSE
 &x	ENDP
+ENDIF
 ENDIF
 ENDIF
 ENDIF

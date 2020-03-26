@@ -6,7 +6,7 @@
 #	make install
 #
 # Hwloc can be downloaded from https://www.open-mpi.org/projects/hwloc/
-# Configure hwloc with --enable-static --disable-shared --disable-pci --disable-cuda --disable-gl
+# Configure hwloc with --enable-static --disable-shared --disable-pci --disable-cuda --disable-gl --disable-opencl
 #
 #  Ugh, different linux variants require different makefiles.
 #  The current makefile is for CentOS 5.10.  We prefer to link against
@@ -21,7 +21,7 @@
 #	LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic $(shell pkg-config --static --libs libhwloc) -Wl,-Bstatic $(shell pkg-config --static --libs libcurl) -lstdc++ -Wl,-Bdynamic -ldl
 
 CC = gcc
-CFLAGS = -I.. -I../gwnum -I/usr/local/include -DX86_64 -O2 
+CFLAGS = -I.. -I../gwnum -I/usr/local/include -DX86_64 -Wno-unused-result -O2
 
 CPP = g++
 CPPFLAGS = -I.. -I../gwnum -DX86_64 -O2

@@ -8,7 +8,7 @@
 #	ldd mprime
 #
 # Hwloc can be downloaded from https://www.open-mpi.org/projects/hwloc/
-# Configure hwloc with --enable-static --disable-shared --disable-pci --disable-cuda --disable-gl
+# Configure hwloc with --enable-static --disable-shared --disable-pci --disable-cuda --disable-gl --disable-opencl
 #
 #  Ugh, different linux variants require different makefiles.
 #  The current makefile is for CentOS 5.10.  We prefer to link against
@@ -23,12 +23,13 @@
 #	LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic $(shell pkg-config --static --libs libhwloc) -Wl,-Bstatic $(shell pkg-config --static --libs libcurl) -lstdc++ -Wl,-Bdynamic -ldl
 
 CC = gcc
-CFLAGS = -I.. -I../gwnum -O2 -march=i486 -malign-double
+CFLAGS = -I.. -I../gwnum -Wno-unused-result -march=i486 -malign-double -O2
 
 CPP = g++
-CPPFLAGS = -I.. -I../gwnum -O2 -march=i486 -malign-double
+CPPFLAGS = -I.. -I../gwnum -Wno-unused-result -march=i486 -malign-double -O2
 
 LFLAGS = -Wl,-M -Wl,-L/usr/local/lib
+#LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic -lhwloc -Wl,-Bstatic -lcurl -Wl,-Bdynamic -lrt -lstdc++ -lz -lxml2 -ldl -lgmp
 LIBS = ../gwnum/gwnum.a ../gwnum/gwnum.ld -lm -lpthread -Wl,-Bstatic -lhwloc -Wl,-Bstatic -lcurl -Wl,-Bdynamic -lrt -lstdc++ -ldl -lgmp
 
 FACTOROBJ = factor32.o

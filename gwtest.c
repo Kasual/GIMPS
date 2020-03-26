@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------
-| Copyright 1995-2015 Mersenne Research, Inc.  All rights reserved
+| Copyright 1995-2018 Mersenne Research, Inc.  All rights reserved
 |
 | This file contains routines to QA the gwnum FFT routines.
 | QA can be activated by using Advanced/Time menu choice on exponent 9900.
@@ -121,23 +121,35 @@ unsigned int gen_n ()
 
 /* Compare gwnum to a giant */
 
+static int compare_counter = 0;
+static char *compare_failure_text = NULL;
+
 void compare (int thread_num, gwhandle *gwdata, gwnum x, giant g)
 {
 	giant	tmp;
 	int	i;
 
 	if (gwdata->POSTFFT) return;		// We cannot compare if we've started next forward FFT
+	compare_counter++;
+
 	tmp = popg (&gwdata->gdata, ((int) gwdata->bit_length >> 5) + 13);
 	gwtogiant (gwdata, x, tmp);
 	if (gcompg (g, tmp) != 0) {
 		gwnum	y = gwalloc (gwdata);
+		char	test_desc[200], msg[300];
+
+		if (compare_failure_text == NULL) sprintf (test_desc, "Compare #%d", compare_counter);
+		else strcpy (test_desc, compare_failure_text);
+		if (gw_get_maxerr (gwdata) < 0.49) sprintf (msg, "Test (%s) failed.\n", test_desc);
+		else sprintf (msg, "Test (%s) failed - probably due to roundoff error\n", test_desc);
+		OutputBoth (thread_num, msg);
+
 		gianttogw (gwdata, g, y);
-		if (gw_get_maxerr (gwdata) >= 0.49)
-			OutputBoth (thread_num, "Test failed - probably due to roundoff error\n");
-		else
-			OutputBoth (thread_num, "Test failed.\n");
-		if(0) {			// Sometimes we must debug by finding which FFT words are different
-			for (i = 0; i < (int) gwdata->FFTLEN; i++) {
+		if (IniSectionGetInt (INI_FILE, "QA", "DUMP_DIFF", 0)) { // Sometimes we must debug by finding which FFT words are different
+			int	count, max_count;
+			count = 0;
+			max_count = IniSectionGetInt (INI_FILE, "QA", "DUMP_DIFF_COUNT", 50);
+			for (i = 0; i < (int) gwdata->FFTLEN && count < max_count; i++) {
 				long val, val2;
 				get_fft_value (gwdata, x, i, &val);
 				get_fft_value (gwdata, y, i, &val2);
@@ -145,9 +157,11 @@ void compare (int thread_num, gwhandle *gwdata, gwnum x, giant g)
 					char	buf[90];
 					sprintf (buf, "Mismatch word: %d  was: %ld  sb: %ld\n", i, val, val2);
 					OutputBoth (thread_num, buf);
+					count++;
 				}
 			}
 		}
+		if (IniSectionGetInt (INI_FILE, "QA", "CORRECT_DIFF", 1)) gwcopy (gwdata, x, y);
 		gwfree (gwdata, y);
 	}
 	if (0) {			// Test for doubles that aren't properly normalized
@@ -162,6 +176,20 @@ void compare (int thread_num, gwhandle *gwdata, gwnum x, giant g)
 	pushg (&gwdata->gdata, 1);
 }
 
+void compare_with_text (int thread_num, gwhandle *gwdata, gwnum x, giant g, char *fail_msg)
+{
+	compare_failure_text = fail_msg;
+	compare (thread_num, gwdata, x, g);
+	compare_failure_text = NULL;
+}
+
+void compare_with_text_and_int (int thread_num, gwhandle *gwdata, gwnum x, giant g, char *fail_msg, int fail_num)
+{
+	char	buf[100];
+	sprintf (buf, "%s #%d", fail_msg, fail_num);
+	compare_with_text (thread_num, gwdata, x, g, buf);
+}
+
 /* Generate random data to start the test */
 
 void gen_data (gwhandle *gwdata, gwnum x, giant g)
@@ -172,8 +200,7 @@ void gen_data (gwhandle *gwdata, gwnum x, giant g)
 
 /* Set and output seed so that we can re-generate the random data */
 
-	seed = IniSectionGetInt (INI_FILE, "QA", "SPECIFIC_SEED",
-				 (int) time (NULL) + rand ());
+	seed = IniSectionGetInt (INI_FILE, "QA", "SPECIFIC_SEED", (int) time (NULL) + rand ());
 	srand (seed);
 	sprintf (buf, "Random seed is %d\n", seed);
 	writeResults (buf);
@@ -227,7 +254,7 @@ void test_it_all (
 	giant	g, g2, g3;
 	int	i, ii, res, nth_fft, num_squarings;
 	double	diff, maxdiff;
-	char	buf[200], fft_desc[100];
+	char	buf[256], fft_desc[200];
 
 /* Init */
 
@@ -273,8 +300,7 @@ void test_it_all (
 /* Output a startup message */
 
 		gwfft_description (&gwdata, fft_desc);
-		sprintf (buf, "QA of %s using %s\n",
-			 gwmodulo_as_string (&gwdata), fft_desc);
+		sprintf (buf, "QA of %s using %s\n", gwmodulo_as_string (&gwdata), fft_desc);
 		OutputBoth (thread_num, buf);
 
 /* Alloc and init numbers */
@@ -306,7 +332,7 @@ void test_it_all (
 			gwstartnextfft (&gwdata, (i & 3) == 2);
 
 			/* Test gwsetaddin without and with POSTFFT set */
-			if ((i == 45 || i == 46) && abs (c) == 1)
+			if ((i == 45 || i == 46) && labs (c) == 1)
 				gwsetaddin (&gwdata, -31);
 
 			/* Test several different ways to square a number */
@@ -326,7 +352,7 @@ void test_it_all (
 			/* Remember maximum difference */
 			diff = fabs (gwsuminp (&gwdata, x) - gwsumout (&gwdata, x));
 			if (diff > maxdiff) maxdiff = diff;
-			if ((i == 45 || i == 46) && abs (c) == 1)
+			if ((i == 45 || i == 46) && labs (c) == 1)
 				gwsetaddin (&gwdata, 0);
 		}
 		if (gwdata.MAXDIFF < 1e50)
@@ -347,7 +373,7 @@ void test_it_all (
 /* Test square and mul carefully */
 
 		gwfree (&gwdata, x3); gwfree (&gwdata, x4);
-		if (abs (c) == 1) gwsetaddin (&gwdata, -42);
+		if (labs (c) == 1) gwsetaddin (&gwdata, -42);
 		gwsquare_carefully (&gwdata, x);
 		diff = fabs (gwsuminp (&gwdata, x) - gwsumout (&gwdata, x));
 		if (diff > maxdiff) maxdiff = diff;
@@ -355,7 +381,7 @@ void test_it_all (
 		gwfree (&gwdata, gwdata.GW_RANDOM); gwdata.GW_RANDOM = NULL;
 		diff = fabs (gwsuminp (&gwdata, x) - gwsumout (&gwdata, x));
 		if (diff > maxdiff) maxdiff = diff;
-		if (abs (c) == 1) gwsetaddin (&gwdata, 0);
+		if (labs (c) == 1) gwsetaddin (&gwdata, 0);
 
 /* Test gwaddquick, gwsubquick */
 
@@ -475,6 +501,7 @@ void test_it (
 	CHECK_OFTEN = IniSectionGetInt (INI_FILE, "QA", "CHECK_OFTEN", 0);
 	num_squarings = IniSectionGetInt (INI_FILE, "QA", "NUM_SQUARINGS", 50);
 	num_inverses = IniSectionGetInt (INI_FILE, "QA", "NUM_INVERSES", 0);
+	compare_counter = 0;
 
 /* Alloc and init numbers */
 
@@ -490,16 +517,85 @@ void test_it (
 	if (CHECK_OFTEN) compare (thread_num, gwdata, x, g);
 	gwcopy (gwdata, x, x2); gtog (g, g2);
 
+/* Test single, double, and triple FFT words.  Handy when first developing an FFT. */
+
+	if (IniSectionGetInt (INI_FILE, "QA", "SingleWordTests", 0)) {
+		gwsetnormroutine (gwdata, 0, 1, 0);	/* Enable error checking */
+		for (i = 0; i < (int) (gwdata->ZERO_PADDED_FFT ? gwdata->FFTLEN / 2 + 1 : gwdata->FFTLEN); i++) {
+			dbltogw (gwdata, 0.0, x);
+			set_fft_value (gwdata, x, i, 5000);
+			gwtogiant (gwdata, x, g);
+			gwsquare (gwdata, x);
+			squaregi (&gwdata->gdata, g);
+			specialmodg (gwdata, g);
+			compare (thread_num, gwdata, x, g);
+		}
+		for (i = 0; i < (int) (gwdata->ZERO_PADDED_FFT ? gwdata->FFTLEN / 2 : gwdata->FFTLEN - 1); i++) {
+			dbltogw (gwdata, 0.0, x);
+			set_fft_value (gwdata, x, i, 5000);
+			set_fft_value (gwdata, x, i+1, 3000);
+			gwtogiant (gwdata, x, g);
+			gwsquare (gwdata, x);
+			squaregi (&gwdata->gdata, g);
+			specialmodg (gwdata, g);
+			compare (thread_num, gwdata, x, g);
+		}
+		for (i = 0; i < (int) (gwdata->ZERO_PADDED_FFT ? gwdata->FFTLEN / 2 - 1 : gwdata->FFTLEN - 2); i++) {
+			dbltogw (gwdata, 0.0, x);
+			set_fft_value (gwdata, x, i, 5000);
+			set_fft_value (gwdata, x, i+1, 3000);
+			set_fft_value (gwdata, x, i+2, 1000);
+			gwtogiant (gwdata, x, g);
+			gwsquare (gwdata, x);
+			squaregi (&gwdata->gdata, g);
+			specialmodg (gwdata, g);
+			compare (thread_num, gwdata, x, g);
+		}
+	}
+
+	if (IniSectionGetInt (INI_FILE, "QA", "ExtraTests", 0)) {
+		gwfft (gwdata, x, x3);
+		gwcopy (gwdata, x3, x);
+		gwfftfftmul (gwdata, x, x, x);
+		squaregi (&gwdata->gdata, g);
+		specialmodg (gwdata, g);
+		compare_with_text_and_int (thread_num, gwdata, x, g, "ExtraTest", 1);
+
+		OutputBoth (thread_num, "ExtraTest2\n");
+		gwcopy (gwdata, x, x3);
+		gwfft (gwdata, x3, x3);
+		gwfftmul (gwdata, x3, x);
+		squaregi (&gwdata->gdata, g);
+		specialmodg (gwdata, g);
+		compare_with_text_and_int (thread_num, gwdata, x, g, "ExtraTest", 2);
+
+		OutputBoth (thread_num, "ExtraTest3\n");
+		gwfft (gwdata, x, x);
+		gwcopy (gwdata, x, x3);
+		gwfftfftmul (gwdata, x, x3, x);
+		squaregi (&gwdata->gdata, g);
+		specialmodg (gwdata, g);
+		compare_with_text_and_int (thread_num, gwdata, x, g, "ExtraTest", 3);
+
+		OutputBoth (thread_num, "ExtraTest4\n");
+		gwfft (gwdata, x, x);
+		gwcopy (gwdata, x, x3);
+		gwfftfftmul (gwdata, x3, x, x);
+		squaregi (&gwdata->gdata, g);
+		specialmodg (gwdata, g);
+		compare_with_text_and_int (thread_num, gwdata, x, g, "ExtraTest", 4);
+	}
+
 /* Test 50 squarings */	
 
 	gwsetnormroutine (gwdata, 0, 1, 0);	/* Enable error checking */
 	for (i = 0; i < num_squarings; i++) {
-
+		
 		/* Test POSTFFT sometimes */
 		gwstartnextfft (gwdata, (i & 3) == 2);
 
 		/* Test gwsetaddin without and with POSTFFT set */
-		if ((i == 45 || i == 46) && abs (gwdata->c) == 1)
+		if ((i == 45 || i == 46) && labs (gwdata->c) == 1)
 			gwsetaddin (gwdata, -31);
 
 		/* Test several different ways to square a number */
@@ -522,14 +618,14 @@ void test_it (
 
 		/* Square number (and do add-in) using giants code */
 		squaregi (&gwdata->gdata, g);
-		if ((i == 45 || i == 46) && abs (gwdata->c) == 1) {
+		if ((i == 45 || i == 46) && labs (gwdata->c) == 1) {
 			iaddg (-31, g);
 			gwsetaddin (gwdata, 0);
 		}
 		specialmodg (gwdata, g);
 
 		/* Compare results */
-		if (CHECK_OFTEN) compare (thread_num, gwdata, x, g);
+		if (CHECK_OFTEN) compare_with_text_and_int (thread_num, gwdata, x, g, "Square", i);
 	}
 	if (SQUARE_ONLY) goto done;
 
@@ -585,7 +681,7 @@ void test_it (
 	if (diff > maxdiff) maxdiff = diff;
 	squaregi (&gwdata->gdata, g); imulg (3, g);
 	specialmodg (gwdata, g);
-	if (CHECK_OFTEN) compare (thread_num, gwdata, x, g);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "mul by const 3");
 
 	gwsetmulbyconst (gwdata, -3);
 	gwsetnormroutine (gwdata, 0, 1, 1);
@@ -595,27 +691,48 @@ void test_it (
 	if (diff > maxdiff) maxdiff = diff;
 	squaregi (&gwdata->gdata, g); imulg (-3, g);
 	specialmodg (gwdata, g);
-	if (CHECK_OFTEN) compare (thread_num, gwdata, x, g);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "mul by const -3");
+
+/* Test without error checking as that runs different normalization code */
+
+	gwsetnormroutine (gwdata, 0, 0, 0);
+	gwsquare (gwdata, x);
+	gwsetnormroutine (gwdata, 0, 1, 0);
+	diff = fabs (gwsuminp (gwdata, x) - gwsumout (gwdata, x));
+	if (diff > maxdiff) maxdiff = diff;
+	squaregi (&gwdata->gdata, g);
+	specialmodg (gwdata, g);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "no echk");
+
+	gwsetmulbyconst (gwdata, 5);
+	gwsetnormroutine (gwdata, 0, 0, 1);
+	gwsquare (gwdata, x);
+	gwsetnormroutine (gwdata, 0, 1, 0);
+	diff = fabs (gwsuminp (gwdata, x) - gwsumout (gwdata, x));
+	if (diff > maxdiff) maxdiff = diff;
+	squaregi (&gwdata->gdata, g); imulg (5, g);
+	specialmodg (gwdata, g);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "const, no echk");
 
 /* Test square and mul carefully */
 
 	gwfree (gwdata, x3); gwfree (gwdata, x4);
-	if (abs (gwdata->c) == 1) gwsetaddin (gwdata, -42);
+	if (labs (gwdata->c) == 1) gwsetaddin (gwdata, -42);
 	gwsquare_carefully (gwdata, x);
 	diff = fabs (gwsuminp (gwdata, x) - gwsumout (gwdata, x));
 	if (diff > maxdiff) maxdiff = diff;
 	squaregi (&gwdata->gdata, g);
-	if (abs (gwdata->c) == 1) iaddg (-42, g);
+	if (labs (gwdata->c) == 1) iaddg (-42, g);
 	specialmodg (gwdata, g);
-	if (CHECK_OFTEN) compare (thread_num, gwdata, x, g);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "square careful");
 	gwmul_carefully (gwdata, x, x);
 	gwfree (gwdata, gwdata->GW_RANDOM); gwdata->GW_RANDOM = NULL;
 	diff = fabs (gwsuminp (gwdata, x) - gwsumout (gwdata, x));
 	if (diff > maxdiff) maxdiff = diff;
 	squaregi (&gwdata->gdata, g);
-	if (abs (gwdata->c) == 1) { iaddg (-42, g); gwsetaddin (gwdata, 0); }
+	if (labs (gwdata->c) == 1) { iaddg (-42, g); gwsetaddin (gwdata, 0); }
 	specialmodg (gwdata, g);
-	if (CHECK_OFTEN) compare (thread_num, gwdata, x, g);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "mul careful");
 
 /* Test gwaddquick, gwsubquick */
 
@@ -624,8 +741,8 @@ void test_it (
 	gwadd3quick (gwdata, x, x2, x3); gtog (g, g3); addg (g2, g3);
 	gwsub3quick (gwdata, x, x2, x4); gtog (g, g4); subg (g2, g4);
 	if (CHECK_OFTEN) {
-		specialmodg (gwdata, g3); compare (thread_num, gwdata, x3, g3);
-		specialmodg (gwdata, g4); compare (thread_num, gwdata, x4, g4);
+		specialmodg (gwdata, g3); compare_with_text (thread_num, gwdata, x3, g3, "add quick");
+		specialmodg (gwdata, g4); compare_with_text (thread_num, gwdata, x4, g4, "sub quick");
 	}
 
 /* Test gwadd and gwsub */
@@ -637,9 +754,9 @@ void test_it (
 	gwadd3 (gwdata, x3, x4, x2); gtog (g3, g2); addg (g4, g2);
 	gwsub3 (gwdata, x3, x, x4); gtog (g3, g4); subg (g, g4);
 	if (CHECK_OFTEN) {
-		specialmodg (gwdata, g); compare (thread_num, gwdata, x, g);
-		specialmodg (gwdata, g2); compare (thread_num, gwdata, x2, g2);
-		specialmodg (gwdata, g4); compare (thread_num, gwdata, x4, g4);
+		specialmodg (gwdata, g); compare_with_text (thread_num, gwdata, x, g, "add1");
+		specialmodg (gwdata, g2); compare_with_text (thread_num, gwdata, x2, g2, "add2");
+		specialmodg (gwdata, g4); compare_with_text (thread_num, gwdata, x4, g4, "add3");
 	}
 	gwadd (gwdata, x2, x); addg (g2, g);
 	gwadd (gwdata, x4, x); addg (g4, g);
@@ -655,54 +772,53 @@ void test_it (
 	gtog (g, g3); addg (g2, g3);
 	gtog (g, g4); subg (g2, g4);
 	if (CHECK_OFTEN) {
-		specialmodg (gwdata, g); compare (thread_num, gwdata, x, g);
-		specialmodg (gwdata, g2); compare (thread_num, gwdata, x2, g2);
-		specialmodg (gwdata, g3); compare (thread_num, gwdata, x3, g3);
-		specialmodg (gwdata, g4); compare (thread_num, gwdata, x4, g4);
+		specialmodg (gwdata, g); compare_with_text (thread_num, gwdata, x, g, "addsub1");
+		specialmodg (gwdata, g2); compare_with_text (thread_num, gwdata, x2, g2, "addsub2");
+		specialmodg (gwdata, g3); compare_with_text (thread_num, gwdata, x3, g3, "addsub3");
+		specialmodg (gwdata, g4); compare_with_text (thread_num, gwdata, x4, g4, "addsub4");
 	}
 	gwadd (gwdata, x2, x); addg (g2, g);
 	gwadd (gwdata, x3, x); addg (g3, g);
 	gwadd (gwdata, x4, x); addg (g4, g); specialmodg (gwdata, g);
-	if (CHECK_OFTEN) compare (thread_num, gwdata, x, g);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "addsub5");
 
 /* Test gwsmalladd and gwsmallmul */
 
 	gwsmalladd (gwdata, GWSMALLADD_MAX, x);
 	dbltog (GWSMALLADD_MAX, g4); addg (g4, g); specialmodg (gwdata, g);
-	if (CHECK_OFTEN) compare (thread_num, gwdata, x, g);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "smalladd");
 	i = rand() % 10 + 2;
 	gwsmallmul (gwdata, i, x);
 	ulmulg (i, g); specialmodg (gwdata, g);
-	if (CHECK_OFTEN) compare (thread_num, gwdata, x, g);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "smallmul1");
 	gwsmallmul (gwdata, GWSMALLMUL_MAX-1.0, x);
 	ulmulg ((unsigned long) (GWSMALLMUL_MAX-1.0), g); specialmodg (gwdata, g);
-	if (CHECK_OFTEN) compare (thread_num, gwdata, x, g);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "smallmul2");
 
-/* Do some multiplies to make sure that the adds and subtracts above */
-/* normalized properly. */
+/* Do some multiplies to make sure that the adds and subtracts above normalized properly. */
 
 	gwfft (gwdata, x, x);
 	gwfftfftmul (gwdata, x, x, x);
 	diff = fabs (gwsuminp (gwdata, x) - gwsumout (gwdata, x));
 	if (diff > maxdiff) maxdiff = diff;
 	squaregi (&gwdata->gdata, g); specialmodg (gwdata, g);
-	if (CHECK_OFTEN) compare (thread_num, gwdata, x, g);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "smallmul3");
 
 	gwfft (gwdata, x, x2); gwcopy (gwdata, x2, x); gwfftadd3 (gwdata, x, x2, x4);
 	gwfftmul (gwdata, x4, x3); addg (g3, g3); mulgi (&gwdata->gdata, g, g3); specialmodg (gwdata, g3);
 	diff = fabs (gwsuminp (gwdata, x3) - gwsumout (gwdata, x3));
 	if (diff > maxdiff) maxdiff = diff;
-	if (CHECK_OFTEN) compare (thread_num, gwdata, x3, g3);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x3, g3, "smallmul4");
 	gwfft (gwdata, x3, x4);
 	gwfftfftmul (gwdata, x4, x2, x);
 	diff = fabs (gwsuminp (gwdata, x) - gwsumout (gwdata, x));
 	if (diff > maxdiff) maxdiff = diff;
 	mulgi (&gwdata->gdata, g3, g); specialmodg (gwdata, g);
-	if (CHECK_OFTEN) compare (thread_num, gwdata, x, g);
+	if (CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "smallmul5");
 
 /* Do the final compare */
 
-done:	if (!CHECK_OFTEN) compare (thread_num, gwdata, x, g);
+done:	if (!CHECK_OFTEN) compare_with_text (thread_num, gwdata, x, g, "final");
 	if (gwdata->GWERROR) OutputBoth (thread_num, "GWERROR set during calculations.\n");
 
 /* Print final stats */
@@ -816,6 +932,7 @@ again:		gwinit (&gwdata);
 			sprintf (buf, "Trying gwsetup on %s.\n", numstr);
 			OutputBoth (thread_num, buf);
 		}
+		gwset_maxmulbyconst (&gwdata, 5);
 		gwset_minimum_fftlen (&gwdata, SPECIFIC_FFTLEN);
 		gwset_num_threads (&gwdata, threads);
 		gwset_thread_callback (&gwdata, SetAuxThreadPriority);
@@ -837,6 +954,7 @@ again:		gwinit (&gwdata);
 		if ((rand () & 7) == 1 && !SPECIFIC_N && !gwdata.RATIONAL_FFT) {
 			n = n / gwdata.FFTLEN * gwdata.FFTLEN;		// Make n a multiple of the FFT length
 			gwdone (&gwdata);
+			if (n == 0) continue;
 			goto again;
 		}
 
