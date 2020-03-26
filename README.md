@@ -7,6 +7,14 @@ To use this program you must agree to the terms and conditions,
 prize rules, etc. at http://mersenne.org/legal/
 
 
+__Version 29.8 build 6__ - See the latest [WhatsNew.txt](https://www.mersenne.org/download/whatsnew_298b3.txt) file for a full list of changes.
+
+### Highlights of version 29.8 include
+- AVX-512 support.
+- Modified torture test dialog box with new options and better understanding of the L1/L2/L3 cache hierarchy.
+- More robust implementation of Gerbicz error checking in PRP tests. This replace LL testing as the default work type.
+
+
 
 __Version 29.4 build 7__ - See the latest [WhatsNew.txt](https://www.mersenne.org/download/whatsnew_294b7.txt) file for a full list of changes.
 
