@@ -7,6 +7,13 @@ To use this program you must agree to the terms and conditions,
 prize rules, etc. at http://mersenne.org/legal/
 
 
+__Latest version: 30.3 build 6__ - see the latest [WhatsNew.txt](https://www.mersenne.org/download/whatsnew_303b6.txt) file for a full list of changes.
+### Highlights of version 30.3 include
+- PRP with proofs. Eliminates the need for lengthy double-checking!!!
+- Resource Limits dialog box to control Prime95's resource usage. See the readme.txt file for setting these options
+
+
+
 __Version 29.8 build 6__ - See the latest [WhatsNew.txt](https://www.mersenne.org/download/whatsnew_298b3.txt) file for a full list of changes.
 
 ### Highlights of version 29.8 include
